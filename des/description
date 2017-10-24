@@ -1,0 +1,13 @@
+=========================================================================================================
+                              **********这里是描述信息**********
+=========================================================================================================
+
+刷新库：https://github.com/scwang90/SmartRefreshLayout 使用版本号：1.0.3
+
+
+指示器：https://github.com/hackware1993/MagicIndicator  使用版本号：1.5.0
+
+
+注解权限: https://github.com/permissions-dispatcher/PermissionsDispatcher  使用版本号：3.0.1
+
+在studio开发版中需要在gradle.properties 加上 android.enableAapt2=false，不是会报错不能创建文件
