@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--加载数据自定义属性-->
+    <declare-styleable name="SLoading">
+        <attr name="snum" format="integer" />
+        <attr name="sgap" format="dimension" />
+        <attr name="scolorarray" format="reference" />
+        <attr name="sradius" format="dimension" />
+        <attr name="scolortype" format="integer" />
+    </declare-styleable>
+</resources>
