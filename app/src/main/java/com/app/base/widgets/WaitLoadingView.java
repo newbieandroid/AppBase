@@ -96,8 +96,9 @@ public class WaitLoadingView extends View {
         type = a.getInt(R.styleable.SLoading_scolortype, 0);
         int resourceId = a.getResourceId(R.styleable.SLoading_scolorarray, 0);
         try {
-            if (resourceId != 0)
+            if (resourceId != 0) {
                 color = getResources().getIntArray(resourceId);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -131,11 +132,13 @@ public class WaitLoadingView extends View {
         } else {
             height = (int) Math.min(2 * radius, heightSize);
         }
-        if (gap == -1)
+        if (gap == -1) {
             gap = height / 2;
+        }
 
-        if (radius == -1)
+        if (radius == -1) {
             radius = height / 2;
+        }
 
         if (list.size() == 0) {
             for (int i = 0; i < num; i++) {
@@ -253,8 +256,9 @@ public class WaitLoadingView extends View {
     @Override
     protected void onDetachedFromWindow() {
         stopAnimator();
-        if (animators != null)
+        if (animators != null) {
             animators.clear();
+        }
         super.onDetachedFromWindow();
     }
 

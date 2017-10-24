@@ -18,11 +18,10 @@ import com.zhy.autolayout.utils.AutoUtils;
 public class DialogViewHolder {
     private final SparseArray<View> mViews;
     private View mDialogView;
-    private ViewGroup viewGroup;
 
     private DialogViewHolder(Context context, int layoutId) {
         this.mViews = new SparseArray<View>();
-        mDialogView = LayoutInflater.from(context).inflate(layoutId, viewGroup, false);
+        mDialogView = LayoutInflater.from(context).inflate(layoutId, null, false);
         AutoUtils.auto(mDialogView);
 
     }

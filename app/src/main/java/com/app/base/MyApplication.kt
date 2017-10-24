@@ -4,9 +4,13 @@ import android.app.Application
 import android.content.Context
 import android.support.multidex.MultiDex
 import com.app.base.helper.ActivityStateListener
+import com.lzy.okgo.OkGo
+import com.lzy.okgo.cache.CacheMode
 import com.squareup.leakcanary.LeakCanary
 import com.squareup.leakcanary.RefWatcher
 import com.zhy.autolayout.config.AutoLayoutConifg
+import okhttp3.OkHttpClient
+import java.util.concurrent.TimeUnit
 
 /**
  *  Auther: chen
@@ -37,6 +41,19 @@ class MyApplication : Application() {
         /**适配**/
         AutoLayoutConifg.getInstance().useDeviceSize()
 
+        /**网络请求**/
+
+        val builder = OkHttpClient.Builder()
+        builder.connectTimeout(3600, TimeUnit.SECONDS)
+        builder.readTimeout(3 * 3600, TimeUnit.SECONDS)
+        builder.writeTimeout(3 * 3600, TimeUnit.SECONDS)
+
+
+        OkGo
+                .getInstance()
+                .init(this)
+                .setCacheMode(CacheMode.REQUEST_FAILED_READ_CACHE)
+                .setOkHttpClient(builder.build())
     }
 
 

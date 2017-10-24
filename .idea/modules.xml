@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AppBase.iml" filepath="$PROJECT_DIR$/AppBase.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ShareLib/ShareLib.iml" filepath="$PROJECT_DIR$/ShareLib/ShareLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/SmartRefreshLib/SmartRefreshLib.iml" filepath="$PROJECT_DIR$/SmartRefreshLib/SmartRefreshLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>

@@ -1,1 +1,1 @@
-include ':app', ':SmartRefreshLib'
+include ':app', ':SmartRefreshLib', ':ShareLib'

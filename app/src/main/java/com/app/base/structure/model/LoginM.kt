@@ -10,7 +10,5 @@ import com.app.base.base.BaseM
  */
 class LoginM : BaseM {
 
-    fun getLoginData(): LoginBean {
-        return LoginBean()
-    }
+    fun getLoginData(): LoginBean = LoginBean()
 }
