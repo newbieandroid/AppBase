@@ -2,7 +2,6 @@ package com.app.base.base
 
 import android.content.pm.ActivityInfo
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.app.base.R
 import com.app.base.listener.OnDialogPositiveListener

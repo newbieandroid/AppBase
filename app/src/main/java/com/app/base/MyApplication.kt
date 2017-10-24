@@ -6,6 +6,7 @@ import android.support.multidex.MultiDex
 import com.app.base.helper.ActivityStateListener
 import com.squareup.leakcanary.LeakCanary
 import com.squareup.leakcanary.RefWatcher
+import com.zhy.autolayout.config.AutoLayoutConifg
 
 /**
  *  Auther: chen
@@ -32,6 +33,10 @@ class MyApplication : Application() {
 
         /**内存泄漏监控**/
         refWatcher = LeakCanary.install(this)
+
+        /**适配**/
+        AutoLayoutConifg.getInstance().useDeviceSize()
+
     }
 
 
