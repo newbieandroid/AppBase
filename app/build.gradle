@@ -93,5 +93,8 @@ dependencies {
     implementation files('libs/qiniu-android-sdk-7.3.9.jar')
     implementation files('libs/tbs_sdk_thirdapp_v3.3.0.1045_43300_sharewithdownload_withoutGame_obfs_20170605_170212.jar')
     implementation 'com.alibaba:fastjson:1.2.39'
+
+    //数据库
+    compile 'org.litepal.android:core:1.6.0'
 }
 

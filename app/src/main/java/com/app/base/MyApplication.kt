@@ -10,6 +10,7 @@ import com.squareup.leakcanary.LeakCanary
 import com.squareup.leakcanary.RefWatcher
 import com.zhy.autolayout.config.AutoLayoutConifg
 import okhttp3.OkHttpClient
+import org.litepal.LitePal
 import java.util.concurrent.TimeUnit
 
 /**
@@ -41,8 +42,10 @@ class MyApplication : Application() {
         /**适配**/
         AutoLayoutConifg.getInstance().useDeviceSize()
 
-        /**网络请求**/
+        /**数据库**/
+        LitePal.initialize(this)
 
+        /**网络请求**/
         val builder = OkHttpClient.Builder()
         builder.connectTimeout(3600, TimeUnit.SECONDS)
         builder.readTimeout(3 * 3600, TimeUnit.SECONDS)

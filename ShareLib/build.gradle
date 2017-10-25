@@ -13,6 +13,13 @@ android {
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
+
+        resValue "string", "wxKey", "\"${wxKey}\""
+        resValue "string", "wxSecret", "\"${wxSecret}\""
+        resValue "string", "qqKey", "\"${qqKey}\""
+        resValue "string", "qqSecret", "\"${qqSecret}\""
+        resValue "string", "wbKey", "\"${wbKey}\""
+        resValue "string", "wbSecret", "\"${wbSecret}\""
     }
 
     buildTypes {
@@ -33,4 +40,5 @@ dependencies {
     compile 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
     implementation files('libs/open_sdk_r5886_lite.jar')
     compile 'com.sina.weibo.sdk:core:4.1.0:openDefaultRelease@aar'
+    implementation files('libs/alipaySdk-20170922.jar')
 }
