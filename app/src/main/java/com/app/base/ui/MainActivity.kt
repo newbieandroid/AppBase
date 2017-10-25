@@ -3,11 +3,13 @@ package com.app.base.ui
 import android.os.Bundle
 import com.app.base.base.BaseActivity
 import com.app.base.R
+import com.app.base.bean.reshttp.ResLoginInfoBean
 import com.app.base.listener.LoginBackListener
 import com.app.base.structure.model.LoginM
 import com.app.base.structure.presenter.LoginP
 import com.app.base.structure.view.LoginV
 import kotlinx.android.synthetic.main.activity_main.*
+import org.litepal.crud.DataSupport
 
 /**
  *  Auther: chen
@@ -19,6 +21,8 @@ class MainActivity : BaseActivity<LoginM, LoginV, LoginP>() {
     override fun setLayoutRes(): Int = R.layout.activity_main
 
     override fun initData(savedInstanceState: Bundle?) {
+
+        val b = DataSupport.findFirst(ResLoginInfoBean::class.java)
 
     }
 

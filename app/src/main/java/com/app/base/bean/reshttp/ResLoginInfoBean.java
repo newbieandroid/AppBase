@@ -1,12 +1,14 @@
 package com.app.base.bean.reshttp;
 
+import org.litepal.crud.DataSupport;
+
 /**
  * @author: chen
  * @CreatDate: 2017\10\25 0025
  * @Desc:
  */
 
-public class ResLoginInfoBean {
+public class ResLoginInfoBean extends DataSupport {
 
 
     /**

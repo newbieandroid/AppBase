@@ -44,6 +44,7 @@ class MyApplication : Application() {
 
         /**数据库**/
         LitePal.initialize(this)
+        LitePal.getDatabase()
 
         /**网络请求**/
         val builder = OkHttpClient.Builder()

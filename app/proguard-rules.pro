@@ -173,3 +173,11 @@
 -keep class com.google.gson.** {*;}
 -dontwarn com.google.**
 -keep class com.google.protobuf.** {*;}
+
+#数据库
+-keep class org.litepal.** {
+    *;
+}
+-keep class * extends org.litepal.crud.DataSupport {
+    *;
+}
