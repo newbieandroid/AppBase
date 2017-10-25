@@ -6,7 +6,7 @@
     <version value="1" />
 
     <list>
-        <mapping class="com.app.base.bean.reshttp.ResLoginInfoBean" />
+        <mapping class="com.fuyoul.sanwenseller.bean.reshttp.ResLoginInfoBean" />
     </list>
 
 </litepal>
