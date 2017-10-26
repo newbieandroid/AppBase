@@ -81,12 +81,6 @@
 
 
         <activity
-            android:name=".wxapi.WXEntryActivity"
-            android:exported="true"
-            android:launchMode="singleTop" />
-
-
-        <activity
             android:name=".im.session.activity.avchat.AVChatActivity"
             android:launchMode="singleInstance"
             android:screenOrientation="portrait"

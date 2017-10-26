@@ -2,16 +2,16 @@ package com.fuyoul.sanwenseller.ui.fragment.main
 
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.View
 import com.csl.refresh.SmartRefreshLayout
 import com.fuyoul.sanwenseller.R
 import com.fuyoul.sanwenseller.base.BaseAdapter
-import com.fuyoul.sanwenseller.base.BaseRefreshFragmen
+import com.fuyoul.sanwenseller.base.BaseFragment
 import com.fuyoul.sanwenseller.base.BaseViewHolder
 import com.fuyoul.sanwenseller.bean.AdapterMultiItem
 import com.fuyoul.sanwenseller.bean.MultBaseBean
 import com.fuyoul.sanwenseller.bean.reshttp.ResLoginInfoBean
-import com.fuyoul.sanwenseller.bean.reshttp.ResOrderItem
 import com.fuyoul.sanwenseller.configs.Code.VIEWTYPE_ORDER
 import com.fuyoul.sanwenseller.structure.model.OrderM
 import com.fuyoul.sanwenseller.structure.presenter.OrderP
@@ -24,8 +24,7 @@ import org.litepal.crud.DataSupport
  *  @CreatDate: 2017\10\26 0026
  *  @Desc:
  */
-class OrderItemFragment : BaseRefreshFragmen<OrderM, OrderV, OrderP>() {
-    override fun getRefreshLayout(): SmartRefreshLayout = orderItemRefreshLayout
+class OrderItemFragment : BaseFragment<OrderM, OrderV, OrderP>() {
     private var loginInfo = DataSupport.findFirst(ResLoginInfoBean::class.java)
     private var index = 0
     private var adapter: ThisAdapter? = null
@@ -38,8 +37,8 @@ class OrderItemFragment : BaseRefreshFragmen<OrderM, OrderV, OrderP>() {
         manager.orientation = LinearLayoutManager.VERTICAL
         orderDataList.layoutManager = manager
 
-        adapter = ThisAdapter()
-        orderDataList.adapter = adapter
+        adapter = initViewImpl().getBaseAdapter()
+        adapter?.getRecyclerView()?.adapter = adapter
 
         getData(true, true)
     }
@@ -57,32 +56,26 @@ class OrderItemFragment : BaseRefreshFragmen<OrderM, OrderV, OrderP>() {
     override fun getPresenter(): OrderP = OrderP(initViewImpl())
 
     override fun initViewImpl(): OrderV = object : OrderV() {
-        override fun setRefreshAndLoadMoreEnable(isEnableRefresh: Boolean, isEnableLoadMore: Boolean) {
-            orderItemRefreshLayout.isEnableRefresh = isEnableRefresh
-            orderItemRefreshLayout.isEnableLoadmore = isEnableLoadMore
-        }
-
-        override fun setEmptyView(resLayoutId: Int) {
-            adapter?.setEmptyView(resLayoutId)
-        }
-
-        override fun setData(isRefresh: Boolean, datas: List<ResOrderItem>) {
-
-            if (isRefresh) {
-                adapter?.setNewData(datas)
-            } else {
-                adapter?.addData(datas)
-            }
-            setRefreshAndLoadMoreEnable(true, true)
-        }
-
-        override fun setReqLayoutInfo(isRefresh: Boolean, isSuccess: Boolean) {
-            onReqFinish(isRefresh, isSuccess)
-        }
-
+        override fun getBaseAdapter(): ThisAdapter = adapter ?: ThisAdapter()
     }
 
     inner class ThisAdapter : BaseAdapter(context) {
+        override fun getSmartRefreshLayout(): SmartRefreshLayout = orderItemRefreshLayout
+
+        override fun getRecyclerView(): RecyclerView = orderDataList
+
+
+        override fun onEmpryLayou(view: View, layoutResId: Int) {
+
+            when (layoutResId) {
+                R.layout.emptylayout -> {
+
+                }
+                R.layout.errorstatelayout -> {
+                }
+            }
+        }
+
         override fun onItemClicked(view: View, position: Int) {
         }
 
@@ -105,20 +98,21 @@ class OrderItemFragment : BaseRefreshFragmen<OrderM, OrderV, OrderP>() {
         }
         getPresenter().getOrderData(context, isShowDialog, isRefresh, index, 1234567890122, arguments.getInt("orderType"))
 
-//        if (loginInfo == null) {
-//            initViewImpl().setRefreshAndLoadMoreEnable(false)
-//            onReqFinish(isRefresh, false)
-//
-//        } else {
-//            initViewImpl().setRefreshAndLoadMoreEnable(true)
-//
-//            if (isRefresh) {
-//                index = 0
-//            } else {
-//                index++
-//            }
-//            getPresenter().getOrderData(context, isRefresh, index, loginInfo.userInfoId, arguments.getInt("orderType"))
-//        }
+        if (loginInfo == null) {
+            initViewImpl().getBaseAdapter().setRefreshAndLoadMoreEnable(false, false)
+            initViewImpl().getBaseAdapter().setReqLayoutInfo(isRefresh, false)
+
+        } else {
+            initViewImpl().getBaseAdapter().setRefreshAndLoadMoreEnable(true, true)
+
+            if (isRefresh) {
+                index = 0
+            } else {
+                index++
+            }
+            getPresenter().getOrderData(context, isShowDialog, isRefresh, index, loginInfo.userInfoId, arguments.getInt("orderType"))
+
+        }
     }
 
 }

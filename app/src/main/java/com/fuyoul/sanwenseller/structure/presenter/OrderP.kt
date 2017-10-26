@@ -24,27 +24,28 @@ class OrderP(orderV: OrderV) : BaseP<OrderM, OrderV>(orderV) {
 
         getModelImpl().getData(index, masterId, status, object : HttpReqListener(context, isShowDialog, true) {
             override fun reqOk(result: ResHttpResult) {
-                viewImpl?.setData(isRefresh, JSON.parseArray(result.data.toString(), ResOrderItem::class.java))
-                viewImpl?.setReqLayoutInfo(isRefresh, true)
+
+
+                viewImpl?.getBaseAdapter()?.setData(isRefresh, JSON.parseArray(result.data.toString(), ResOrderItem::class.java))
+                viewImpl?.getBaseAdapter()?.setReqLayoutInfo(isRefresh, true)
             }
 
             override fun withoutData(msg: String) {
-                viewImpl?.setReqLayoutInfo(isRefresh, false)
-                viewImpl?.setRefreshAndLoadMoreEnable(isRefresh, false)
-                viewImpl?.setEmptyView(R.layout.emptylayout)
+                viewImpl?.getBaseAdapter()?.setReqLayoutInfo(isRefresh, false)
+                viewImpl?.getBaseAdapter()?.setRefreshAndLoadMoreEnable(isRefresh, false)
 
                 if (isRefresh) {
-//                    viewImpl?.setEmptyView(R.layout.emptylayout)
+                    viewImpl?.getBaseAdapter()?.setEmptyView(R.layout.emptylayout)
                 } else {
                     NormalFunUtils.showToast(context, "全部数据加载完成")
                 }
             }
 
             override fun error(errorInfo: String) {
-                viewImpl?.setReqLayoutInfo(isRefresh, false)
-                viewImpl?.setRefreshAndLoadMoreEnable(isRefresh, false)
+                viewImpl?.getBaseAdapter()?.setReqLayoutInfo(isRefresh, false)
+                viewImpl?.getBaseAdapter()?.setRefreshAndLoadMoreEnable(isRefresh, false)
                 if (isRefresh) {
-                    viewImpl?.setEmptyView(R.layout.emptylayout)
+                    viewImpl?.getBaseAdapter()?.setEmptyView(R.layout.errorstatelayout)
                 }
                 NormalFunUtils.showToast(context, errorInfo)
             }

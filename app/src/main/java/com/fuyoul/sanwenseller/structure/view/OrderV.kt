@@ -1,7 +1,7 @@
 package com.fuyoul.sanwenseller.structure.view
 
 import com.fuyoul.sanwenseller.base.BaseV
-import com.fuyoul.sanwenseller.bean.reshttp.ResOrderItem
+import com.fuyoul.sanwenseller.ui.fragment.main.OrderItemFragment
 
 /**
  *  @author: chen
@@ -9,8 +9,6 @@ import com.fuyoul.sanwenseller.bean.reshttp.ResOrderItem
  *  @Desc:
  */
 abstract class OrderV : BaseV {
-    abstract fun setReqLayoutInfo(isRefresh: Boolean, isSuccess: Boolean)
-    abstract fun setData(isRefresh: Boolean, datas: List<ResOrderItem>)
-    abstract fun setEmptyView(resLayoutId: Int)
-    abstract fun setRefreshAndLoadMoreEnable(isEnableRefresh: Boolean, isEnableLoadMore: Boolean)
+
+    abstract fun getBaseAdapter(): OrderItemFragment.ThisAdapter
 }

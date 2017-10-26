@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.csl.refresh.SmartRefreshLayout
 import com.fuyoul.sanwenseller.bean.AdapterMultiItem
 import com.fuyoul.sanwenseller.bean.MultBaseBean
 import com.fuyoul.sanwenseller.configs.Code
@@ -45,6 +46,8 @@ abstract class BaseAdapter(context: Context) : RecyclerView.Adapter<BaseViewHold
                         view.setOnClickListener {
                             onItemClicked(view!!, view?.tag as Int)
                         }
+                    } else {
+                        onEmpryLayou(view, multiItems[index].typeLayoutRes)
                     }
 
                 }
@@ -63,23 +66,14 @@ abstract class BaseAdapter(context: Context) : RecyclerView.Adapter<BaseViewHold
 
     }
 
-    /**数据的操作**/
-    abstract fun convert(holder: BaseViewHolder, position: Int, atas: List<MultBaseBean>?)
 
-    /**添加布局**/
-    abstract fun addMultiType(multiItems: ArrayList<AdapterMultiItem>)
-
-    /**item点击事件**/
-    abstract fun onItemClicked(view: View, position: Int)
-
-    fun <D : MultBaseBean> setNewData(newDatas: List<D>) {
+    private fun <D : MultBaseBean> setNewData(newDatas: List<D>) {
         this.datas.clear()
         this.datas.addAll(newDatas)
         notifyDataSetChanged()
     }
 
-
-    fun <D : MultBaseBean> addData(addDatas: List<D>) {
+    private fun <D : MultBaseBean> addData(addDatas: List<D>) {
         if (datas == null) {
             setNewData(addDatas)
         } else {
@@ -88,18 +82,19 @@ abstract class BaseAdapter(context: Context) : RecyclerView.Adapter<BaseViewHold
         }
     }
 
-    fun changeData(item: MultBaseBean, position: Int) {
+
+    private fun changeData(item: MultBaseBean, position: Int) {
 
         datas?.set(position, item)
         notifyItemChanged(position)
     }
 
-    fun remove(position: Int) {
+    private fun remove(position: Int) {
         this.datas?.removeAt(position)
         notifyItemRemoved(position)
     }
 
-    fun remove(item: MultBaseBean) {
+    private fun remove(item: MultBaseBean) {
 
         val index = this.datas?.indexOf(item) ?: -1
         this.datas?.remove(item)
@@ -116,13 +111,53 @@ abstract class BaseAdapter(context: Context) : RecyclerView.Adapter<BaseViewHold
         datas.add(object : MultBaseBean {
             override fun itemType(): Int = VIEWTYPE_EMPTY
         })
+
         val item = AdapterMultiItem(VIEWTYPE_EMPTY, emptyLayourRes)
-        if (multiItems.contains(item)) {
-            multiItems.remove(item)
-        }
+        (0 until multiItems.size)
+                .filter { multiItems[it].typeId == VIEWTYPE_EMPTY }
+                .forEach { multiItems.removeAt(it) }
         multiItems.add(item)
         notifyDataSetChanged()
 
     }
 
+
+    /**数据的操作**/
+    abstract fun convert(holder: BaseViewHolder, position: Int, atas: List<MultBaseBean>?)
+
+    /**添加布局**/
+    abstract fun addMultiType(multiItems: ArrayList<AdapterMultiItem>)
+
+    /**item点击事件**/
+    abstract fun onItemClicked(view: View, position: Int)
+
+    /**空数据页的点击事件**/
+    abstract fun onEmpryLayou(view: View, layoutResId: Int)
+
+    abstract fun getSmartRefreshLayout(): SmartRefreshLayout
+
+    abstract fun getRecyclerView(): RecyclerView
+
+
+    fun setRefreshAndLoadMoreEnable(isEnableRefresh: Boolean, isEnableLoadMore: Boolean) {
+        getSmartRefreshLayout().isEnableRefresh = isEnableRefresh
+        getSmartRefreshLayout().isEnableLoadmore = isEnableLoadMore
+    }
+
+    fun <D : MultBaseBean> setData(isRefresh: Boolean, datas: List<D>) {
+        if (isRefresh) {
+            setNewData(datas)
+        } else {
+            addData(datas)
+        }
+        setRefreshAndLoadMoreEnable(true, true)
+    }
+
+    fun setReqLayoutInfo(isRefresh: Boolean, isSuccess: Boolean) {
+        if (isRefresh) {
+            getSmartRefreshLayout().finishRefresh(isSuccess)
+        } else {
+            getSmartRefreshLayout().finishLoadmore(isSuccess)
+        }
+    }
 }
