@@ -2,12 +2,233 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="center"
     android:orientation="vertical">
 
-    <TextView
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="21px"
+        android:background="@color/color_dfdfdf" />
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="订单" />
+        android:layout_marginBottom="63px"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/orderItemTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="36px"
+            android:layout_marginTop="34px"
+            android:text="2017/05/23"
+            android:textColor="@color/color_666666"
+            android:textSize="35px" />
+
+
+        <TextView
+            android:id="@+id/orderItemState"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="36px"
+            android:layout_marginTop="34px"
+            android:text="待预测"
+            android:textColor="@color/color_FF627B"
+            android:textSize="40px" />
+
+
+        <ImageView
+            android:id="@+id/orderItemIcon"
+            android:layout_width="233px"
+            android:layout_height="233px"
+            android:layout_below="@+id/orderItemState"
+            android:layout_marginLeft="36px"
+            android:layout_marginTop="68px"
+            android:scaleType="fitXY"
+            android:src="@mipmap/ic_launcher" />
+
+
+        <TextView
+            android:id="@+id/orderItemPrice"
+            android:layout_width="317px"
+            android:layout_height="88px"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/orderItemState"
+            android:layout_marginTop="33px"
+            android:background="@drawable/back_orderprice"
+            android:drawableLeft="@mipmap/ic_dd_ddxq"
+            android:drawableRight="@mipmap/ic_dd_ddxq_jt"
+            android:gravity="center"
+            android:paddingLeft="36px"
+            android:paddingRight="36px"
+            android:textColor="@color/color_333333"
+            android:textSize="40px" />
+
+
+        <TextView
+            android:id="@+id/orderItemTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/orderItemState"
+            android:layout_marginLeft="26px"
+            android:layout_marginTop="68px"
+            android:layout_toRightOf="@+id/orderItemIcon"
+            android:drawablePadding="5dp"
+            android:drawableRight="@mipmap/icon_quicktesttype"
+            android:textColor="@color/color_333333"
+            android:textSize="47px" />
+
+
+        <TextView
+            android:id="@+id/orderItemDes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/orderItemTitle"
+            android:layout_marginLeft="26px"
+            android:layout_marginRight="36px"
+            android:layout_marginTop="10px"
+            android:layout_toRightOf="@+id/orderItemIcon"
+            android:singleLine="true"
+            android:textColor="@color/color_aaaaaa"
+            android:textSize="35px" />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="83px"
+            android:layout_below="@+id/orderItemDes"
+            android:layout_marginLeft="26px"
+            android:layout_marginRight="36px"
+            android:layout_marginTop="30px"
+            android:layout_toRightOf="@+id/orderItemIcon">
+
+            <ImageView
+                android:id="@+id/orderItemHead"
+                android:layout_width="83px"
+                android:layout_height="83px"
+                android:scaleType="fitCenter"
+                android:src="@mipmap/ic_my_wdltx" />
+
+            <ImageView
+                android:id="@+id/orderItemMasterState"
+                android:layout_width="39px"
+                android:layout_height="39px"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="-30px"
+                android:layout_toRightOf="@+id/orderItemHead"
+                android:scaleType="fitCenter"
+                android:src="@mipmap/ic_yb_ycsicon" />
+
+            <TextView
+                android:id="@+id/orderItemNick"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="35px"
+                android:layout_marginRight="36px"
+                android:layout_toRightOf="@+id/orderItemHead"
+                android:textColor="@color/color_666666"
+                android:textSize="38px" />
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:id="@+id/orderItemFuncLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/back_mainbottom"
+        android:gravity="center_vertical|right"
+        android:orientation="vertical"
+        android:paddingBottom="24px"
+        android:paddingLeft="36px"
+        android:paddingRight="36px"
+        android:paddingTop="24px">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/orderItem_Func_Left"
+                android:layout_width="216px"
+                android:layout_height="87px"
+                android:layout_marginLeft="30px"
+                android:background="@drawable/back_order_normal"
+                android:clickable="true"
+                android:gravity="center"
+                android:text="预测"
+                android:textColor="@color/color_888888"
+                android:textSize="46px"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/orderItem_Func_Middle"
+                android:layout_width="216px"
+                android:layout_height="87px"
+                android:layout_marginLeft="30px"
+                android:background="@drawable/back_order_normal"
+                android:clickable="true"
+                android:gravity="center"
+                android:text="预测"
+                android:textColor="@color/color_888888"
+                android:textSize="46px"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/orderItem_Func_Right"
+                android:layout_width="216px"
+                android:layout_height="87px"
+                android:layout_marginLeft="30px"
+                android:background="@drawable/back_order_normal"
+                android:clickable="true"
+                android:gravity="center"
+                android:text="预测"
+                android:textColor="@color/color_888888"
+                android:textSize="46px"
+                android:visibility="gone" />
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/orderItemReleaseTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16px"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/countDownViewInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_aaaaaa"
+                android:textSize="35px"
+                android:visibility="visible" />
+
+
+            <com.fuyoul.sanwenseller.widgets.CountdownView.CountdownView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/countDownView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:isShowDay="true"
+                app:isShowHour="true"
+                app:isShowMillisecond="false"
+                app:isShowMinute="true"
+                app:isShowSecond="true"
+                app:suffixTextColor="@color/color_3CC5BC"
+                app:timeTextColor="@color/color_3CC5BC" />
+
+        </LinearLayout>
+    </LinearLayout>
+
 </LinearLayout>

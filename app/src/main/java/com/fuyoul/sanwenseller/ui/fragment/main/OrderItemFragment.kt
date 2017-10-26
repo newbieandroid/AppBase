@@ -11,6 +11,7 @@ import com.fuyoul.sanwenseller.base.BaseFragment
 import com.fuyoul.sanwenseller.base.BaseViewHolder
 import com.fuyoul.sanwenseller.bean.AdapterMultiItem
 import com.fuyoul.sanwenseller.bean.MultBaseBean
+import com.fuyoul.sanwenseller.bean.reshttp.ResHttpOrderItem
 import com.fuyoul.sanwenseller.bean.reshttp.ResLoginInfoBean
 import com.fuyoul.sanwenseller.configs.Code.VIEWTYPE_ORDER
 import com.fuyoul.sanwenseller.structure.model.OrderM
@@ -79,7 +80,11 @@ class OrderItemFragment : BaseFragment<OrderM, OrderV, OrderP>() {
         override fun onItemClicked(view: View, position: Int) {
         }
 
-        override fun convert(holder: BaseViewHolder, position: Int, atas: List<MultBaseBean>?) {
+        override fun convert(holder: BaseViewHolder, position: Int, datas: List<MultBaseBean>) {
+
+            val item = datas[position] as ResHttpOrderItem
+
+
         }
 
         override fun addMultiType(multiItems: ArrayList<AdapterMultiItem>) {
@@ -99,11 +104,11 @@ class OrderItemFragment : BaseFragment<OrderM, OrderV, OrderP>() {
         getPresenter().getOrderData(context, isShowDialog, isRefresh, index, 1234567890122, arguments.getInt("orderType"))
 
         if (loginInfo == null) {
-            initViewImpl().getBaseAdapter().setRefreshAndLoadMoreEnable(false, false)
+            initViewImpl().getBaseAdapter().setRefreshAndLoadMoreEnable(false)
             initViewImpl().getBaseAdapter().setReqLayoutInfo(isRefresh, false)
 
         } else {
-            initViewImpl().getBaseAdapter().setRefreshAndLoadMoreEnable(true, true)
+            initViewImpl().getBaseAdapter().setRefreshAndLoadMoreEnable(true)
 
             if (isRefresh) {
                 index = 0

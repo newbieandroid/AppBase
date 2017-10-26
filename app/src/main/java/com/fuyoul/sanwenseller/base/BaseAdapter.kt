@@ -82,19 +82,21 @@ abstract class BaseAdapter(context: Context) : RecyclerView.Adapter<BaseViewHold
         }
     }
 
-
-    private fun changeData(item: MultBaseBean, position: Int) {
+    /**更改某一条数据**/
+    fun changeData(item: MultBaseBean, position: Int) {
 
         datas?.set(position, item)
         notifyItemChanged(position)
     }
 
-    private fun remove(position: Int) {
+    /**移除某一条数据**/
+    fun remove(position: Int) {
         this.datas?.removeAt(position)
         notifyItemRemoved(position)
     }
 
-    private fun remove(item: MultBaseBean) {
+    /**移除某一条数据**/
+    fun remove(item: MultBaseBean) {
 
         val index = this.datas?.indexOf(item) ?: -1
         this.datas?.remove(item)
@@ -123,7 +125,7 @@ abstract class BaseAdapter(context: Context) : RecyclerView.Adapter<BaseViewHold
 
 
     /**数据的操作**/
-    abstract fun convert(holder: BaseViewHolder, position: Int, atas: List<MultBaseBean>?)
+    abstract fun convert(holder: BaseViewHolder, position: Int, atas: List<MultBaseBean>)
 
     /**添加布局**/
     abstract fun addMultiType(multiItems: ArrayList<AdapterMultiItem>)
@@ -139,20 +141,22 @@ abstract class BaseAdapter(context: Context) : RecyclerView.Adapter<BaseViewHold
     abstract fun getRecyclerView(): RecyclerView
 
 
-    fun setRefreshAndLoadMoreEnable(isEnableRefresh: Boolean, isEnableLoadMore: Boolean) {
-        getSmartRefreshLayout().isEnableRefresh = isEnableRefresh
+    /**控制刷新和加载更多是否可用**/
+    fun setRefreshAndLoadMoreEnable(isEnableLoadMore: Boolean) {
         getSmartRefreshLayout().isEnableLoadmore = isEnableLoadMore
     }
 
+    /**增加或者刷新数据**/
     fun <D : MultBaseBean> setData(isRefresh: Boolean, datas: List<D>) {
         if (isRefresh) {
             setNewData(datas)
         } else {
             addData(datas)
         }
-        setRefreshAndLoadMoreEnable(true, true)
+        setRefreshAndLoadMoreEnable(true)
     }
 
+    /**通过网络请求获取数据的状态来设置刷新控件的状态**/
     fun setReqLayoutInfo(isRefresh: Boolean, isSuccess: Boolean) {
         if (isRefresh) {
             getSmartRefreshLayout().finishRefresh(isSuccess)
