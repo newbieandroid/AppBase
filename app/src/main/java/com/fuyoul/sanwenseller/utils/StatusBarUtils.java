@@ -24,13 +24,12 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 /**
- * Auther: chen
+ * @author: chen
  * Creat at: 2017\8\17 0017
  * Desc:沉浸式
  */
 
 public class StatusBarUtils {
-
 
     public static final int DEFAULT_STATUS_BAR_ALPHA = 112;
     private static final int FAKE_STATUS_BAR_VIEW_ID = R.id.statusbarutil_fake_status_bar_view;

@@ -56,6 +56,7 @@ abstract class HttpReqListener(context: Context, isShowDialog: Boolean, isCancle
         super.onCacheSuccess(response)
         checkData(false, response)
 
+
         Log.e("csl", "请求地址:${response?.rawResponse?.request()?.url()}\n接口缓存信息:${JSON.toJSONString(response?.body())}\n状态：${response?.exception}")
 
     }
@@ -86,10 +87,10 @@ abstract class HttpReqListener(context: Context, isShowDialog: Boolean, isCancle
             error("和服务器通信失败")
         } else {
             val result = response?.body()
-            if (result?.errorCode == Code.HTTP_NODATA || TextUtils.isEmpty(result?.data.toString())) {
+            if (result?.errorCode == Code.HTTP_NODATA || TextUtils.isEmpty(result?.data.toString()) || TextUtils.equals("[]", result?.data.toString()) || TextUtils.equals("{}", result?.data.toString())) {
                 withoutData("${result?.msg}")
             } else if (result?.errorCode == Code.HTTP_ERROR) {
-                error("${result?.msg}")
+                error("${result.msg}")
             } else if (result?.errorCode == Code.HTTP_SUCCESS) {
                 reqOk(result)
             } else {

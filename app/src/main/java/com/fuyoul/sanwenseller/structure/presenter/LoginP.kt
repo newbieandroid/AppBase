@@ -87,7 +87,6 @@ class LoginP(loginV: LoginV) : BaseP<LoginM, LoginV>(loginV) {
         OpenSdkHelper.wxLogin(context)
     }
 
-
     fun imLogin(context: Context, loginInfo: LoginInfo) {
         NimUIKit.doLogin(loginInfo, object : RequestCallback<LoginInfo> {
             override fun onFailed(p0: Int) {

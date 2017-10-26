@@ -1,18 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
+    <include layout="@layout/includetopbar" />
 
-    <com.fuyoul.sanwenseller.widgets.WaitLoadingView
-        android:id="@+id/test"
+    <com.zhy.autolayout.AutoFrameLayout
+        android:id="@+id/mainContentLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:sgap="15dp"
-        app:snum="4"
-        app:sradius="12dp" />
+        android:layout_height="match_parent"
+        android:layout_above="@+id/mainBottomLayout"
+        android:layout_below="@+id/titBarLayout" />
 
-</LinearLayout>
+    <com.fuyoul.sanwenseller.widgets.AutoRadioGroup
+        android:id="@+id/mainBottomLayout"
+        android:layout_width="match_parent"
+        android:layout_height="142px"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/back_singtop_dfdfdf"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/mainItem"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:checked="true"
+            android:drawableTop="@drawable/icon_main"
+            android:gravity="center"
+            android:text="首页"
+            android:textColor="@color/color_main"
+            android:textSize="32px" />
+
+        <RadioButton
+            android:id="@+id/babyItem"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/icon_babymanager"
+            android:gravity="center"
+            android:text="宝贝管理"
+            android:textColor="@color/color_main"
+            android:textSize="32px" />
+
+
+        <com.zhy.autolayout.AutoRelativeLayout
+            android:id="@+id/msgLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <RadioButton
+                android:id="@+id/msgItem"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:button="@null"
+                android:drawableTop="@drawable/icon_msgitem"
+                android:gravity="center"
+                android:text="消息"
+                android:textColor="@color/color_main"
+                android:textSize="32px" />
+
+
+            <TextView
+                android:id="@+id/msgCount"
+                android:layout_width="50px"
+                android:layout_height="50px"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="50px"
+                android:background="@drawable/msgdot"
+                android:gravity="center"
+                android:textColor="@color/color_white"
+                android:textSize="26px"
+                android:textStyle="bold"
+                android:visibility="gone" />
+        </com.zhy.autolayout.AutoRelativeLayout>
+
+        <RadioButton
+            android:id="@+id/myItem"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/icon_myitem"
+            android:gravity="center"
+            android:text="我的"
+            android:textColor="@color/color_main"
+            android:textSize="32px" />
+    </com.fuyoul.sanwenseller.widgets.AutoRadioGroup>
+</RelativeLayout>

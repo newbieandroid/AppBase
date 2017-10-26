@@ -1,5 +1,7 @@
 package com.fuyoul.sanwenseller.configs
 
+import com.fuyoul.sanwenseller.R
+
 /**
  *  @author: chen
  *  @CreatDate: 2017\10\25 0025
@@ -14,4 +16,6 @@ object Data {
     /**预测师状态**/
     val FREE = 0//可预约
     val BUSY = 1//不预约
+
+
 }

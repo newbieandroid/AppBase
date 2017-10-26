@@ -102,5 +102,7 @@ dependencies {
     compile 'org.litepal.android:core:1.6.0'
     implementation project(':uikit')
     implementation files('libs/mi_push_sdk_3.2.2.jar')
+    //指示器
+    compile 'com.github.hackware1993:MagicIndicator:1.5.0'
 }
 

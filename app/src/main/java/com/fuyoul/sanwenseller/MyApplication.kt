@@ -56,9 +56,10 @@ class MyApplication : Application() {
 
         /**网络请求**/
         val builder = OkHttpClient.Builder()
-        builder.connectTimeout(3600, TimeUnit.SECONDS)
-        builder.readTimeout(3 * 3600, TimeUnit.SECONDS)
-        builder.writeTimeout(3 * 3600, TimeUnit.SECONDS)
+        builder.connectTimeout(30, TimeUnit.SECONDS)
+        builder.readTimeout(60, TimeUnit.SECONDS)
+        builder.writeTimeout(60, TimeUnit.SECONDS)
+
 
 
         OkGo
