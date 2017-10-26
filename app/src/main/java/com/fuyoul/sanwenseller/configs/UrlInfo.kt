@@ -11,5 +11,7 @@ import com.lzy.okgo.OkGo
 object UrlInfo {
     private var base = OkGo.getInstance().context.getString(R.string.baseUrl)
 
-    val LOGIN = "${base}/account/master/signIn"//登录
+    val LOGIN = "$base/account/master/signIn"//登录
+
+    val SMS = "$base/account/sendVerifyCode?phone="//获取验证码
 }

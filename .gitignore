@@ -7,4 +7,5 @@
 .externalNativeBuild
 /androidTest
 /.idea
+/.gitignore
 

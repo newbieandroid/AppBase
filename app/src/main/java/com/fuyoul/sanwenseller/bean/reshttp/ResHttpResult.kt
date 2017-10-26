@@ -11,6 +11,6 @@ class ResHttpResult : Serializable {
 
     var errorCode: Int = 0
     var msg: String? = null
-    var data: String? = null
+    var data: Any? = null
 
 }

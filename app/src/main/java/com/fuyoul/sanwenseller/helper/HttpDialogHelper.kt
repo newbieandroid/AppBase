@@ -1,6 +1,7 @@
 package com.fuyoul.sanwenseller.helper
 
 import android.content.Context
+import android.util.Log
 import com.fuyoul.sanwenseller.R
 import com.fuyoul.sanwenseller.widgets.WaitLoadingView
 import com.fuyoul.sanwenseller.widgets.dialog.AbstractDialog
@@ -39,8 +40,8 @@ object HttpDialogHelper {
 
             if (dialog?.isShow == false) {
                 dialog?.showDialog()
+                httpLoadingView?.startAnimator()
             }
-
         }
 
 

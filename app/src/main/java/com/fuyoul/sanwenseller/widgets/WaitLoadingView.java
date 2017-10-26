@@ -17,6 +17,7 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 
 
 import com.fuyoul.sanwenseller.R;
+import com.fuyoul.sanwenseller.bean.CircleProgress;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +34,14 @@ public class WaitLoadingView extends View {
      */
     private int[] color = {0xFFF4511E, 0xFFFDD835, 0xFF43A047,
             0xFF1E88E5, 0xFF8E24AA, 0xFF546E7A};
+
+//    private int[] color = {
+//            getResources().getColor(R.color.color_888888),
+//            getResources().getColor(R.color.colorPrimary),
+//            getResources().getColor(R.color.color_white),
+//            getResources().getColor(R.color.color_3CC5BC),
+//            getResources().getColor(R.color.color_CCCCCC),
+//            getResources().getColor(R.color.color_red_f04c62)};
 
     /**
      * 圆间隔
@@ -66,7 +75,7 @@ public class WaitLoadingView extends View {
     /**
      * 圆实体
      */
-    List<Progress> list = new ArrayList<>();
+    List<CircleProgress> list = new ArrayList<>();
 
     /**
      * 动画集
@@ -143,7 +152,7 @@ public class WaitLoadingView extends View {
 
         if (list.size() == 0) {
             for (int i = 0; i < num; i++) {
-                list.add(new Progress(radius, type == 0 ? 0 : ((num - i) % num)));
+                list.add(new CircleProgress(radius, type == 0 ? 0 : ((num - i) % num)));
             }
 
         }
@@ -194,7 +203,7 @@ public class WaitLoadingView extends View {
         return this;
     }
 
-    private ObjectAnimator getAnimator(final Progress progress, final int i) {
+    private ObjectAnimator getAnimator(final CircleProgress progress, final int i) {
         ObjectAnimator animator = ObjectAnimator.ofObject(progress, "percentage", new FloatEvaluator(), 0.2, 1, 0.2);
         animator.setDuration(1200);
         animator.setRepeatCount(-1);
@@ -217,14 +226,11 @@ public class WaitLoadingView extends View {
     }
 
     private void goAnimator() {
-        Log.i("aa", "resizeToNum: " + num + "--" + list.size());
-
 
         if (list.size() == 0) {
             for (int i = 0; i < num; i++) {
-                list.add(new Progress(radius, type == 0 ? 0 : ((num - i) % num)));
+                list.add(new CircleProgress(radius, type == 0 ? 0 : ((num - i) % num)));
             }
-
         }
 
         if (set == null) {
@@ -271,52 +277,11 @@ public class WaitLoadingView extends View {
         }
     }
 
-    private static class Progress {
-        //进度百分比
-        float percentage = 0;
-        //当前半径
-        float current;
-        //最大半径
-        float radius;
-        //颜色下标
-        int colorIndex;
-
-        public Progress(float radius, int colorIndex) {
-            this.current = percentage * radius;
-            this.radius = radius;
-            this.colorIndex = colorIndex;
-        }
-
-        public void setColorIndex(int colorIndex) {
-            this.colorIndex = colorIndex;
-        }
-
-        public void setRadius(float radius) {
-            this.radius = radius;
-        }
-
-        public int getColorIndex() {
-            return colorIndex;
-        }
-
-        public float getCurrent() {
-            return current;
-        }
-
-        public float getPercentage() {
-            return percentage;
-        }
-
-        public void setPercentage(float percentage) {
-            this.percentage = percentage;
-            this.current = percentage * radius;
-        }
-    }
 
     static class Anl implements Animator.AnimatorListener {
-        Progress progress;
+        CircleProgress progress;
 
-        public Anl(Progress progress) {
+        public Anl(CircleProgress progress) {
             this.progress = progress;
         }
 
@@ -340,7 +305,7 @@ public class WaitLoadingView extends View {
         public void onAnimationRepeat(Animator animator) {
             int colorIndex = progress.getColorIndex();
             progress.setColorIndex(++colorIndex);
-            Log.i("dddd", "onAnimationRepeat: " + colorIndex);
+            Log.i("csl", "自定义等待view: " + colorIndex);
         }
     }
 }

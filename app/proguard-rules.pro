@@ -71,27 +71,24 @@
 -keep class com.lzy.okgo.**{*;}
 
 #Glide
-#-keepnames class * com.netease.nim.uikit.glide.NIMGlideModule
+
 -keep public class * implements com.bumptech.glide.module.GlideModule
 -keep public enum com.bumptech.glide.load.resource.bitmap.ImageHeaderParser$** {
       **[] $VALUES;
       public *;
 }
 
-#fastjson
-#-keepattributes Signature
-#-dontwarn com.alibaba.fastjson.**
-#-keep class com.alibaba.fastjson.**{*; }
 
--keep class com.app.base.bean.**{*;}
--keep class com.app.base.bean.reqhttp.**{*;}
--keep class com.app.base.bean.reshttp.**{*;}
+-keep class com.fuyoul.sanwenseller.bean.**{*;}
+-keep class com.fuyoul.sanwenseller.reqhttp.**{*;}
+-keep class com.fuyoul.sanwenseller.reshttp.**{*;}
+-keep class com.fuyoul.sanwenseller.reshttp.**{*;}
+
 
 #微博
 -keep class com.sina.weibo.sdk.** { *; }
 
 #QQ
-#-libraryjars libs/open_sdk_r5793_lite.jar
 -dontwarn com.tencent.**
 -keep class com.tencent.** {*;}
 
@@ -181,3 +178,5 @@
 -keep class * extends org.litepal.crud.DataSupport {
     *;
 }
+
+-keep public class com.fuyoul.sanwenseller.widgets.WaitLoadingView

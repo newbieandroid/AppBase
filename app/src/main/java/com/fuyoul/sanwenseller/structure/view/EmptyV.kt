@@ -8,11 +8,6 @@ import com.fuyoul.sanwenseller.base.BaseV
  *  Desc:
  */
 class EmptyV : BaseV {
-    override fun showDialog() {
-    }
-
-    override fun dismissDialog() {
-    }
 
 
 }

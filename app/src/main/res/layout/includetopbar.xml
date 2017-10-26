@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/titBarLayout"
+    android:layout_width="match_parent"
+    android:layout_height="127px"
+    android:layout_alignParentTop="true"
+    android:background="@drawable/back_titlebar"
+    android:paddingLeft="43px"
+    android:paddingRight="43px">
+
+    <ImageView
+        android:id="@+id/toolbarBack"
+        android:layout_width="88px"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:scaleType="centerInside" />
+
+    <TextView
+        android:id="@+id/toolbarTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:maxLength="10"
+        android:textColor="@color/color_333333"
+        android:textSize="52px" />
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true">
+
+        <TextView
+            android:id="@+id/toolbarChildTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:clickable="true"
+            android:gravity="center"
+            android:textColor="@color/color_888888"
+            android:textSize="46px"
+            android:visibility="gone" />
+
+
+        <ImageView
+            android:id="@+id/toolbarChildImg"
+            android:layout_width="88px"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:scaleType="centerInside"
+            android:src="@mipmap/ic_yb_top_back"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

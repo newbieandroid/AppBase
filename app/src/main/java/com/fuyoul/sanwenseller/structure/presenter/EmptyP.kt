@@ -9,8 +9,6 @@ import com.fuyoul.sanwenseller.structure.view.EmptyV
  *  Creat at: 2017\10\10 0010
  *  Desc:
  */
-class EmptyP : BaseP<EmptyM, EmptyV>(EmptyV()) {
-    override fun getModelImpl(): EmptyM {
-        return EmptyM()
-    }
+class EmptyP(emptyV: EmptyV) : BaseP<EmptyM, EmptyV>(emptyV) {
+    override fun getModelImpl(): EmptyM = EmptyM()
 }

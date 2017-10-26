@@ -10,63 +10,28 @@ import org.litepal.crud.DataSupport;
 
 public class ResLoginInfoBean extends DataSupport {
 
-
     /**
+     * imToken : 3a31c533-3f29-4cd8-8ff4-74f3d02aa831
+     * token : 93SC6f2GuMUKRu82U+BGII8wlckkY+j4S3Nykz1YC3e5ze7pbMbwq7R0aCOWkLbuo4PHbqMA7/puINRizYmz8qcwNsp5HHtzKqNQaC8sDayQeQ+JRF8Uj1/J3D89g/fx
+     * nickname : 1822**
+     * userInfoId : 1710251508401
+     * gender : 0
      * auditStatus : -1
-     * userInfoId : 1709271640361
-     * nickname : ??6290
-     * avatar : http://img3.imgtn.bdimg.com/it/u=1388120186,3336399575&fm=27&gp=0.jpg
-     * gender : -1
-     * token : 72KlhUaBtWv0aBffGVLQzuy029whtuD0YWn+KYbHBuUUzyc7U6CFiQmrpyGMHDMHApItgEPZzAPZ3SWD0tV05Al7J8LPeyEbu/+d4m9Y7B0sV7GAJ88YAmEGVnx/wc5f
-     * imToken : 39b48198-49b8-4473-85da-bffca6eb46f5
      */
 
-    private int auditStatus;
-    private long userInfoId;
-    private String nickname;
-    private String avatar;
-    private int gender;
-    private String token;
     private String imToken;
+    private String token;
+    private String nickname;
+    private long userInfoId;
+    private int gender;
+    private int auditStatus;
 
-    public int getAuditStatus() {
-        return auditStatus;
+    public String getImToken() {
+        return imToken;
     }
 
-    public void setAuditStatus(int auditStatus) {
-        this.auditStatus = auditStatus;
-    }
-
-    public long getUserInfoId() {
-        return userInfoId;
-    }
-
-    public void setUserInfoId(long userInfoId) {
-        this.userInfoId = userInfoId;
-    }
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
-
-    public int getGender() {
-        return gender;
-    }
-
-    public void setGender(int gender) {
-        this.gender = gender;
+    public void setImToken(String imToken) {
+        this.imToken = imToken;
     }
 
     public String getToken() {
@@ -77,11 +42,35 @@ public class ResLoginInfoBean extends DataSupport {
         this.token = token;
     }
 
-    public String getImToken() {
-        return imToken;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setImToken(String imToken) {
-        this.imToken = imToken;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public long getUserInfoId() {
+        return userInfoId;
+    }
+
+    public void setUserInfoId(long userInfoId) {
+        this.userInfoId = userInfoId;
+    }
+
+    public int getGender() {
+        return gender;
+    }
+
+    public void setGender(int gender) {
+        this.gender = gender;
+    }
+
+    public int getAuditStatus() {
+        return auditStatus;
+    }
+
+    public void setAuditStatus(int auditStatus) {
+        this.auditStatus = auditStatus;
     }
 }

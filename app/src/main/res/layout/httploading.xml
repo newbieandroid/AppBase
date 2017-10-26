@@ -5,8 +5,12 @@
     android:orientation="vertical">
 
 
-    <com.app.base.widgets.WaitLoadingView
+    <com.fuyoul.sanwenseller.widgets.WaitLoadingView xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/httpLoadingView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        app:sgap="15dp"
+        app:snum="4"
+        app:sradius="12dp" />
 </LinearLayout>

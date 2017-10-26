@@ -23,6 +23,10 @@ android {
         }
 
         resValue "string", "baseUrl", "\"${baseUrl}\""
+        resValue "string", "xiaomiappid", "\"${xiaomiappid}\""
+        resValue "string", "xiaomiappkey", "\"${xiaomiappkey}\""
+        resValue "string", "mipushhname", "\"${mipushhname}\""
+        resValue "string", "imkey", "\"${imkey}\""
     }
 
 
@@ -48,11 +52,11 @@ android {
         }
 
         debug {
-
-            zipAlignEnabled false
-            shrinkResources false
-            minifyEnabled false
+            zipAlignEnabled true
+            shrinkResources true
+            minifyEnabled true
             signingConfig signingConfigs.release
+
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -94,9 +98,9 @@ dependencies {
     implementation files('libs/happy-dns-0.2.9.jar')
     implementation files('libs/qiniu-android-sdk-7.3.9.jar')
     implementation files('libs/tbs_sdk_thirdapp_v3.3.0.1045_43300_sharewithdownload_withoutGame_obfs_20170605_170212.jar')
-    implementation 'com.alibaba:fastjson:1.2.39'
-
     //数据库
     compile 'org.litepal.android:core:1.6.0'
+    implementation project(':uikit')
+    implementation files('libs/mi_push_sdk_3.2.2.jar')
 }
 

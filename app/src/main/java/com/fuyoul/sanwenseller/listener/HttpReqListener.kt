@@ -22,6 +22,12 @@ abstract class HttpReqListener(context: Context, isShowDialog: Boolean, isCancle
     private var isShowDialog: Boolean = true
     private var isCancleable: Boolean = true
 
+
+    constructor(context: Context, isCancleable: Boolean) : this(context, true, isCancleable)
+
+    constructor(context: Context) : this(context, true)
+
+
     init {
         this.context = context
         this.isCancleable = isCancleable
@@ -42,16 +48,23 @@ abstract class HttpReqListener(context: Context, isShowDialog: Boolean, isCancle
 
     override fun onSuccess(response: Response<ResHttpResult>?) {
         checkData(false, response)
+        Log.e("csl", "请求地址:${response?.rawResponse?.request()?.url()}\n接口请求信息:${JSON.toJSONString(response?.body())}\n状态：${response?.exception}")
+
     }
 
     override fun onCacheSuccess(response: Response<ResHttpResult>?) {
         super.onCacheSuccess(response)
         checkData(false, response)
+
+        Log.e("csl", "请求地址:${response?.rawResponse?.request()?.url()}\n接口缓存信息:${JSON.toJSONString(response?.body())}\n状态：${response?.exception}")
+
     }
 
     override fun onError(response: Response<ResHttpResult>?) {
         super.onError(response)
         checkData(true, response)
+        Log.e("csl", "请求地址:${response?.rawResponse?.request()?.url()}\n异常:${JSON.toJSONString(response?.body())}\n状态：${response?.exception}")
+
     }
 
     override fun convertResponse(response: okhttp3.Response?): ResHttpResult = JSON.parseObject(response?.body()?.string(), ResHttpResult::class.java)
@@ -60,25 +73,27 @@ abstract class HttpReqListener(context: Context, isShowDialog: Boolean, isCancle
     abstract fun reqOk(result: ResHttpResult)
 
     /**请求成功但是没有数据**/
-    abstract fun withoutData()
+    abstract fun withoutData(msg: String)
 
     /**请求失败(包括没有请求成功和服务端异常)**/
-    abstract fun withoutError(errorInfo: String)
+    abstract fun error(errorInfo: String)
 
     /**检查数据**/
     private fun checkData(isError: Boolean, response: Response<ResHttpResult>?) {
 
+
         if (isError) {
-            Log.e("csl", "网络请求失败：${response?.exception}")
-            withoutError("和服务器通信异常")
+            error("和服务器通信失败")
         } else {
             val result = response?.body()
-            if (result?.errorCode == Code.HTTP_NODATA || TextUtils.isEmpty(result?.data)) {
-                withoutData()
+            if (result?.errorCode == Code.HTTP_NODATA || TextUtils.isEmpty(result?.data.toString())) {
+                withoutData("${result?.msg}")
             } else if (result?.errorCode == Code.HTTP_ERROR) {
-                withoutError("${result?.msg}")
+                error("${result?.msg}")
             } else if (result?.errorCode == Code.HTTP_SUCCESS) {
                 reqOk(result)
+            } else {
+                error("${result?.msg}")
             }
 
         }

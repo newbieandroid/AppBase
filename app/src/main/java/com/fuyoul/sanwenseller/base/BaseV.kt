@@ -7,7 +7,4 @@ package com.fuyoul.sanwenseller.base
  */
 interface BaseV {
 
-    fun showDialog()
-
-    fun dismissDialog()
 }
