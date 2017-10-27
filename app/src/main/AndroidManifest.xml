@@ -44,7 +44,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Design.NoActionBar">
+        android:theme="@style/Theme.Design.Light.NoActionBar">
         <activity
             android:name=".ui.MainActivity"
             android:theme="@style/Theme.Design.Light.NoActionBar">
@@ -58,12 +58,15 @@
 
         <activity
             android:name=".ui.normal.SplashActivity"
-            android:theme="@style/Theme.Design.NoActionBar" />
+            android:theme="@style/Theme.Design.Light.NoActionBar" />
+        <activity
+            android:name=".ui.baby.EditBabyInfoActivity"
+            android:theme="@style/Theme.Design.Light.NoActionBar"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
 
-
-        <!--<activity-->
-        <!--android:name=".ui.normal.LoginActivity"-->
-        <!--android:theme="@style/Theme.Design.NoActionBar" />-->
+        <activity
+            android:name=".ui.normal.LoginActivity"
+            android:theme="@style/Theme.Design.Light.NoActionBar" />
 
 
         <!--腾讯x5-->
@@ -213,6 +216,17 @@
                 <action android:name="com.xiaomi.mipush.ERROR" />
             </intent-filter>
         </receiver>
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="@string/zhifprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths_public" />
+        </provider>
+
     </application>
 
 </manifest>

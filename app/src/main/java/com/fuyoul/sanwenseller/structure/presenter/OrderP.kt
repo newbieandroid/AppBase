@@ -29,7 +29,7 @@ class OrderP(orderV: OrderV) : BaseP<OrderM, OrderV>(orderV) {
                 viewImpl?.getBaseAdapter()?.setReqLayoutInfo(isRefresh, true)
             }
 
-            override fun withoutData(msg: String) {
+            override fun withoutData(code: Int, msg: String) {
                 viewImpl?.getBaseAdapter()?.setReqLayoutInfo(isRefresh, false)
                 viewImpl?.getBaseAdapter()?.setRefreshAndLoadMoreEnable(false)
 

@@ -120,7 +120,8 @@
                 android:layout_marginLeft="-30px"
                 android:layout_toRightOf="@+id/orderItemHead"
                 android:scaleType="fitCenter"
-                android:src="@mipmap/ic_yb_ycsicon" />
+                android:src="@mipmap/ic_yb_ycsicon"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/orderItemNick"

@@ -39,7 +39,7 @@ class LoginP(loginV: LoginV) : BaseP<LoginM, LoginV>(loginV) {
                 imLogin(context, LoginInfo("user_${loginInfo.userInfoId}", loginInfo.imToken))
             }
 
-            override fun withoutData(msg: String) {
+            override fun withoutData(code: Int, msg: String) {
                 NormalFunUtils.showToast(context, msg)
 //                HttpDialogHelper.dismisss()
 
@@ -69,7 +69,7 @@ class LoginP(loginV: LoginV) : BaseP<LoginM, LoginV>(loginV) {
                 viewImpl?.changeGetSmsState()
             }
 
-            override fun withoutData(msg: String) {
+            override fun withoutData(code: Int, msg: String) {
                 NormalFunUtils.showToast(context, msg)
 
             }

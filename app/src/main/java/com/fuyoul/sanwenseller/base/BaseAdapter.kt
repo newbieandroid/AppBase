@@ -20,7 +20,7 @@ import com.zhy.autolayout.utils.AutoUtils
 abstract class BaseAdapter(context: Context) : RecyclerView.Adapter<BaseViewHolder>() {
 
     private var context: Context? = null
-    private var datas = arrayListOf<MultBaseBean>()//数据
+    var datas = arrayListOf<MultBaseBean>()//数据
     private var multiItems = ArrayList<AdapterMultiItem>()//多布局
 
     init {

@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/ShareLib/ShareLib.iml" filepath="$PROJECT_DIR$/ShareLib/ShareLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/SmartRefreshLib/SmartRefreshLib.iml" filepath="$PROJECT_DIR$/SmartRefreshLib/SmartRefreshLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/photoselector/photoselector.iml" filepath="$PROJECT_DIR$/photoselector/photoselector.iml" />
       <module fileurl="file://$PROJECT_DIR$/uikit/uikit.iml" filepath="$PROJECT_DIR$/uikit/uikit.iml" />
     </modules>
   </component>

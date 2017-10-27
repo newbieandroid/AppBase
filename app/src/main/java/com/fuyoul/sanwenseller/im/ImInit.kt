@@ -165,7 +165,7 @@ object ImInit {
         config.notificationSmallIconId = R.mipmap.ic_launcher_round
         config.notificationColor = context.resources.getColor(R.color.color_activity_blue_bg)
         // 通知铃声的uri字符串
-        config.notificationSound = "android.resource://com.yijing/raw/msg"
+        config.notificationSound = "android.resource://com.fuyoul.sanwenseller/raw/msg"
 
         // 呼吸灯配置
         config.ledARGB = Color.GREEN

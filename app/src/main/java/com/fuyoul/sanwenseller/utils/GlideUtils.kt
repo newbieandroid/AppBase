@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.res.Resources
 import android.graphics.*
 import android.support.annotation.ColorRes
+import android.util.Log
 import android.widget.ImageView
 import com.bumptech.glide.DrawableRequestBuilder
 import com.bumptech.glide.Glide
@@ -24,8 +25,8 @@ import java.lang.Exception
  */
 object GlideUtils {
 
-    private val ERRORIMG = android.R.drawable.stat_sys_warning
-    private val LOADINGIMG = android.R.drawable.ic_menu_upload_you_tube
+    private val ERRORIMG = R.mipmap.icon_imgloading
+    private val LOADINGIMG = R.mipmap.icon_imgloading
 
     /**
      * 加载圆形图片,带边框
@@ -35,18 +36,16 @@ object GlideUtils {
         val builder: DrawableRequestBuilder<T> = Glide.with(context)
                 .load(path)
                 .thumbnail(0.1f)
-                .placeholder(if (loadingImgRes == 0) LOADINGIMG else loadingImgRes)
-                .error(if (errorImgRes == 0) ERRORIMG else errorImgRes)
+                .placeholder(loadingImgRes)
+                .error(errorImgRes)
                 .centerCrop()
                 .listener(object : RequestListener<T, GlideDrawable> {
                     override fun onException(e: Exception?, model: T?, target: Target<GlideDrawable>?, isFirstResource: Boolean): Boolean {
-                        loadCircleImg(context, if (errorImgRes == 0) ERRORIMG else errorImgRes, imageView, isBord, bordColor, if (loadingImgRes == 0) LOADINGIMG else loadingImgRes, if (errorImgRes == 0) ERRORIMG else errorImgRes)
+                        loadCircleImg(context, ERRORIMG, imageView, isBord, bordColor, LOADINGIMG, ERRORIMG)
                         return true
                     }
 
-                    override fun onResourceReady(resource: GlideDrawable?, model: T?, target: Target<GlideDrawable>?, isFromMemoryCache: Boolean, isFirstResource: Boolean): Boolean {
-                        return false
-                    }
+                    override fun onResourceReady(resource: GlideDrawable?, model: T?, target: Target<GlideDrawable>?, isFromMemoryCache: Boolean, isFirstResource: Boolean): Boolean = false
 
                 })
 
@@ -60,7 +59,7 @@ object GlideUtils {
     }
 
     fun <T> loadCircleImg(context: Context, path: T, imageView: ImageView, isBord: Boolean, @ColorRes bordColor: Int) {
-        loadCircleImg(context, path, imageView, isBord, bordColor, 0, 0)
+        loadCircleImg(context, path, imageView, isBord, bordColor, LOADINGIMG, ERRORIMG)
     }
 
 
@@ -72,14 +71,14 @@ object GlideUtils {
     }
 
     fun <T> loadCircleImg(context: Context, path: T, imageView: ImageView) {
-        loadCircleImg(context, path, imageView, false, 0, 0, 0)
+        loadCircleImg(context, path, imageView, false, 0, LOADINGIMG, ERRORIMG)
     }
 
     /**
      * 加载本地或者网络圆角图片
      */
     fun <T> loadRoundCornerImg(context: Context, path: T, imageView: ImageView) {
-        loadRoundCornerImg(context, path, imageView, 0, 0)
+        loadRoundCornerImg(context, path, imageView, LOADINGIMG, ERRORIMG)
     }
 
     fun <T> loadRoundCornerImg(context: Context, path: T, imageView: ImageView, loadingImgRes: Int, errorImgRes: Int) {
@@ -87,20 +86,17 @@ object GlideUtils {
         Glide.with(context)
                 .load(path)
                 .thumbnail(0.1f)
-                .placeholder(if (loadingImgRes == 0) LOADINGIMG else loadingImgRes)
-                .error(if (errorImgRes == 0) ERRORIMG else errorImgRes)
+                .placeholder(loadingImgRes)
+                .error(errorImgRes)
                 .fitCenter()
                 .bitmapTransform(RoundedCornersTransformation(context, 30, 0, RoundedCornersTransformation.CornerType.ALL))
                 .listener(object : RequestListener<T, GlideDrawable> {
                     override fun onException(e: Exception?, model: T?, target: Target<GlideDrawable>?, isFirstResource: Boolean): Boolean {
-                        loadRoundCornerImg(context, if (errorImgRes == 0) ERRORIMG else errorImgRes, imageView)
+                        loadRoundCornerImg(context, ERRORIMG, imageView)
                         return true
                     }
 
-                    override fun onResourceReady(resource: GlideDrawable?, model: T?, target: Target<GlideDrawable>?, isFromMemoryCache: Boolean, isFirstResource: Boolean): Boolean {
-
-                        return false
-                    }
+                    override fun onResourceReady(resource: GlideDrawable?, model: T?, target: Target<GlideDrawable>?, isFromMemoryCache: Boolean, isFirstResource: Boolean): Boolean = false
 
                 })
                 .into(imageView)
@@ -111,29 +107,30 @@ object GlideUtils {
      * 加载本地或者网络普通图片
      */
     fun <T> loadNormalImg(context: Context, path: T, imageView: ImageView) {
-        loadNormalImg(context, path, imageView, 0, 0)
+        loadNormalImg(context, path, imageView, LOADINGIMG, ERRORIMG)
     }
 
     fun <T> loadNormalImg(context: Context, path: T, imageView: ImageView, loadingImgRes: Int, errorImgRes: Int) {
 
+
+        Log.e("csl", "----------$path--------")
+
+
         Glide.with(context)
                 .load(path)
                 .thumbnail(0.1f)
-                .placeholder(if (loadingImgRes == 0) LOADINGIMG else loadingImgRes)
-                .error(if (errorImgRes == 0) ERRORIMG else errorImgRes)
+                .placeholder(loadingImgRes)
+                .error(errorImgRes)
                 .centerCrop()
-                .listener(object : RequestListener<T, GlideDrawable> {
-                    override fun onException(e: Exception?, model: T?, target: Target<GlideDrawable>?, isFirstResource: Boolean): Boolean {
-                        loadNormalImg(context, if (errorImgRes == 0) ERRORIMG else errorImgRes, imageView)
-                        return true
-                    }
-
-                    override fun onResourceReady(resource: GlideDrawable?, model: T?, target: Target<GlideDrawable>?, isFromMemoryCache: Boolean, isFirstResource: Boolean): Boolean {
-
-                        return false
-                    }
-
-                })
+//                .listener(object : RequestListener<T, GlideDrawable> {
+//                    override fun onException(e: Exception?, model: T?, target: Target<GlideDrawable>?, isFirstResource: Boolean): Boolean {
+//                        loadNormalImg(context, ERRORIMG, imageView)
+//                        return true
+//                    }
+//
+//                    override fun onResourceReady(resource: GlideDrawable?, model: T?, target: Target<GlideDrawable>?, isFromMemoryCache: Boolean, isFirstResource: Boolean): Boolean = false
+//
+//                })
                 .into(imageView)
     }
 
@@ -157,15 +154,9 @@ object GlideUtils {
         }
 
 
-        override fun getId(): String {
-            return "${System.currentTimeMillis()}"
-        }
+        override fun getId(): String = "${System.currentTimeMillis()}"
 
-        override fun transform(pool: BitmapPool?, toTransform: Bitmap?, outWidth: Int, outHeight: Int): Bitmap {
-
-
-            return circleCrop(pool!!, toTransform)!!
-        }
+        override fun transform(pool: BitmapPool?, toTransform: Bitmap?, outWidth: Int, outHeight: Int): Bitmap = circleCrop(pool!!, toTransform)!!
 
 
         private fun circleCrop(pool: BitmapPool, source: Bitmap?): Bitmap? {

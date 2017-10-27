@@ -1,6 +1,5 @@
 package com.fuyoul.sanwenseller.configs
 
-import com.fuyoul.sanwenseller.R
 
 /**
  *  @author: chen
@@ -18,4 +17,8 @@ object Data {
     val BUSY = 1//不预约
 
 
+    /**宝贝类别**/
+    val NORMALBABY = 0//普通宝贝类型
+    val QUICKTESTBABY = 1//闪测
+    val PERSONALBABY = 2//自测
 }

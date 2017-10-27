@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/includetopbar" />
+
+
+    <LinearLayout
+        android:id="@+id/editBabyContent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/titBarLayout"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/editBabyNameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="144px"
+            android:layout_below="@+id/titBarLayout"
+            android:layout_marginTop="21px"
+            android:background="@drawable/back_titlebar"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="36px"
+            android:paddingRight="36px">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="宝贝名称"
+                android:textColor="@color/color_333333"
+                android:textSize="46px" />
+
+            <EditText
+                android:id="@+id/editBabyName"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="60px"
+                android:background="@color/color_white"
+                android:hint="请输入宝贝名称"
+                android:singleLine="true"
+                android:textColor="@color/color_333333"
+                android:textSize="40px" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/editBabyPriceLayout"
+            android:layout_width="match_parent"
+            android:layout_height="144px"
+            android:layout_below="@+id/editBabyNameLayout"
+            android:background="@drawable/back_titlebar"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="36px"
+            android:paddingRight="36px">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="宝贝价格"
+                android:textColor="@color/color_333333"
+                android:textSize="46px" />
+
+            <EditText
+                android:id="@+id/editBabyPrice"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="60px"
+                android:background="@color/color_white"
+                android:hint="请输入宝贝价格"
+                android:inputType="numberDecimal"
+                android:singleLine="true"
+                android:textColor="@color/color_333333"
+                android:textSize="40px" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/editBabyTypeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="144px"
+            android:layout_below="@+id/editBabyPriceLayout"
+            android:background="@drawable/back_titlebar"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="36px"
+            android:paddingRight="36px">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="产品分类"
+                android:textColor="@color/color_333333"
+                android:textSize="46px" />
+
+            <TextView
+                android:id="@+id/editBabyType"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="right|center"
+                android:singleLine="true"
+                android:text="请选择分类"
+                android:textColor="@color/color_aaaaaa"
+                android:textSize="40px" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/editBabyPicLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/editBabyTypeLayout"
+            android:background="@drawable/back_titlebar"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:padding="36px">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="40px"
+                android:text="产品图片"
+                android:textColor="@color/color_333333"
+                android:textSize="46px" />
+
+
+            <ImageView
+                android:id="@+id/editBabyPic"
+                android:layout_width="230px"
+                android:layout_height="230px"
+                android:scaleType="fitCenter"
+                android:src="@mipmap/icon_addimg" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/editBabyDesLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/editBabyBtn"
+            android:layout_below="@+id/editBabyPicLayout"
+            android:background="@drawable/back_titlebar"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:padding="36px">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="40px"
+                android:text="产品描述"
+                android:textColor="@color/color_333333"
+                android:textSize="46px" />
+
+
+            <EditText
+                android:id="@+id/editBabyDes"
+                android:layout_width="match_parent"
+                android:layout_height="350px"
+                android:background="@drawable/back_order_normal"
+                android:gravity="top"
+                android:hint="请输入宝贝描述"
+                android:padding="36px"
+                android:textColor="@color/color_888888"
+                android:textColorHint="@color/color_888888"
+                android:textSize="40px" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <com.fuyoul.sanwenseller.widgets.AutoRadioGroup
+        android:id="@+id/editBabyTypeList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/titBarLayout"
+        android:background="@color/color_dfdfdf"
+        android:visibility="gone">
+
+        <RadioButton
+            android:id="@+id/yftxBabyType"
+            android:layout_width="match_parent"
+            android:layout_height="144px"
+            android:background="@drawable/back_titlebar"
+            android:button="@null"
+            android:drawableLeft="@mipmap/ic_index_topmenu_yftx"
+            android:drawablePadding="10dp"
+            android:drawableRight="@drawable/draw_checkbtn"
+            android:paddingLeft="36px"
+            android:paddingRight="36px"
+            android:privateImeOptions="36px"
+            android:text="缘分探寻"
+            android:textColor="@color/color_444444"
+            android:textSize="46px" />
+
+        <RadioButton
+            android:id="@+id/bzppBabyType"
+            android:layout_width="match_parent"
+            android:layout_height="144px"
+            android:background="@drawable/back_titlebar"
+            android:button="@null"
+            android:drawableLeft="@mipmap/ic_index_topmenu_bzpp"
+            android:drawablePadding="10dp"
+            android:drawableRight="@drawable/draw_checkbtn"
+            android:paddingLeft="36px"
+            android:paddingRight="36px"
+            android:privateImeOptions="36px"
+            android:text="八字匹配"
+            android:textColor="@color/color_444444"
+            android:textSize="46px" />
+
+        <RadioButton
+            android:id="@+id/pjcyBabyType"
+            android:layout_width="match_parent"
+            android:layout_height="144px"
+            android:background="@drawable/back_titlebar"
+            android:button="@null"
+            android:drawableLeft="@mipmap/ic_index_topmenu_pjcy"
+            android:drawablePadding="10dp"
+            android:drawableRight="@drawable/draw_checkbtn"
+            android:paddingLeft="36px"
+            android:paddingRight="36px"
+            android:privateImeOptions="36px"
+            android:text="破镜重圆"
+            android:textColor="@color/color_444444"
+            android:textSize="46px" />
+
+        <RadioButton
+            android:id="@+id/hyjtBabyType"
+            android:layout_width="match_parent"
+            android:layout_height="144px"
+            android:background="@drawable/back_titlebar"
+            android:button="@null"
+            android:drawableLeft="@mipmap/ic_index_topmenu_yyjt"
+            android:drawablePadding="10dp"
+            android:drawableRight="@drawable/draw_checkbtn"
+            android:paddingLeft="36px"
+            android:paddingRight="36px"
+            android:privateImeOptions="36px"
+            android:text="婚姻家庭"
+            android:textColor="@color/color_444444"
+            android:textSize="46px" />
+
+        <RadioButton
+            android:id="@+id/sycyBabyType"
+            android:layout_width="match_parent"
+            android:layout_height="144px"
+            android:background="@drawable/back_titlebar"
+            android:button="@null"
+            android:drawableLeft="@mipmap/ic_index_topmenu_sycy"
+            android:drawablePadding="10dp"
+            android:drawableRight="@drawable/draw_checkbtn"
+            android:paddingLeft="36px"
+            android:paddingRight="36px"
+            android:privateImeOptions="36px"
+            android:text="事业财运"
+            android:textColor="@color/color_444444"
+            android:textSize="46px" />
+
+        <RadioButton
+            android:id="@+id/lczrBabyType"
+            android:layout_width="match_parent"
+            android:layout_height="144px"
+            android:background="@drawable/back_titlebar"
+            android:button="@null"
+            android:drawableLeft="@mipmap/ic_index_topmenu_lczr"
+            android:drawablePadding="10dp"
+            android:drawableRight="@drawable/draw_checkbtn"
+            android:paddingLeft="36px"
+            android:paddingRight="36px"
+            android:privateImeOptions="36px"
+            android:text="良辰择日"
+            android:textColor="@color/color_444444"
+            android:textSize="46px" />
+
+        <RadioButton
+            android:id="@+id/zyqmBabyType"
+            android:layout_width="match_parent"
+            android:layout_height="144px"
+            android:background="@drawable/back_titlebar"
+            android:button="@null"
+            android:drawableLeft="@mipmap/ic_index_topmenu_zyqm"
+            android:drawablePadding="10dp"
+            android:drawableRight="@drawable/draw_checkbtn"
+            android:paddingLeft="36px"
+            android:paddingRight="36px"
+            android:privateImeOptions="36px"
+            android:text="周易取名"
+            android:textColor="@color/color_444444"
+            android:textSize="46px" />
+
+        <RadioButton
+            android:id="@+id/zhycBabyType"
+            android:layout_width="match_parent"
+            android:layout_height="144px"
+            android:background="@drawable/back_titlebar"
+            android:button="@null"
+            android:drawableLeft="@mipmap/ic_index_topmenu_zhyc"
+            android:drawablePadding="10dp"
+            android:drawableRight="@drawable/draw_checkbtn"
+            android:paddingLeft="36px"
+            android:paddingRight="36px"
+            android:privateImeOptions="36px"
+            android:text="综合预测"
+            android:textColor="@color/color_444444"
+            android:textSize="46px" />
+
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:button="@null"
+            android:focusable="false" />
+    </com.fuyoul.sanwenseller.widgets.AutoRadioGroup>
+
+    <TextView
+        android:id="@+id/editBabyBtn"
+        android:layout_width="match_parent"
+        android:layout_height="172px"
+        android:layout_alignParentBottom="true"
+        android:background="@color/color_3CC5BC"
+        android:gravity="center"
+        android:text="完成"
+        android:textColor="@color/white"
+        android:textSize="46px" />
+</RelativeLayout>

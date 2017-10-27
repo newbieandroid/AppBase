@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="475px"
+    android:layout_marginTop="21px"
+    android:background="@color/color_white"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/babyItemIcon"
+        android:layout_width="230px"
+        android:layout_height="230px"
+        android:layout_marginLeft="36px"
+        android:layout_marginRight="28px"
+        android:layout_marginTop="36px"
+        android:src="@mipmap/ic_launcher" />
+
+    <TextView
+        android:id="@+id/babyItemTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="36px"
+        android:layout_marginTop="36px"
+        android:layout_toRightOf="@+id/babyItemIcon"
+        android:singleLine="true"
+        android:textColor="@color/color_333333"
+        android:textSize="46px" />
+
+    <TextView
+        android:id="@+id/babyItemDes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/babyItemTitle"
+        android:layout_marginRight="36px"
+        android:layout_toRightOf="@+id/babyItemIcon"
+        android:lines="2"
+        android:textColor="@color/color_aaaaaa"
+        android:textSize="37px" />
+
+    <TextView
+        android:id="@+id/babyItemPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/babyItemDes"
+        android:layout_marginTop="25px"
+        android:layout_toRightOf="@+id/babyItemIcon"
+        android:text="价格"
+        android:textColor="@color/color_FF627B"
+        android:textSize="40px" />
+
+    <LinearLayout
+        android:id="@+id/babyItemFuncLayout"
+        android:layout_width="match_parent"
+        android:layout_height="172px"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/back_mainbottom"
+        android:gravity="right|center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="36px"
+        android:paddingRight="36px">
+
+        <TextView
+            android:id="@+id/babyItemLeftFunc"
+            android:layout_width="216px"
+            android:layout_height="86px"
+            android:layout_marginLeft="28px"
+            android:background="@drawable/back_order_normal"
+            android:gravity="center"
+            android:text="编辑"
+            android:textColor="@color/color_888888"
+            android:textSize="37px" />
+
+        <TextView
+            android:id="@+id/babyItemMiddleFunc"
+            android:layout_width="216px"
+            android:layout_height="86px"
+            android:layout_marginLeft="28px"
+            android:background="@drawable/back_order_normal"
+            android:gravity="center"
+            android:text="下架"
+            android:textColor="@color/color_888888"
+            android:textSize="37px" />
+
+        <TextView
+            android:id="@+id/babyItemRightFunc"
+            android:layout_width="216px"
+            android:layout_height="86px"
+            android:layout_marginLeft="28px"
+            android:background="@drawable/back_order_normal"
+            android:gravity="center"
+            android:text="删除宝贝"
+            android:textColor="@color/color_888888"
+            android:textSize="37px" />
+    </LinearLayout>
+</RelativeLayout>

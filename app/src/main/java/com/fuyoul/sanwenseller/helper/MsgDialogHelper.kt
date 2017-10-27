@@ -1,8 +1,20 @@
 package com.fuyoul.sanwenseller.helper
 
 import android.content.Context
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.text.TextUtils
+import android.view.View
+import android.widget.TextView
+import com.csl.refresh.SmartRefreshLayout
 import com.fuyoul.sanwenseller.R
+import com.fuyoul.sanwenseller.base.BaseAdapter
+import com.fuyoul.sanwenseller.base.BaseViewHolder
+import com.fuyoul.sanwenseller.bean.AdapterMultiItem
+import com.fuyoul.sanwenseller.bean.MultBaseBean
+import com.fuyoul.sanwenseller.bean.others.MultDialogBean
+import com.fuyoul.sanwenseller.configs.Code.VIEWTYPE_MULTDIALOG
+import com.fuyoul.sanwenseller.listener.MultDialogListener
 import com.fuyoul.sanwenseller.widgets.dialog.AbstractDialog
 import com.fuyoul.sanwenseller.widgets.dialog.DialogViewHolder
 
@@ -53,7 +65,6 @@ object MsgDialogHelper {
 
     }
 
-
     /**底部只有一个按钮的弹框**/
     fun showSingleDialog(context: Context, cancleable: Boolean, title: String, msgInfo: String, sureText: String?, listener: DialogListener?) {
 
@@ -72,6 +83,61 @@ object MsgDialogHelper {
 
         }.backgroundLight(0.7).setCancelAble(cancleable).showDialog(R.style.dialog_scale_animstyle)
 
+    }
+
+
+    fun showMultItemDialog(context: Context, items: List<MultDialogBean>, bottomText: String, listener: MultDialogListener) {
+        object : AbstractDialog(context, R.layout.iosselectdialog) {
+            override fun convert(holder: DialogViewHolder?) {
+
+                holder?.convertView?.setOnClickListener {
+                    dismiss()
+                }
+
+                val selectItem = holder?.convertView?.findViewById<RecyclerView>(R.id.selectItem)
+
+                val manager = LinearLayoutManager(context)
+                manager.orientation = LinearLayoutManager.VERTICAL
+                selectItem?.layoutManager = manager
+                val adapter = object : BaseAdapter(context) {
+                    override fun convert(holder: BaseViewHolder, position: Int, datas: List<MultBaseBean>) {
+                        holder.itemView.findViewById<TextView>(R.id.iosItemText).text = items[position].title
+                    }
+
+                    override fun addMultiType(multiItems: ArrayList<AdapterMultiItem>) {
+
+                        multiItems.add(AdapterMultiItem(VIEWTYPE_MULTDIALOG, R.layout.item_iosdialog))
+                    }
+
+                    override fun onItemClicked(view: View, position: Int) {
+                        listener.onItemClicked(position)
+                        dismiss()
+                    }
+
+                    override fun onEmpryLayou(view: View, layoutResId: Int) {
+                    }
+
+                    override fun getSmartRefreshLayout(): SmartRefreshLayout = SmartRefreshLayout(context)
+
+                    override fun getRecyclerView(): RecyclerView = selectItem!!
+
+                }
+                selectItem?.adapter = adapter
+                adapter.setData(true, items)
+
+                val cancle = holder!!.convertView.findViewById<TextView>(R.id.cancle)
+                cancle.text = bottomText
+                cancle.setOnClickListener {
+                    dismiss()
+                }
+            }
+
+        }.fromBottom()
+                .setCancelAble(true)
+                .setCanceledOnTouchOutside(true)
+                .backgroundLight(0.7)
+                .fullWidth()
+                .showDialog()
     }
 
 

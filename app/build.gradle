@@ -18,6 +18,8 @@ android {
         flavorDimensions "versionCode"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
+        
+
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
@@ -27,6 +29,7 @@ android {
         resValue "string", "xiaomiappkey", "\"${xiaomiappkey}\""
         resValue "string", "mipushhname", "\"${mipushhname}\""
         resValue "string", "imkey", "\"${imkey}\""
+        resValue "string", "zhifprovider", "\"${zhifprovider}\""
     }
 
 
@@ -104,5 +107,6 @@ dependencies {
     implementation files('libs/mi_push_sdk_3.2.2.jar')
     //指示器
     compile 'com.github.hackware1993:MagicIndicator:1.5.0'
+    implementation project(':photoselector')
 }
 

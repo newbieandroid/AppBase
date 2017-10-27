@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="29px"
+    android:paddingLeft="29px"
+    android:paddingRight="29px">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/selectItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/cancle" />
+
+
+    <TextView
+        android:id="@+id/cancle"
+        android:layout_width="match_parent"
+        android:layout_height="144px"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="29px"
+        android:background="@drawable/back_iosdialog"
+        android:gravity="center"
+        android:text="取消"
+        android:textColor="@color/color_888888"
+        android:textSize="49px" />
+</com.zhy.autolayout.AutoRelativeLayout>

@@ -82,7 +82,7 @@
 -keep class com.fuyoul.sanwenseller.bean.**{*;}
 -keep class com.fuyoul.sanwenseller.reqhttp.**{*;}
 -keep class com.fuyoul.sanwenseller.reshttp.**{*;}
--keep class com.fuyoul.sanwenseller.reshttp.**{*;}
+-keep class com.fuyoul.sanwenseller.others.**{*;}
 
 
 #微博

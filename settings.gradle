@@ -1,1 +1,1 @@
-include ':app', ':SmartRefreshLib', ':ShareLib', ':uikit'
+include ':app', ':SmartRefreshLib', ':ShareLib', ':uikit', ':photoselector'

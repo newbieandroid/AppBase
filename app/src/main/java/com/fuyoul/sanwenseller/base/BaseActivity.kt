@@ -1,13 +1,19 @@
 package com.fuyoul.sanwenseller.base
 
 import android.content.pm.ActivityInfo
+import android.graphics.Rect
 import android.os.Bundle
 import android.view.View
+import android.view.ViewTreeObserver
 import com.fuyoul.sanwenseller.R
 import com.fuyoul.sanwenseller.configs.TopBarOption
 import com.fuyoul.sanwenseller.utils.StatusBarUtils
 import com.zhy.autolayout.AutoLayoutActivity
 import kotlinx.android.synthetic.main.includetopbar.*
+import android.os.Build
+import android.util.Log
+import com.fuyoul.sanwenseller.utils.NormalFunUtils
+
 
 /**
  *  Auther: chen
@@ -93,4 +99,82 @@ abstract class BaseActivity<out M : BaseM, V : BaseV, out P : BaseP<M, V>> : Aut
         }
     }
 
+
+    private var globalLayoutListener: CustomGlobalLayoutListener? = null
+
+
+    inner class CustomGlobalLayoutListener(root: View, scrollToView: View) : ViewTreeObserver.OnGlobalLayoutListener {
+
+
+        var root: View? = null
+        var scrollToView: View? = null
+
+        init {
+            this.root = root
+            this.scrollToView = scrollToView
+        }
+
+        override fun onGlobalLayout() {
+
+            val rect = Rect()
+            //获取root在窗体的可视区域
+            root?.getWindowVisibleDisplayFrame(rect)
+            //获取root在窗体的不可视区域高度(被其他View遮挡的区域高度)
+            val rootInvisibleHeight = (root?.rootView?.height ?: 0) - rect.bottom
+
+            //若不可视区域高度大于100，则键盘显示
+            if (rootInvisibleHeight > 100) {
+                val location = IntArray(2)
+                //获取scrollToView在窗体的坐标
+                scrollToView?.getLocationInWindow(location)
+                //计算root滚动高度，使scrollToView在可见区域的底部
+                val srollHeight = location[1] + (scrollToView?.height ?: 0) - rect.bottom
+
+                root?.scrollTo(0, srollHeight)
+            } else {
+                //键盘隐藏
+                root?.scrollTo(0, 0)
+            }
+        }
+
+    }
+
+    fun registKeyBordListener(root: View, scrollToView: View) {
+
+        if (globalLayoutListener == null) {
+            globalLayoutListener = CustomGlobalLayoutListener(root, scrollToView)
+        }
+
+        root.viewTreeObserver.addOnGlobalLayoutListener(globalLayoutListener)
+    }
+
+
+    /**兼容软键盘控制布局的移动**/
+    private fun ounRegistKeyBordListener() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+            globalLayoutListener?.root?.viewTreeObserver?.removeGlobalOnLayoutListener(globalLayoutListener)
+        } else {
+            globalLayoutListener?.root?.viewTreeObserver?.removeOnGlobalLayoutListener(globalLayoutListener)
+
+        }
+    }
+
+
+    override fun onRestart() {
+        super.onRestart()
+        if (globalLayoutListener != null) {
+            registKeyBordListener(globalLayoutListener!!.root!!, globalLayoutListener!!.scrollToView!!)
+        }
+    }
+
+    override fun onStop() {
+        super.onStop()
+
+        if (globalLayoutListener != null) {
+            NormalFunUtils.changeKeyBord(this, false, globalLayoutListener!!.scrollToView!!)
+
+        }
+
+        ounRegistKeyBordListener()
+    }
 }

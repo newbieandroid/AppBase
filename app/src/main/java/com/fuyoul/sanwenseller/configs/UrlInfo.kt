@@ -17,4 +17,6 @@ object UrlInfo {
 
     /**订单相关**/
     val ORDERLIST = "$base/order/master/orderList"//获取订单列表
+
+    val BABYLIST = "$base/goods/master/getMasterGoodsList"//获取预测师的宝贝礼拜
 }

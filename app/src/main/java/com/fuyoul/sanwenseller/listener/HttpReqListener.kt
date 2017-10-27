@@ -6,6 +6,8 @@ import android.util.Log
 import com.alibaba.fastjson.JSON
 import com.fuyoul.sanwenseller.bean.reshttp.ResHttpResult
 import com.fuyoul.sanwenseller.configs.Code
+import com.fuyoul.sanwenseller.configs.Code.HTTP_ERROR
+import com.fuyoul.sanwenseller.configs.Code.HTTP_SUCCESS
 import com.fuyoul.sanwenseller.helper.HttpDialogHelper
 import com.lzy.okgo.callback.AbsCallback
 import com.lzy.okgo.model.Response
@@ -74,7 +76,7 @@ abstract class HttpReqListener(context: Context, isShowDialog: Boolean, isCancle
     abstract fun reqOk(result: ResHttpResult)
 
     /**请求成功但是没有数据**/
-    abstract fun withoutData(msg: String)
+    abstract fun withoutData(code: Int, msg: String)
 
     /**请求失败(包括没有请求成功和服务端异常)**/
     abstract fun error(errorInfo: String)
@@ -88,10 +90,10 @@ abstract class HttpReqListener(context: Context, isShowDialog: Boolean, isCancle
         } else {
             val result = response?.body()
             if (result?.errorCode == Code.HTTP_NODATA || TextUtils.isEmpty(result?.data.toString()) || TextUtils.equals("[]", result?.data.toString()) || TextUtils.equals("{}", result?.data.toString())) {
-                withoutData("${result?.msg}")
-            } else if (result?.errorCode == Code.HTTP_ERROR) {
+                withoutData(result?.errorCode ?: HTTP_SUCCESS, "${result?.msg}")
+            } else if (result?.errorCode == HTTP_ERROR) {
                 error("${result.msg}")
-            } else if (result?.errorCode == Code.HTTP_SUCCESS) {
+            } else if (result?.errorCode == HTTP_SUCCESS) {
                 reqOk(result)
             } else {
                 error("${result?.msg}")

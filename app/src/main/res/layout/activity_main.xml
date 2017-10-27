@@ -15,7 +15,7 @@
     <com.fuyoul.sanwenseller.widgets.AutoRadioGroup
         android:id="@+id/mainBottomLayout"
         android:layout_width="match_parent"
-        android:layout_height="142px"
+        android:layout_height="144px"
         android:layout_alignParentBottom="true"
         android:background="@drawable/back_singtop_dfdfdf"
         android:orientation="horizontal">
