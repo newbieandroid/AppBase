@@ -1,11 +1,19 @@
-package com.fuyoul.sanwenseller.ui.normal
+package com.fuyoul.sanwenseller.ui
 
+import android.app.Activity
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.TextPaint
 import android.text.TextUtils
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
+import android.text.style.ForegroundColorSpan
+import android.view.View
 import com.fuyoul.sanwenseller.R
 import com.fuyoul.sanwenseller.base.BaseActivity
 import com.fuyoul.sanwenseller.bean.reshttp.ResLoginInfoBean
@@ -15,6 +23,8 @@ import com.fuyoul.sanwenseller.configs.TopBarOption
 import com.fuyoul.sanwenseller.structure.model.LoginM
 import com.fuyoul.sanwenseller.structure.presenter.LoginP
 import com.fuyoul.sanwenseller.structure.view.LoginV
+import com.fuyoul.sanwenseller.ui.normal.AgreeMentActivity
+import com.fuyoul.sanwenseller.utils.NormalFunUtils
 import kotlinx.android.synthetic.main.loginactivity.*
 import org.litepal.crud.DataSupport
 import java.util.*
@@ -28,6 +38,26 @@ class LoginActivity : BaseActivity<LoginM, LoginV, LoginP>() {
 
 
     private var isDestory = false
+
+
+    companion object {
+        /**
+         * @param isAutoJump是否自动跳转到登录页
+         */
+        fun checkLogin(isAutoJump: Boolean, activity: Activity): Boolean {
+
+            if (DataSupport.findFirst(ResLoginInfoBean::class.java) != null) {
+                return true
+            }
+            if (isAutoJump) {
+                NormalFunUtils.showToast(activity, "请登录")
+                activity.startActivity(Intent(activity, LoginActivity::class.java).putExtra("isAutoJump", isAutoJump))
+            }
+            return false
+
+        }
+    }
+
 
     override fun initTopBar(): TopBarOption {
 
@@ -45,6 +75,27 @@ class LoginActivity : BaseActivity<LoginM, LoginV, LoginP>() {
         val filter = IntentFilter()
         filter.addAction(Action.ACTION_WXLOGIN)
         this.registerReceiver(receiver, filter)
+
+
+        val tips = agreeTips.text
+        val sps = SpannableString(tips)
+        sps.setSpan(ForegroundColorSpan(resources.getColor(R.color.color_3CC5BC)), tips.length - 8, tips.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        sps.setSpan(object : ClickableSpan() {
+            override fun onClick(widget: View?) {
+                startActivity(Intent(this@LoginActivity, AgreeMentActivity::class.java))
+            }
+
+            override fun updateDrawState(ds: TextPaint?) {
+                ds!!.isLinearText = false
+                ds.bgColor = resources.getColor(R.color.color_white)
+
+            }
+
+        }, tips.length - 8, tips.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+
+        agreeTips.text = sps
+        agreeTips.movementMethod = LinkMovementMethod.getInstance()
+
     }
 
     override fun setListener() {
@@ -65,6 +116,10 @@ class LoginActivity : BaseActivity<LoginM, LoginV, LoginP>() {
     override fun getPresenter(): LoginP = LoginP(initViewImpl())
 
     override fun initViewImpl(): LoginV = object : LoginV() {
+        override fun deleteDbInfo() {
+            DataSupport.deleteAll(ResLoginInfoBean::class.java)
+        }
+
         override fun isCanSendSms(): Boolean = TextUtils.equals("获取验证码", getSmsCode.text)
 
         override fun saveDbInfo(loginInfo: ResLoginInfoBean) {

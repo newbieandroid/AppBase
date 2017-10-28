@@ -28,7 +28,7 @@ class BabyManagerP(babyManagerV: BabyManagerV) : BaseP<BabyManagerM, BabyManager
                 viewImpl?.getBaseAdapter()?.setReqLayoutInfo(isRefresh, true)
             }
 
-            override fun withoutData(conde: Int, msg: String) {
+            override fun withoutData(code: Int, msg: String) {
                 viewImpl?.getBaseAdapter()?.setReqLayoutInfo(isRefresh, false)
                 viewImpl?.getBaseAdapter()?.setRefreshAndLoadMoreEnable(false)
 
@@ -56,9 +56,8 @@ class BabyManagerP(babyManagerV: BabyManagerV) : BaseP<BabyManagerM, BabyManager
 
         val item = viewImpl?.getBaseAdapter()?.datas?.get(position) as ResHttpBabyItem
 
-        getModelImpl().deleteBbay(context, item.goodsId, item.masterId, object : HttpReqListener(context) {
+        getModelImpl().deleteBbay(context, item.goodsId, object : HttpReqListener(context) {
             override fun reqOk(result: ResHttpResult) {
-
                 viewImpl?.getBaseAdapter()?.remove(position)
             }
 
@@ -71,6 +70,7 @@ class BabyManagerP(babyManagerV: BabyManagerV) : BaseP<BabyManagerM, BabyManager
             }
 
             override fun error(errorInfo: String) {
+                NormalFunUtils.showToast(context, errorInfo)
             }
 
         })
@@ -79,14 +79,20 @@ class BabyManagerP(babyManagerV: BabyManagerV) : BaseP<BabyManagerM, BabyManager
     fun upToShop(context: Context, position: Int) {
 
         val item = viewImpl?.getBaseAdapter()?.datas?.get(position) as ResHttpBabyItem
-        getModelImpl().upToShop(context, item.goodsId, item.masterId, object : HttpReqListener(context) {
+        getModelImpl().upToShop(context, item.goodsId, object : HttpReqListener(context) {
             override fun reqOk(result: ResHttpResult) {
+                viewImpl?.getBaseAdapter()?.remove(position)
             }
 
             override fun withoutData(code: Int, msg: String) {
+                if (code == Code.HTTP_SUCCESS) {
+                    viewImpl?.getBaseAdapter()?.remove(position)
+                }
+                NormalFunUtils.showToast(context, msg)
             }
 
             override fun error(errorInfo: String) {
+                NormalFunUtils.showToast(context, errorInfo)
             }
 
         })
@@ -95,14 +101,20 @@ class BabyManagerP(babyManagerV: BabyManagerV) : BaseP<BabyManagerM, BabyManager
 
     fun downToShop(context: Context, position: Int) {
         val item = viewImpl?.getBaseAdapter()?.datas?.get(position) as ResHttpBabyItem
-        getModelImpl().downToShop(context, item.goodsId, item.masterId, object : HttpReqListener(context) {
+        getModelImpl().downToShop(context, item.goodsId, object : HttpReqListener(context) {
             override fun reqOk(result: ResHttpResult) {
+                viewImpl?.getBaseAdapter()?.remove(position)
             }
 
             override fun withoutData(code: Int, msg: String) {
+                if (code == Code.HTTP_SUCCESS) {
+                    viewImpl?.getBaseAdapter()?.remove(position)
+                }
+                NormalFunUtils.showToast(context, msg)
             }
 
             override fun error(errorInfo: String) {
+                NormalFunUtils.showToast(context, errorInfo)
             }
 
         })

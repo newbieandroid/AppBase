@@ -7,169 +7,213 @@
     <include layout="@layout/includetopbar" />
 
 
-    <LinearLayout
-        android:id="@+id/editBabyContent"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/editBabyBtn"
         android:layout_below="@+id/titBarLayout"
-        android:orientation="vertical">
+        android:fillViewport="true"
+        android:scrollbars="none">
 
         <LinearLayout
-            android:id="@+id/editBabyNameLayout"
-            android:layout_width="match_parent"
-            android:layout_height="144px"
-            android:layout_below="@+id/titBarLayout"
-            android:layout_marginTop="21px"
-            android:background="@drawable/back_titlebar"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingLeft="36px"
-            android:paddingRight="36px">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="宝贝名称"
-                android:textColor="@color/color_333333"
-                android:textSize="46px" />
-
-            <EditText
-                android:id="@+id/editBabyName"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="60px"
-                android:background="@color/color_white"
-                android:hint="请输入宝贝名称"
-                android:singleLine="true"
-                android:textColor="@color/color_333333"
-                android:textSize="40px" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/editBabyPriceLayout"
-            android:layout_width="match_parent"
-            android:layout_height="144px"
-            android:layout_below="@+id/editBabyNameLayout"
-            android:background="@drawable/back_titlebar"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingLeft="36px"
-            android:paddingRight="36px">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="宝贝价格"
-                android:textColor="@color/color_333333"
-                android:textSize="46px" />
-
-            <EditText
-                android:id="@+id/editBabyPrice"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="60px"
-                android:background="@color/color_white"
-                android:hint="请输入宝贝价格"
-                android:inputType="numberDecimal"
-                android:singleLine="true"
-                android:textColor="@color/color_333333"
-                android:textSize="40px" />
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:id="@+id/editBabyTypeLayout"
-            android:layout_width="match_parent"
-            android:layout_height="144px"
-            android:layout_below="@+id/editBabyPriceLayout"
-            android:background="@drawable/back_titlebar"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingLeft="36px"
-            android:paddingRight="36px">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="产品分类"
-                android:textColor="@color/color_333333"
-                android:textSize="46px" />
-
-            <TextView
-                android:id="@+id/editBabyType"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="right|center"
-                android:singleLine="true"
-                android:text="请选择分类"
-                android:textColor="@color/color_aaaaaa"
-                android:textSize="40px" />
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:id="@+id/editBabyPicLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/editBabyTypeLayout"
-            android:background="@drawable/back_titlebar"
-            android:gravity="center_vertical"
-            android:orientation="vertical"
-            android:padding="36px">
+            android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="40px"
-                android:text="产品图片"
-                android:textColor="@color/color_333333"
-                android:textSize="46px" />
-
-
-            <ImageView
-                android:id="@+id/editBabyPic"
-                android:layout_width="230px"
-                android:layout_height="230px"
-                android:scaleType="fitCenter"
-                android:src="@mipmap/icon_addimg" />
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:id="@+id/editBabyDesLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@+id/editBabyBtn"
-            android:layout_below="@+id/editBabyPicLayout"
-            android:background="@drawable/back_titlebar"
-            android:gravity="center_vertical"
-            android:orientation="vertical"
-            android:padding="36px">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="40px"
-                android:text="产品描述"
-                android:textColor="@color/color_333333"
-                android:textSize="46px" />
-
-
-            <EditText
-                android:id="@+id/editBabyDes"
+            <LinearLayout
+                android:id="@+id/editBabyNameLayout"
                 android:layout_width="match_parent"
-                android:layout_height="350px"
-                android:background="@drawable/back_order_normal"
-                android:gravity="top"
-                android:hint="请输入宝贝描述"
-                android:padding="36px"
-                android:textColor="@color/color_888888"
-                android:textColorHint="@color/color_888888"
-                android:textSize="40px" />
+                android:layout_height="144px"
+                android:layout_below="@+id/titBarLayout"
+                android:layout_marginTop="21px"
+                android:background="@drawable/back_titlebar"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="36px"
+                android:paddingRight="36px">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="宝贝名称"
+                    android:textColor="@color/color_333333"
+                    android:textSize="46px" />
+
+                <EditText
+                    android:id="@+id/editBabyName"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="60px"
+                    android:background="@color/color_white"
+                    android:hint="请输入宝贝名称"
+                    android:maxLength="15"
+                    android:singleLine="true"
+                    android:textColor="@color/color_333333"
+                    android:textSize="40px" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/editBabyPriceLayout"
+                android:layout_width="match_parent"
+                android:layout_height="144px"
+                android:layout_below="@+id/editBabyNameLayout"
+                android:background="@drawable/back_titlebar"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="36px"
+                android:paddingRight="36px">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="宝贝价格"
+                    android:textColor="@color/color_333333"
+                    android:textSize="46px" />
+
+                <EditText
+                    android:id="@+id/editBabyPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="60px"
+                    android:background="@color/color_white"
+                    android:digits="0123456789"
+                    android:hint="请输入宝贝价格"
+                    android:inputType="number"
+                    android:maxLength="5"
+                    android:singleLine="true"
+                    android:textColor="@color/color_333333"
+                    android:textSize="40px" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/editBabyTypeLayout"
+                android:layout_width="match_parent"
+                android:layout_height="144px"
+                android:layout_below="@+id/editBabyPriceLayout"
+                android:background="@drawable/back_titlebar"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="36px"
+                android:paddingRight="36px">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="产品分类"
+                    android:textColor="@color/color_333333"
+                    android:textSize="46px" />
+
+                <TextView
+                    android:id="@+id/editBabyType"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="right|center"
+                    android:singleLine="true"
+                    android:text="请选择分类"
+                    android:textColor="@color/color_aaaaaa"
+                    android:textSize="40px" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/editBabyServiceTimeLayout"
+                android:layout_width="match_parent"
+                android:layout_height="144px"
+                android:layout_below="@+id/editBabyPriceLayout"
+                android:background="@drawable/back_titlebar"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="36px"
+                android:paddingRight="36px">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="服务时长"
+                    android:textColor="@color/color_333333"
+                    android:textSize="46px" />
+
+                <EditText
+                    android:id="@+id/editBabyServiceTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="60px"
+                    android:background="@color/color_white"
+                    android:digits="123456789"
+                    android:gravity="center_vertical"
+                    android:hint="默认时长为1小时"
+                    android:inputType="number"
+                    android:maxLength="2"
+                    android:singleLine="true"
+                    android:textColor="@color/color_aaaaaa"
+                    android:textSize="40px" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/editBabyPicLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/editBabyTypeLayout"
+                android:background="@drawable/back_titlebar"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:padding="36px">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="40px"
+                    android:text="产品图片"
+                    android:textColor="@color/color_333333"
+                    android:textSize="46px" />
+
+
+                <ImageView
+                    android:id="@+id/editBabyPic"
+                    android:layout_width="230px"
+                    android:layout_height="230px"
+                    android:scaleType="fitCenter"
+                    android:src="@mipmap/icon_addimg" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/editBabyDesLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/editBabyBtn"
+                android:layout_below="@+id/editBabyPicLayout"
+                android:background="@drawable/back_titlebar"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:padding="36px">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="40px"
+                    android:text="产品描述"
+                    android:textColor="@color/color_333333"
+                    android:textSize="46px" />
+
+
+                <EditText
+                    android:id="@+id/editBabyDes"
+                    android:layout_width="match_parent"
+                    android:layout_height="350px"
+                    android:background="@drawable/back_order_normal"
+                    android:gravity="top"
+                    android:hint="请输入宝贝描述"
+                    android:padding="36px"
+                    android:textColor="@color/color_888888"
+                    android:textColorHint="@color/color_888888"
+                    android:textSize="40px" />
+            </LinearLayout>
+
         </LinearLayout>
 
-    </LinearLayout>
+    </ScrollView>
 
     <com.fuyoul.sanwenseller.widgets.AutoRadioGroup
         android:id="@+id/editBabyTypeList"

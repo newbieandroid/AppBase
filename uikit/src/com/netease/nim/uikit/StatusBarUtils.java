@@ -620,10 +620,11 @@ public class StatusBarUtils {
             activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
         }
         int realHeight = metrics.heightPixels;
-        if (realHeight > usableHeight)
+        if (realHeight > usableHeight) {
             return realHeight - usableHeight;
-        else
+        } else {
             return 0;
+        }
     }
 
     /**

@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import android.support.multidex.MultiDex
 import com.csl.share.OpenSdkHelper
+import com.fuyoul.sanwenseller.bean.reshttp.ResLoginInfoBean
 import com.fuyoul.sanwenseller.helper.ActivityStateListener
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.cache.CacheMode
@@ -11,9 +12,11 @@ import com.squareup.leakcanary.LeakCanary
 import com.squareup.leakcanary.RefWatcher
 import com.tencent.smtt.sdk.QbSdk
 import com.fuyoul.sanwenseller.im.ImInit
+import com.lzy.okgo.model.HttpHeaders
 import com.zhy.autolayout.config.AutoLayoutConifg
 import okhttp3.OkHttpClient
 import org.litepal.LitePal
+import org.litepal.crud.DataSupport
 import java.util.concurrent.TimeUnit
 
 /**
@@ -61,12 +64,14 @@ class MyApplication : Application() {
         builder.writeTimeout(60, TimeUnit.SECONDS)
 
 
-
+        val httpHeader = HttpHeaders()
+        httpHeader.put("authorization", DataSupport.findFirst(ResLoginInfoBean::class.java)?.token ?: "")
         OkGo
                 .getInstance()
                 .init(this)
                 .setCacheMode(CacheMode.REQUEST_FAILED_READ_CACHE)
                 .setOkHttpClient(builder.build())
+                .addCommonHeaders(httpHeader)
 
         /**初始化网易聊天**/
         ImInit.initIm(this)

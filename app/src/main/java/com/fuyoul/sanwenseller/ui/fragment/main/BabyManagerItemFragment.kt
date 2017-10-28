@@ -21,6 +21,7 @@ import com.fuyoul.sanwenseller.structure.model.BabyManagerM
 import com.fuyoul.sanwenseller.structure.presenter.BabyManagerP
 import com.fuyoul.sanwenseller.structure.view.BabyManagerV
 import com.fuyoul.sanwenseller.ui.baby.EditBabyInfoActivity
+import com.fuyoul.sanwenseller.ui.LoginActivity
 import com.fuyoul.sanwenseller.utils.GlideUtils
 import kotlinx.android.synthetic.main.babymanageritem.*
 import org.litepal.crud.DataSupport
@@ -67,8 +68,6 @@ class BabyManagerItemFragment : BaseFragment<BabyManagerM, BabyManagerV, BabyMan
         } else {
             index++
         }
-        //TODO 这里是测试用的
-        getPresenter().getData(context, isRefresh, index, 1234567890122, arguments.getInt("status"))
 
 
         if (loginInfo == null) {
@@ -155,7 +154,9 @@ class BabyManagerItemFragment : BaseFragment<BabyManagerM, BabyManagerV, BabyMan
                 R.layout.errorstatelayout -> {
                 }
                 R.layout.notsignstatelayout -> {
-
+                    view.findViewById<TextView>(R.id.errorLoginStateView).setOnClickListener {
+                        startActivity(Intent(context, LoginActivity::class.java))
+                    }
                 }
             }
         }

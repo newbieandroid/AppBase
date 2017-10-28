@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_white"
+    android:orientation="vertical">
+
+    <include layout="@layout/includetopbar" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="22px"
+        android:background="@color/color_f5f5f5" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="58px"
+            android:paddingLeft="58px"
+            android:paddingRight="58px">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="86px"
+                android:text="三问用户使用协议"
+                android:textColor="@color/color_333333"
+                android:textSize="49px" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="44px"
+                android:text="三问是主要依靠网络技术，通过极客学院平台向您在线提供在线学习与移动学习服务。请您在注册和使用极客学院学习平台前仔细阅读本协议。如您不同意本协议任何条款，请勿注册账号或使用本平台。"
+                android:textColor="@color/color_333333"
+                android:textSize="40px" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="86px"
+                android:text="一.注册协议条款的确认和接受"
+                android:textColor="@color/color_333333"
+                android:textSize="49px" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="44px"
+                android:text="本协议双方为北京易联致远无线技术有限公司旗下的极客学院（以下亦称“本网站”）和极客学院注册用户。本协议阐述之条款和条件适用于极客学院（所涉域名为： www.jikexueyuan.com）的全部学习服务，包括但不限于各种课程视频、学习内容、源代码、资料及相应服务。"
+                android:textColor="@color/color_333333"
+                android:textSize="40px" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="44px"
+                android:text="注册用户在使用极客学院中的有关服务时，应承诺接受并遵守各项相关规则的规定。极客学院有权根据实际运营需要而不定时修改本协议或补充协议，如本协议有任何变更，将通过网站消息或其他方式通知用户。如注册用户不同意相关变更，则应立即终止账号使用，否则即视同用户同意并完全接受修订后的协议版本。经修订的协议一经公布于极客学院网站链接及页面，立即自动生效，亦成为本协议的一部分。注册用户登录且继续使用服务将被视为已接受修订后的协议。除书面另行声明外，任何扩大的服务范围及新增提供的内容均受本协议约束。"
+                android:textColor="@color/color_333333"
+                android:textSize="40px" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="44px"
+                android:text="极客学院同意按照本协议的规定及其不定时发布的操作规则提供基于互联网和移动网的相关服务(以下称“网络服务”)。为获得网络服务，申请人应当认真阅读、充分理解本《协议》中各条款, 包括免除或者限制本网站责任的免责条款及对用户的权利限制条款。认真阅读并选择接受或不接受本《协议》(未成年人应在法定监护人陪同下阅读)。同意接受本协议的全部条款的，申请人应当按照页面上的提示完成全部的注册程序，并在注册程序过程中点击“同意”按钮，否则视为不接受本《协议》全部条款，申请人应当终止并退出申请。
+"
+                android:textColor="@color/color_333333"
+                android:textSize="40px" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

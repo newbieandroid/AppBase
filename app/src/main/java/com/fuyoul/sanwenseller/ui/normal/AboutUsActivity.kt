@@ -10,13 +10,11 @@ import com.fuyoul.sanwenseller.structure.view.EmptyV
 
 /**
  *  @author: chen
- *  @CreatDate: 2017\10\25 0025
+ *  @CreatDate: 2017\10\28 0028
  *  @Desc:
  */
-class SplashActivity : BaseActivity<EmptyM, EmptyV, EmptyP>() {
-    override fun initTopBar(): TopBarOption = TopBarOption()
-
-    override fun setLayoutRes(): Int = R.layout.splash
+class AboutUsActivity : BaseActivity<EmptyM, EmptyV, EmptyP>() {
+    override fun setLayoutRes(): Int = R.layout.aboutus
 
     override fun initData(savedInstanceState: Bundle?) {
     }
@@ -28,4 +26,11 @@ class SplashActivity : BaseActivity<EmptyM, EmptyV, EmptyP>() {
 
     override fun initViewImpl(): EmptyV = EmptyV()
 
+    override fun initTopBar(): TopBarOption {
+
+        val op = TopBarOption()
+        op.isShowBar = true
+        op.mainTitle = "关于我们"
+        return op
+    }
 }

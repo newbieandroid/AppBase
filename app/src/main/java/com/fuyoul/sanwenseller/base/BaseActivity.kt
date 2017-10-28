@@ -7,12 +7,12 @@ import android.view.View
 import android.view.ViewTreeObserver
 import com.fuyoul.sanwenseller.R
 import com.fuyoul.sanwenseller.configs.TopBarOption
-import com.fuyoul.sanwenseller.utils.StatusBarUtils
 import com.zhy.autolayout.AutoLayoutActivity
 import kotlinx.android.synthetic.main.includetopbar.*
 import android.os.Build
-import android.util.Log
+import android.view.WindowManager
 import com.fuyoul.sanwenseller.utils.NormalFunUtils
+import com.netease.nim.uikit.StatusBarUtils
 
 
 /**
@@ -25,6 +25,12 @@ abstract class BaseActivity<out M : BaseM, V : BaseV, out P : BaseP<M, V>> : Aut
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.requestWindowFeature(android.view.Window.FEATURE_NO_TITLE)//去掉标题栏
+
+        if (isFullScreen()) {
+            this.requestWindowFeature(android.view.Window.FEATURE_NO_TITLE)
+            this.window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
+        }
+
         setContentView(setLayoutRes())
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT//强制竖屏,在显示view之后调用
         setBar(initTopBar())
@@ -32,6 +38,8 @@ abstract class BaseActivity<out M : BaseM, V : BaseV, out P : BaseP<M, V>> : Aut
         setListener()
         getPresenter()
     }
+
+    open fun isFullScreen(): Boolean = false
 
     /**设置布局资源文件**/
     protected abstract fun setLayoutRes(): Int

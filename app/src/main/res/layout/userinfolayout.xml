@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_white"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <include layout="@layout/includetopbar" />
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="22px"
+                android:background="@color/color_f5f5f5" />
+
+
+            <RelativeLayout
+                android:layout_width="230px"
+                android:layout_height="230px"
+                android:layout_marginBottom="101px"
+                android:layout_marginTop="156px">
+
+                <ImageView
+                    android:id="@+id/userHeadInfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@mipmap/ic_launcher_round" />
+
+                <ImageView
+                    android:layout_width="69px"
+                    android:layout_height="69px"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/ic_yb_ycsicon" />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="159px"
+                android:background="@drawable/back_titlebar"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="36px"
+                android:paddingRight="36px">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="昵称"
+                    android:textColor="@color/color_333333"
+                    android:textSize="43px" />
+
+
+                <TextView
+                    android:id="@+id/userNickInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="57px"
+                    android:clickable="true"
+                    android:drawablePadding="5dp"
+                    android:drawableRight="@mipmap/ic_my_set_help_jtleft"
+                    android:gravity="center_vertical"
+                    android:text="填写昵称"
+                    android:textColor="@color/color_aaaaaa"
+                    android:textSize="43px" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="159px"
+                android:background="@drawable/back_titlebar"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="36px"
+                android:paddingRight="36px">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="性别"
+                    android:textColor="@color/color_333333"
+                    android:textSize="43px" />
+
+
+                <com.fuyoul.sanwenseller.widgets.AutoRadioGroup
+                    android:id="@+id/userSexInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/userSexInfo_Man"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:button="@null"
+                        android:checked="true"
+                        android:drawableLeft="@drawable/icon_man"
+                        android:drawablePadding="5dp"
+                        android:gravity="center"
+                        android:text="男"
+                        android:textColor="@color/color_sex" />
+
+                    <RadioButton
+                        android:id="@+id/userSexInfo_Woman"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="86px"
+                        android:button="@null"
+                        android:drawableLeft="@drawable/icon_woman"
+                        android:drawablePadding="5dp"
+                        android:gravity="center"
+                        android:text="女"
+                        android:textColor="@color/color_sex" />
+                </com.fuyoul.sanwenseller.widgets.AutoRadioGroup>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="159px"
+                android:background="@drawable/back_titlebar"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="36px"
+                android:paddingRight="36px">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="所在地"
+                    android:textColor="@color/color_333333"
+                    android:textSize="43px" />
+
+
+                <TextView
+                    android:id="@+id/userAddressInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="57px"
+                    android:clickable="true"
+                    android:drawablePadding="5dp"
+                    android:drawableRight="@mipmap/ic_my_set_help_jtleft"
+                    android:gravity="center_vertical"
+                    android:maxLength="12"
+                    android:text="请选择所在地"
+                    android:textColor="@color/color_aaaaaa"
+                    android:textSize="43px" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="57px"
+                android:paddingLeft="36px"
+                android:paddingRight="36px">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="个人简介"
+                    android:textColor="@color/color_333333"
+                    android:textSize="43px" />
+
+                <TextView
+                    android:id="@+id/editDesEnable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="编辑"
+                    android:textColor="@color/color_888888"
+                    android:textSize="40px" />
+
+
+                <EditText
+                    android:id="@+id/editDes"
+                    android:layout_width="match_parent"
+                    android:layout_height="568px"
+                    android:layout_below="@+id/editDesEnable"
+                    android:layout_marginTop="43px"
+                    android:background="@drawable/back_userinfoet"
+                    android:gravity="top"
+                    android:hint="请输入个人经理"
+                    android:padding="36px"
+                    android:textColor="@color/color_888888"
+                    android:textColorHint="@color/color_888888"
+                    android:textSize="40px" />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="57px"
+                android:paddingLeft="36px"
+                android:paddingRight="36px">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="编辑"
+                    android:textColor="@color/color_888888"
+                    android:textSize="40px" />
+
+                <TextView
+                    android:id="@+id/editExpEnable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="个人经历"
+                    android:textColor="@color/color_333333"
+                    android:textSize="43px" />
+
+
+                <EditText
+                    android:id="@+id/editExp"
+                    android:layout_width="match_parent"
+                    android:layout_height="568px"
+                    android:layout_below="@+id/editExpEnable"
+                    android:layout_marginTop="43px"
+                    android:background="@drawable/back_userinfoet"
+                    android:gravity="top"
+                    android:hint="请输入个人经理"
+                    android:padding="36px"
+                    android:textColor="@color/color_888888"
+                    android:textColorHint="@color/color_888888"
+                    android:textSize="40px" />
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

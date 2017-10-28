@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_f5f5f5"
+    android:orientation="vertical">
+
+    <include layout="@layout/includetopbar" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="389px"
+        android:layout_marginTop="20px"
+        android:background="@color/color_white"
+        android:padding="36px">
+
+        <EditText
+            android:id="@+id/suggestInfo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/suggestInfoRelease"
+            android:layout_marginBottom="10px"
+            android:background="@color/color_white"
+            android:gravity="top"
+            android:hint="您的反馈将帮助我们更快的成长"
+            android:textColor="@color/color_333333"
+            android:textColorHint="@color/color_aaaaaa"
+            android:textSize="40px" />
+
+
+        <TextView
+            android:id="@+id/suggestInfoRelease"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:text="0/400"
+            android:textColor="@color/color_CCCCCC"
+            android:textSize="40px" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_white"
+        android:orientation="vertical"
+        android:paddingLeft="36px"
+        android:paddingRight="36px">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="34px"
+            android:paddingTop="38px">
+
+            <TextView
+                android:id="@+id/imgTips"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="21px"
+                android:text="图片"
+                android:textColor="@color/color_333333"
+                android:textSize="43px" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/imgTips"
+                android:text="(选填，提供问题截图)"
+                android:textColor="@color/color_aaaaaa"
+                android:textSize="40px" />
+
+            <TextView
+                android:id="@+id/imgRlease"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="0/3"
+                android:textColor="@color/color_CCCCCC"
+                android:textSize="40px" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/suggestImgsLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="36px"
+            android:orientation="horizontal" />
+
+    </LinearLayout>
+</LinearLayout>

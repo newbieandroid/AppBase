@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.res.Resources
 import android.graphics.*
 import android.support.annotation.ColorRes
-import android.util.Log
 import android.widget.ImageView
 import com.bumptech.glide.DrawableRequestBuilder
 import com.bumptech.glide.Glide
@@ -41,7 +40,7 @@ object GlideUtils {
                 .centerCrop()
                 .listener(object : RequestListener<T, GlideDrawable> {
                     override fun onException(e: Exception?, model: T?, target: Target<GlideDrawable>?, isFirstResource: Boolean): Boolean {
-                        loadCircleImg(context, ERRORIMG, imageView, isBord, bordColor, LOADINGIMG, ERRORIMG)
+                        loadCircleImg(context, errorImgRes, imageView, isBord, bordColor, loadingImgRes, errorImgRes)
                         return true
                     }
 
@@ -90,15 +89,15 @@ object GlideUtils {
                 .error(errorImgRes)
                 .fitCenter()
                 .bitmapTransform(RoundedCornersTransformation(context, 30, 0, RoundedCornersTransformation.CornerType.ALL))
-                .listener(object : RequestListener<T, GlideDrawable> {
-                    override fun onException(e: Exception?, model: T?, target: Target<GlideDrawable>?, isFirstResource: Boolean): Boolean {
-                        loadRoundCornerImg(context, ERRORIMG, imageView)
-                        return true
-                    }
-
-                    override fun onResourceReady(resource: GlideDrawable?, model: T?, target: Target<GlideDrawable>?, isFromMemoryCache: Boolean, isFirstResource: Boolean): Boolean = false
-
-                })
+//                .listener(object : RequestListener<T, GlideDrawable> {
+//                    override fun onException(e: Exception?, model: T?, target: Target<GlideDrawable>?, isFirstResource: Boolean): Boolean {
+//                        loadRoundCornerImg(context, errorImgRes, imageView)
+//                        return true
+//                    }
+//
+//                    override fun onResourceReady(resource: GlideDrawable?, model: T?, target: Target<GlideDrawable>?, isFromMemoryCache: Boolean, isFirstResource: Boolean): Boolean = false
+//
+//                })
                 .into(imageView)
     }
 
@@ -111,9 +110,6 @@ object GlideUtils {
     }
 
     fun <T> loadNormalImg(context: Context, path: T, imageView: ImageView, loadingImgRes: Int, errorImgRes: Int) {
-
-
-        Log.e("csl", "----------$path--------")
 
 
         Glide.with(context)

@@ -19,4 +19,6 @@ abstract class LoginV : BaseV {
     /**登录信息保存到数据库**/
     abstract fun saveDbInfo(loginInfo: ResLoginInfoBean)
 
+    abstract fun deleteDbInfo()
+
 }

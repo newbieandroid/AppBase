@@ -26,8 +26,11 @@ import permissions.dispatcher.RuntimePermissions
 import permissions.dispatcher.NeedsPermission
 import android.Manifest
 import android.annotation.SuppressLint
+import android.text.TextUtils
 import android.view.KeyEvent
 import android.view.View
+import com.fuyoul.sanwenseller.bean.reqhttp.ReqReleaseBaby
+import com.fuyoul.sanwenseller.configs.Code.SERVICETIME
 import com.fuyoul.sanwenseller.utils.NormalFunUtils
 import permissions.dispatcher.PermissionRequest
 import permissions.dispatcher.OnShowRationale
@@ -43,10 +46,9 @@ import permissions.dispatcher.OnNeverAskAgain
 class EditBabyInfoActivity : BaseActivity<EditBabyM, EditBabyV, EditBabyP>() {
 
 
-    private var goodsClassifyId = 0
+    private var goodsClassifyId = -1
 
     private val selectPath = ArrayList<String>()//图片
-    private val IMGCOUNT = 1
 
     private var photoUtils: PhotoSelectUtils = PhotoSelectUtils()
 
@@ -54,14 +56,17 @@ class EditBabyInfoActivity : BaseActivity<EditBabyM, EditBabyV, EditBabyP>() {
 
     override fun initData(savedInstanceState: Bundle?) {
 
-        if (intent.extras.getSerializable("item") != null) {
+        if (intent.extras != null && intent.extras.getSerializable("item") != null) {
             val data = intent.extras.getSerializable("item") as ResHttpBabyItem
 
-            initViewImpl().addImg(this, JSON.parseArray(data.imgs).getJSONObject(0).getString("url"), editBabyPic)
+
+            selectPath.add(JSON.parseArray(data.imgs).getJSONObject(0).getString("url"))
+            initViewImpl().addImg(this, selectPath[0], editBabyPic)
 
             editBabyName.setText(data.goodsName)
             editBabyPrice.setText("${data.price}")
             editBabyDes.setText("${data.introduce}")
+            editBabyServiceTime.setText("${data.serviceTime}")
             when (data.goodsClassifyId) {
 
                 BabyType.YFTX.typeId -> {
@@ -113,7 +118,51 @@ class EditBabyInfoActivity : BaseActivity<EditBabyM, EditBabyV, EditBabyP>() {
 
     override fun setListener() {
 
-        registKeyBordListener(editBabyContent, editBabyDes)
+        editBabyBtn.setOnClickListener {
+
+            if (TextUtils.isEmpty(editBabyName.text)) {
+                NormalFunUtils.showToast(this, "请输入宝贝名称")
+            } else if (TextUtils.isEmpty(editBabyPrice.text)) {
+                NormalFunUtils.showToast(this, "请输入宝贝价格")
+            } else if (editBabyPrice.text.toString().toInt() == 0) {
+                NormalFunUtils.showToast(this, "宝贝价格必须大于0")
+            } else if (goodsClassifyId < 0) {
+                NormalFunUtils.showToast(this, "请选择宝贝分类")
+            } else if (selectPath.size == 0) {
+                NormalFunUtils.showToast(this, "请选择宝贝图片")
+            } else if (TextUtils.isEmpty(editBabyDes.text)) {
+                NormalFunUtils.showToast(this, "请输入宝贝描述")
+            } else {
+
+                if (intent.extras.getSerializable("item") != null) {
+                    //编辑
+
+                    val item = intent.extras.getSerializable("item") as ResHttpBabyItem
+
+                    val array = JSON.parseArray((intent.extras.getSerializable("item") as ResHttpBabyItem).imgs)
+                    val before = (0 until array.size).map { array.getJSONObject(it).getString("url") }
+
+
+                    item.goodsName = editBabyName.text.toString()
+                    item.introduce = editBabyDes.text.toString()
+                    item.goodsClassifyId = goodsClassifyId
+                    item.price = editBabyPrice.text.toString().toInt()
+
+                    item.serviceTime = if (TextUtils.isEmpty(editBabyServiceTime.text.toString())) SERVICETIME else editBabyServiceTime.text.toString().toInt()
+                    getPresenter().editBaby(this, item, selectPath, before)
+                } else {
+                    //发布
+                    val data = ReqReleaseBaby()
+                    data.goodsName = editBabyName.text.toString()
+                    data.price = editBabyPrice.text.toString().toInt()
+                    data.category = goodsClassifyId
+                    data.introduce = editBabyDes.text.toString()
+                    data.serviceTime = if (TextUtils.isEmpty(editBabyServiceTime.text.toString())) SERVICETIME else editBabyServiceTime.text.toString().toInt()
+                    getPresenter().releaseBaby(this, data)
+                }
+            }
+        }
+
 
         editBabyPic.setOnClickListener {
             initViewImpl().doSelectImg(this)
@@ -183,7 +232,7 @@ class EditBabyInfoActivity : BaseActivity<EditBabyM, EditBabyV, EditBabyP>() {
     override fun initTopBar(): TopBarOption {
         val option = TopBarOption()
         option.isShowBar = true
-        option.mainTitle = if (intent.extras.getSerializable("item") == null) {
+        option.mainTitle = if (intent.extras == null || intent.extras.getSerializable("item") == null) {
             editBabyBtn.text = "发布"
             "发布宝贝"
         } else {
@@ -235,7 +284,7 @@ class EditBabyInfoActivity : BaseActivity<EditBabyM, EditBabyV, EditBabyP>() {
                         photoUtils.doCapture(activity)
                     }
                     1 -> {
-                        photoUtils.doSelect(activity, IMGCOUNT, selectPath)
+                        photoUtils.doSelect(activity, 1, selectPath)
                     }
                 }
 

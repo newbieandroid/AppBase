@@ -1,6 +1,7 @@
 package com.fuyoul.sanwenseller.structure.presenter
 
 import android.content.Context
+import android.content.Intent
 import com.alibaba.fastjson.JSON
 import com.csl.share.OpenSdkHelper
 import com.fuyoul.sanwenseller.base.BaseP
@@ -11,6 +12,7 @@ import com.fuyoul.sanwenseller.helper.HttpDialogHelper
 import com.fuyoul.sanwenseller.listener.HttpReqListener
 import com.fuyoul.sanwenseller.structure.model.LoginM
 import com.fuyoul.sanwenseller.structure.view.LoginV
+import com.fuyoul.sanwenseller.ui.MainActivity
 import com.fuyoul.sanwenseller.utils.NormalFunUtils
 import com.netease.nim.uikit.NimUIKit
 import com.netease.nimlib.sdk.RequestCallback
@@ -41,13 +43,14 @@ class LoginP(loginV: LoginV) : BaseP<LoginM, LoginV>(loginV) {
 
             override fun withoutData(code: Int, msg: String) {
                 NormalFunUtils.showToast(context, msg)
-//                HttpDialogHelper.dismisss()
-
+                HttpDialogHelper.dismisss()
+                viewImpl?.deleteDbInfo()
             }
 
             override fun error(errorInfo: String) {
                 NormalFunUtils.showToast(context, errorInfo)
-//                HttpDialogHelper.dismisss()
+                HttpDialogHelper.dismisss()
+                viewImpl?.deleteDbInfo()
             }
 
             override fun onFinish() {
@@ -92,18 +95,20 @@ class LoginP(loginV: LoginV) : BaseP<LoginM, LoginV>(loginV) {
             override fun onFailed(p0: Int) {
                 HttpDialogHelper.dismisss()
                 NormalFunUtils.showToast(context, "登录失败,错误码：$p0")
+                viewImpl?.deleteDbInfo()
+
             }
 
             override fun onSuccess(p0: LoginInfo?) {
                 HttpDialogHelper.dismisss()
                 NimUIKit.setAccount(p0?.account)
-
-
+                context.startActivity(Intent(context, MainActivity::class.java))
             }
 
             override fun onException(p0: Throwable?) {
                 HttpDialogHelper.dismisss()
                 NormalFunUtils.showToast(context, "登录失败")
+                viewImpl?.deleteDbInfo()
             }
 
         })

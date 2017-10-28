@@ -9,7 +9,7 @@ import android.support.v4.app.NotificationCompat;
 
 import com.fuyoul.sanwenseller.R;
 import com.fuyoul.sanwenseller.im.conifig.ImConfigs;
-import com.fuyoul.sanwenseller.ui.normal.SplashActivity;
+import com.fuyoul.sanwenseller.ui.SplashActivity;
 import com.netease.nim.uikit.cache.NimUserInfoCache;
 import com.netease.nim.uikit.session.activity.P2PMessageActivity;
 

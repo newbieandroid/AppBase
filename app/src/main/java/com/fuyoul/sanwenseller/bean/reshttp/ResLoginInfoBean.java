@@ -17,14 +17,61 @@ public class ResLoginInfoBean extends DataSupport {
      * userInfoId : 1710251508401
      * gender : 0
      * auditStatus : -1
+     * avatar
      */
 
+    private String avatar;
     private String imToken;
     private String token;
     private String nickname;
     private long userInfoId;
     private int gender;
     private int auditStatus;
+    private String provinces;
+    private String city;
+    private String self_exp;
+    private String self_info;
+
+
+    public String getSelf_exp() {
+        return self_exp;
+    }
+
+    public void setSelf_exp(String self_exp) {
+        this.self_exp = self_exp;
+    }
+
+    public String getSelf_info() {
+        return self_info;
+    }
+
+    public void setSelf_info(String self_info) {
+        this.self_info = self_info;
+    }
+
+    public String getProvinces() {
+        return provinces;
+    }
+
+    public void setProvinces(String provinces) {
+        this.provinces = provinces;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
 
     public String getImToken() {
         return imToken;

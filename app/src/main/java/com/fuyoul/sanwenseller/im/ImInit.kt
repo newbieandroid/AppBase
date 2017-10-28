@@ -16,7 +16,7 @@ import com.fuyoul.sanwenseller.im.mixpush.DemoMixPushMessageHandler
 import com.fuyoul.sanwenseller.im.receiver.PhoneCallStateObserver
 import com.fuyoul.sanwenseller.im.session.activity.avchat.AVChatActivity
 import com.fuyoul.sanwenseller.im.session.activity.avchat.AVChatProfile
-import com.fuyoul.sanwenseller.ui.normal.SplashActivity
+import com.fuyoul.sanwenseller.ui.SplashActivity
 import com.lzy.okgo.OkGo
 import com.netease.nim.uikit.NimUIKit
 import com.netease.nim.uikit.UserPreferences

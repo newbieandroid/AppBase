@@ -28,4 +28,10 @@ object Code {
     val REQ_EDITBABYINFO = 100//编辑宝贝
     val REQ_SELECTIMGS = 88//选择图片
     val REQ_CAMERA = 87//拍照
+    val REQ_IMGPREVIEW = 86//图片预览
+
+    val REQ_EDITNICK = 85//编辑昵称
+
+    /**默认数据**/
+    val SERVICETIME = 60//默认服务时间
 }

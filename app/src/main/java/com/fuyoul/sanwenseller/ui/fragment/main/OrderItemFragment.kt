@@ -1,12 +1,12 @@
 package com.fuyoul.sanwenseller.ui.fragment.main
 
+import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
-import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -27,6 +27,7 @@ import com.fuyoul.sanwenseller.enuminfo.OrderType
 import com.fuyoul.sanwenseller.structure.model.OrderM
 import com.fuyoul.sanwenseller.structure.presenter.OrderP
 import com.fuyoul.sanwenseller.structure.view.OrderV
+import com.fuyoul.sanwenseller.ui.LoginActivity
 import com.fuyoul.sanwenseller.utils.GlideUtils
 import com.fuyoul.sanwenseller.widgets.CountdownView.CountdownView
 import kotlinx.android.synthetic.main.ordertypelayout.*
@@ -90,6 +91,10 @@ class OrderItemFragment : BaseFragment<OrderM, OrderV, OrderP>() {
                 R.layout.errorstatelayout -> {
                 }
                 R.layout.notsignstatelayout -> {
+
+                    view.findViewById<TextView>(R.id.errorLoginStateView).setOnClickListener {
+                        startActivity(Intent(context, LoginActivity::class.java))
+                    }
 
                 }
             }
@@ -420,30 +425,22 @@ class OrderItemFragment : BaseFragment<OrderM, OrderV, OrderP>() {
     }
 
     private fun getData(isRefresh: Boolean, isShowDialog: Boolean) {
-        //TODO 这里是测试数据 ,正式环境注取消下面的注释
-        if (isRefresh) {
-            index = 0
-        } else {
-            index++
-        }
-        getPresenter().getOrderData(context, isShowDialog, isRefresh, index, 1234567890122, arguments.getInt("orderType"))
 
-//        if (loginInfo == null) {
-//            initViewImpl().getBaseAdapter().setRefreshAndLoadMoreEnable(false)
-//            initViewImpl().getBaseAdapter().setReqLayoutInfo(isRefresh, false)
-//
-//            initViewImpl().getBaseAdapter().setEmptyView(R.layout.notsignstatelayout)
-//        } else {
-//            initViewImpl().getBaseAdapter().setRefreshAndLoadMoreEnable(true)
-//
-//            if (isRefresh) {
-//                index = 0
-//            } else {
-//                index++
-//            }
-//            getPresenter().getOrderData(context, isShowDialog, isRefresh, index, loginInfo.userInfoId, arguments.getInt("orderType"))
-//
-//        }
+        if (loginInfo == null) {
+            initViewImpl().getBaseAdapter().setRefreshAndLoadMoreEnable(false)
+            initViewImpl().getBaseAdapter().setReqLayoutInfo(isRefresh, false)
+            initViewImpl().getBaseAdapter().setEmptyView(R.layout.notsignstatelayout)
+        } else {
+            initViewImpl().getBaseAdapter().setRefreshAndLoadMoreEnable(true)
+
+            if (isRefresh) {
+                index = 0
+            } else {
+                index++
+            }
+            getPresenter().getOrderData(context, isShowDialog, isRefresh, index, loginInfo.userInfoId, arguments.getInt("orderType"))
+
+        }
     }
 
 }

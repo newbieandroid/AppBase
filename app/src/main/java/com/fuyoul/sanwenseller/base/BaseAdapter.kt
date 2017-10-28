@@ -74,7 +74,7 @@ abstract class BaseAdapter(context: Context) : RecyclerView.Adapter<BaseViewHold
     }
 
     private fun <D : MultBaseBean> addData(addDatas: List<D>) {
-        if (datas == null) {
+        if (datas.isEmpty()) {
             setNewData(addDatas)
         } else {
             this.datas.addAll(addDatas)
@@ -85,21 +85,21 @@ abstract class BaseAdapter(context: Context) : RecyclerView.Adapter<BaseViewHold
     /**更改某一条数据**/
     fun changeData(item: MultBaseBean, position: Int) {
 
-        datas?.set(position, item)
+        datas[position] = item
         notifyItemChanged(position)
     }
 
     /**移除某一条数据**/
     fun remove(position: Int) {
-        this.datas?.removeAt(position)
+        this.datas.removeAt(position)
         notifyItemRemoved(position)
     }
 
     /**移除某一条数据**/
     fun remove(item: MultBaseBean) {
 
-        val index = this.datas?.indexOf(item) ?: -1
-        this.datas?.remove(item)
+        val index = this.datas.indexOf(item)
+        this.datas.remove(item)
         if (index >= 0) {
             notifyItemRemoved(index)
         }

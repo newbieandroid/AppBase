@@ -22,6 +22,15 @@ object ActivityStateHelper {
         activity.finish()
     }
 
+    /**
+     * 除了指定的外移除全部
+     */
+    fun finishAllExcept(cls: Class<*>) {
+        (0 until activitys.size)
+                .map { activitys[it] }
+                .filter { it != cls }
+                .forEach { it.finish() }
+    }
 
     /**移除所有**/
     fun removeAll() {
