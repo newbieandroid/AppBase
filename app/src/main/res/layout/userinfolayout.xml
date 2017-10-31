@@ -10,15 +10,18 @@
 
 
     <ScrollView
+        android:id="@+id/userInfoScroll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scrollbars="none">
 
         <LinearLayout
+            android:id="@+id/userInfoContent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="200px">
 
             <ImageView
                 android:layout_width="match_parent"
@@ -200,7 +203,7 @@
                     android:layout_marginTop="43px"
                     android:background="@drawable/back_userinfoet"
                     android:gravity="top"
-                    android:hint="请输入个人经理"
+                    android:hint="请输入个人简介"
                     android:padding="36px"
                     android:textColor="@color/color_888888"
                     android:textColorHint="@color/color_888888"
@@ -218,7 +221,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="编辑"
+                    android:text="个人经历"
                     android:textColor="@color/color_888888"
                     android:textSize="40px" />
 
@@ -227,7 +230,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:text="个人经历"
+                    android:text="编辑"
                     android:textColor="@color/color_333333"
                     android:textSize="43px" />
 
@@ -240,7 +243,7 @@
                     android:layout_marginTop="43px"
                     android:background="@drawable/back_userinfoet"
                     android:gravity="top"
-                    android:hint="请输入个人经理"
+                    android:hint="请输入个人经历"
                     android:padding="36px"
                     android:textColor="@color/color_888888"
                     android:textColorHint="@color/color_888888"

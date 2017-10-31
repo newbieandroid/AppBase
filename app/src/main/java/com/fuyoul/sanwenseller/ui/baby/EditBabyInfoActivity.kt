@@ -31,6 +31,7 @@ import android.view.KeyEvent
 import android.view.View
 import com.fuyoul.sanwenseller.bean.reqhttp.ReqReleaseBaby
 import com.fuyoul.sanwenseller.configs.Code.SERVICETIME
+import com.fuyoul.sanwenseller.listener.KeyBordChangerListener
 import com.fuyoul.sanwenseller.utils.NormalFunUtils
 import permissions.dispatcher.PermissionRequest
 import permissions.dispatcher.OnShowRationale
@@ -118,6 +119,21 @@ class EditBabyInfoActivity : BaseActivity<EditBabyM, EditBabyV, EditBabyP>() {
 
     override fun setListener() {
 
+        registKeyBordListener(editBabyCotent, editBabyDes, object : KeyBordChangerListener {
+            override fun onShow(keyBordH: Int, srollHeight: Int) {
+                if (editBabyDes.isFocused) {
+                    editBabyCotent.scrollBy(0, keyBordH)
+                }
+            }
+
+            override fun onHidden() {
+                if (editBabyDes.isFocused) {
+                    editBabyCotent.scrollTo(0, 0)
+                }
+            }
+
+        })
+
         editBabyBtn.setOnClickListener {
 
             if (TextUtils.isEmpty(editBabyName.text)) {
@@ -134,7 +150,7 @@ class EditBabyInfoActivity : BaseActivity<EditBabyM, EditBabyV, EditBabyP>() {
                 NormalFunUtils.showToast(this, "请输入宝贝描述")
             } else {
 
-                if (intent.extras.getSerializable("item") != null) {
+                if (intent.extras != null && intent.extras.getSerializable("item") != null) {
                     //编辑
 
                     val item = intent.extras.getSerializable("item") as ResHttpBabyItem
@@ -153,6 +169,7 @@ class EditBabyInfoActivity : BaseActivity<EditBabyM, EditBabyV, EditBabyP>() {
                 } else {
                     //发布
                     val data = ReqReleaseBaby()
+                    data.img = selectPath[0]
                     data.goodsName = editBabyName.text.toString()
                     data.price = editBabyPrice.text.toString().toInt()
                     data.category = goodsClassifyId

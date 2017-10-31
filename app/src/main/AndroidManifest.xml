@@ -56,22 +56,60 @@
             </intent-filter>
 
         </activity>
+        <activity
+            android:name=".ui.order.AppointMentInfoActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:theme="@style/Theme.Design.Light.NoActionBar"
+            android:windowIsTranslucent="false"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
 
 
         <activity
+            android:name=".ui.user.RegistMasterInfoActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:theme="@style/Theme.Design.Light.NoActionBar"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+
+        <activity
+            android:name=".ui.order.MoneyInfoActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:theme="@style/Theme.Design.Light.NoActionBar"
+            android:windowIsTranslucent="false"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".ui.order.RewardRuleActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:theme="@style/Theme.Design.Light.NoActionBar"
+            android:windowIsTranslucent="false"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+
+
+        <activity
+            android:name=".ui.user.TagSelectActivity"
+            android:theme="@style/Theme.Design.Light.NoActionBar" />
+        <activity
+            android:name=".ui.order.WaitForSettlementActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:theme="@style/Theme.Design.Light.NoActionBar"
+            android:windowIsTranslucent="false"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
             android:name=".ui.normal.SettingActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
+            android:theme="@style/Theme.Design.Light.NoActionBar"
             android:windowIsTranslucent="false"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name=".ui.normal.AboutUsActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
+            android:theme="@style/Theme.Design.Light.NoActionBar"
             android:windowIsTranslucent="false"
             android:windowSoftInputMode="stateHidden|adjustResize" />
 
         <activity
             android:name=".ui.normal.SuggestActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
+            android:theme="@style/Theme.Design.Light.NoActionBar"
             android:windowIsTranslucent="false"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
@@ -82,6 +120,7 @@
         <activity
             android:name=".ui.normal.WebViewActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
+            android:theme="@style/Theme.Design.Light.NoActionBar"
             android:windowIsTranslucent="false"
             android:windowSoftInputMode="stateHidden|adjustResize" />
 
@@ -102,7 +141,10 @@
             android:name=".ui.user.EditUserNickActivity"
             android:theme="@style/Theme.Design.Light.NoActionBar"
             android:windowSoftInputMode="adjustResize|stateHidden" />
-
+        <activity
+            android:name=".ui.order.AppointMentTimeActivity"
+            android:theme="@style/Theme.Design.Light.NoActionBar"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
             android:name=".ui.user.UserInfoActivity"
             android:theme="@style/Theme.Design.Light.NoActionBar"

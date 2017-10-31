@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingTop="28px">
+
+
+    <com.csl.refresh.SmartRefreshLayout
+        android:id="@+id/normalTestRefreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/normalTestBottom">
+
+        <com.csl.refresh.header.MaterialHeader
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/normalTestList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.csl.refresh.SmartRefreshLayout>
+
+
+    <LinearLayout
+        android:id="@+id/normalTestBottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/back_mainbottom"
+        android:orientation="vertical"
+        android:paddingBottom="27px"
+        android:paddingLeft="43px"
+        android:paddingRight="43px">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="130px">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="全天不接单"
+                android:textColor="@color/color_333333"
+                android:textSize="46px" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="260px"
+                android:text="时间安排协议\t>"
+                android:textColor="@color/color_3CC5BC"
+                android:textSize="37px" />
+
+            <ImageView
+                android:id="@+id/stateView"
+                android:layout_width="147px"
+                android:layout_height="90px"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:scaleType="centerInside"
+                android:src="@mipmap/ic_my_yyb_jdshut" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="*以天为单位默认全时段可约,个别时段可单击设置不可约。最多可设置最近三天。"
+            android:textColor="@color/color_888888"
+            android:textSize="35px" />
+    </LinearLayout>
+</RelativeLayout>

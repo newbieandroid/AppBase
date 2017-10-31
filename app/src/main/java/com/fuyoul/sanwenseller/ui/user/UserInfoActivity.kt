@@ -17,15 +17,18 @@ import permissions.dispatcher.RuntimePermissions
 import permissions.dispatcher.NeedsPermission
 import android.Manifest
 import android.annotation.SuppressLint
+import android.text.TextUtils
 import android.view.View
 import com.fuyoul.sanwenseller.bean.others.MultDialogBean
 import com.fuyoul.sanwenseller.helper.MsgDialogHelper
+import com.fuyoul.sanwenseller.listener.KeyBordChangerListener
 import com.fuyoul.sanwenseller.listener.MultDialogListener
 import com.fuyoul.sanwenseller.structure.model.EditUserInfoM
 import com.fuyoul.sanwenseller.structure.presenter.EditUserInfoP
 import com.fuyoul.sanwenseller.structure.view.EditUserInfoV
 import com.fuyoul.sanwenseller.utils.NormalFunUtils
 import com.fuyoul.sanwenseller.utils.PhotoSelectUtils
+import com.fuyoul.sanwenseller.widgets.pickerview.InitCityDataHelper
 import permissions.dispatcher.PermissionRequest
 import permissions.dispatcher.OnShowRationale
 import permissions.dispatcher.OnPermissionDenied
@@ -50,20 +53,67 @@ class UserInfoActivity : BaseActivity<EditUserInfoM, EditUserInfoV, EditUserInfo
         GlideUtils.loadCircleImg(this, headPath, userHeadInfo, false, 0, R.mipmap.ic_my_wdltx, R.mipmap.ic_my_wdltx)
 
         userNickInfo.text = userInfo.nickname
-        editExp.setText(userInfo.self_exp)
-        editDes.setText(userInfo.self_info)
+        editExp.setText(userInfo.selfExp)
+        editDes.setText(userInfo.selfInfo)
 
         if (userInfo.gender < 0 || userInfo.gender == Data.MAN) {
             userSexInfo_Man.isChecked = true
         } else {
             userSexInfo_Woman.isChecked = true
         }
-        userAddressInfo.text = "${userInfo.provinces}${userInfo.city}"
+
+
+        if (TextUtils.isEmpty(userInfo.provinces) || TextUtils.isEmpty(userInfo.city)) {
+            userAddressInfo.text = "请选择地址"
+        } else {
+            userAddressInfo.text = "${userInfo.provinces}${userInfo.city}"
+        }
+
 
     }
 
     override fun setListener() {
 
+        registKeyBordListener(userInfoContent, editExp, object : KeyBordChangerListener {
+            override fun onShow(height: Int, srollHeight: Int) {
+                if (editExp.isFocused) {
+                    userInfoContent.scrollBy(0, srollHeight + height)
+
+                } else if (editDes.isFocused) {
+                    userInfoScroll.scrollBy(0, height)
+                }
+            }
+
+            override fun onHidden() {
+
+                if (editExp.isFocused) {
+                    userInfoContent.scrollTo(0, 0)
+
+                } else if (editDes.isFocused) {
+                    userInfoScroll.scrollTo(0, 0)
+                }
+
+            }
+
+        })
+
+        userAddressInfo.setOnClickListener {
+
+
+            NormalFunUtils.changeKeyBord(this, false, editExp)
+            NormalFunUtils.changeKeyBord(this, false, editDes)
+
+            InitCityDataHelper.getInstance().showAddress(this,
+                    { options1, options2, options3, v ->
+                        val province = InitCityDataHelper.getInstance().city[options1].name
+                        val city = InitCityDataHelper.getInstance().province[options1][options2]
+                        val address = InitCityDataHelper.getInstance().address[options1][options2][options3]
+                        userAddressInfo.text = "$province$city$address"
+
+                        userInfo.provinces = province
+                        userInfo.city = city
+                    })
+        }
 
         userNickInfo.setOnClickListener {
             EditUserNickActivity.start(this, userNickInfo.text.toString())
@@ -110,8 +160,8 @@ class UserInfoActivity : BaseActivity<EditUserInfoM, EditUserInfoV, EditUserInfo
         op.childListener = View.OnClickListener {
             userInfo.avatar = headPath
             userInfo.nickname = userNickInfo.text.toString()
-            userInfo.self_exp = editExp.text.toString()
-            userInfo.self_info = editDes.text.toString()
+            userInfo.selfExp = editExp.text.toString()
+            userInfo.selfInfo = editDes.text.toString()
             getPresenter().upInfo(this, userInfo)
         }
         return op

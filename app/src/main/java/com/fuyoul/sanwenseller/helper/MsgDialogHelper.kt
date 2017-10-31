@@ -5,6 +5,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.text.TextUtils
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import com.csl.refresh.SmartRefreshLayout
 import com.fuyoul.sanwenseller.R
@@ -138,6 +139,20 @@ object MsgDialogHelper {
                 .backgroundLight(0.7)
                 .fullWidth()
                 .showDialog()
+    }
+
+
+    /**显示成功或失败的对话框**/
+    fun showStateDialog(context: Context, content: String, state: Boolean) {
+
+        object : AbstractDialog(context, R.layout.statedialog) {
+            override fun convert(holder: DialogViewHolder?) {
+
+                holder?.convertView?.findViewById<ImageView>(R.id.stateIcon)?.setImageResource(if (state) R.mipmap.ic_all_successful else R.mipmap.ic_all_fail)
+                holder?.convertView?.findViewById<TextView>(R.id.stateText)?.text = content
+            }
+
+        }.backgroundLight(0.7).setCancelAble(true).showDialog()
     }
 
 

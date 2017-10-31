@@ -271,6 +271,9 @@ public class WaitLoadingView extends View {
 
     public void stopAnimator() {
         if (set != null) {
+            for (int i = 0; i < set.getChildAnimations().size(); i++) {
+                set.getChildAnimations().get(i).cancel();
+            }
             set.cancel();
             set.getChildAnimations().clear();
             setVisibility(GONE);
@@ -298,7 +301,6 @@ public class WaitLoadingView extends View {
 
         @Override
         public void onAnimationCancel(Animator animator) {
-
         }
 
         @Override

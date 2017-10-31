@@ -60,7 +60,7 @@ public class MaterialHeader extends ViewGroup implements RefreshHeader {
     private int mHeadHeight;
     private Path mBezierPath;
     private Paint mBezierPaint;
-    private boolean mShowBezierWave = false;
+    private boolean mShowBezierWave = true;
     private RefreshState mState;
 
     //<editor-fold desc="MaterialHeader">

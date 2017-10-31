@@ -37,7 +37,12 @@ class PhotoSelectUtils {
 
 
     //选择图片
+
     fun doSelect(context: Activity, maxCount: Int, selectPath: List<String>?) {
+        doSelect(context, maxCount, selectPath, Code.REQ_SELECTIMGS)
+    }
+
+    fun doSelect(context: Activity, maxCount: Int, selectPath: List<String>?, reqCode: Int) {
 
         Matisse.from(context)
                 .choose(MimeType.ofImage()) // 选择 mime 的类型
@@ -48,15 +53,20 @@ class PhotoSelectUtils {
                 .thumbnailScale(0.85f) // 缩略图的比例
                 .imageEngine(GlideEngine()) // 使用的图片加载引擎
                 .captureStrategy(CaptureStrategy(true, context.getString(R.string.zhifprovider)))
-                .forResult(Code.REQ_SELECTIMGS) // 设置作为标记的请求码
+                .forResult(reqCode) // 设置作为标记的请求码
 
     }
 
     //拍照
+
     fun doCapture(activity: Activity) {
+        doCapture(activity, Code.REQ_CAMERA)
+    }
+
+    fun doCapture(activity: Activity, reqCode: Int) {
         mediaStoreCompat = MediaStoreCompat(activity)
-        mediaStoreCompat!!.setCaptureStrategy(CaptureStrategy(true, activity.getString(R.string.zhifprovider)))
-        mediaStoreCompat!!.dispatchCaptureIntent(activity, Code.REQ_CAMERA)
+        mediaStoreCompat?.setCaptureStrategy(CaptureStrategy(true, activity.getString(R.string.zhifprovider)))
+        mediaStoreCompat?.dispatchCaptureIntent(activity, reqCode)
     }
 
     fun getCapturePath(activity: Activity): String {

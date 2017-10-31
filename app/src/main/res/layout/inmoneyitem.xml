@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="139px"
+    android:background="@drawable/back_titlebar"
+    android:orientation="vertical"
+    android:paddingLeft="102px"
+    android:paddingRight="60px">
+
+    <TextView
+        android:id="@+id/moneyType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20px"
+        android:gravity="center"
+        android:text="收益"
+        android:textColor="@color/color_333333"
+        android:textSize="46px" />
+
+    <TextView
+        android:id="@+id/moneyTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/moneyType"
+        android:gravity="center"
+        android:text="04-06 02:58"
+        android:textColor="@color/color_grey_999999"
+        android:textSize="40px" />
+
+    <TextView
+        android:id="@+id/moneyNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:text="446.00"
+        android:textColor="@color/color_333333"
+        android:textSize="57px" />
+</RelativeLayout>

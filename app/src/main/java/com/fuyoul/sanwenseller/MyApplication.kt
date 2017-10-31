@@ -12,6 +12,7 @@ import com.squareup.leakcanary.LeakCanary
 import com.squareup.leakcanary.RefWatcher
 import com.tencent.smtt.sdk.QbSdk
 import com.fuyoul.sanwenseller.im.ImInit
+import com.fuyoul.sanwenseller.widgets.pickerview.InitCityDataHelper
 import com.lzy.okgo.model.HttpHeaders
 import com.zhy.autolayout.config.AutoLayoutConifg
 import okhttp3.OkHttpClient
@@ -47,7 +48,8 @@ class MyApplication : Application() {
 
         /**适配**/
         AutoLayoutConifg.getInstance().useDeviceSize()
-
+        /**日期地址选择器**/
+        InitCityDataHelper.getInstance().initDatas(this)
         /**数据库**/
         LitePal.initialize(this)
         LitePal.getDatabase()
@@ -66,6 +68,7 @@ class MyApplication : Application() {
 
         val httpHeader = HttpHeaders()
         httpHeader.put("authorization", DataSupport.findFirst(ResLoginInfoBean::class.java)?.token ?: "")
+
         OkGo
                 .getInstance()
                 .init(this)

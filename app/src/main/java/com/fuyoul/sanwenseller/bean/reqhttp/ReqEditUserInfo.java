@@ -24,8 +24,9 @@ public class ReqEditUserInfo {
     private int gender;
     private String provinces;
     private String city;
-    private String self_info;
-    private String self_exp;
+    private String selfInfo;
+    private String selfExp;
+
 
     public String getAvatar() {
         return avatar;
@@ -67,19 +68,19 @@ public class ReqEditUserInfo {
         this.city = city;
     }
 
-    public String getSelf_info() {
-        return self_info;
+    public String getSelfInfo() {
+        return selfInfo;
     }
 
-    public void setSelf_info(String self_info) {
-        this.self_info = self_info;
+    public void setSelfInfo(String selfInfo) {
+        this.selfInfo = selfInfo;
     }
 
-    public String getSelf_exp() {
-        return self_exp;
+    public String getSelfExp() {
+        return selfExp;
     }
 
-    public void setSelf_exp(String self_exp) {
-        this.self_exp = self_exp;
+    public void setSelfExp(String selfExp) {
+        this.selfExp = selfExp;
     }
 }

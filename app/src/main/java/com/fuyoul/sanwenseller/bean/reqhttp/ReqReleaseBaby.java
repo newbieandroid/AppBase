@@ -13,6 +13,16 @@ public class ReqReleaseBaby {
     private int price;
     private int serviceTime = 50;
     private String introduce;
+    private String img;
+
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
 
     public String getGoodsName() {
         return goodsName;

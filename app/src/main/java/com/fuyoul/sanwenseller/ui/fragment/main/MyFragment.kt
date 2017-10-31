@@ -15,6 +15,9 @@ import com.fuyoul.sanwenseller.structure.view.EmptyV
 import com.fuyoul.sanwenseller.ui.LoginActivity
 import com.fuyoul.sanwenseller.ui.normal.SettingActivity
 import com.fuyoul.sanwenseller.ui.normal.SuggestActivity
+import com.fuyoul.sanwenseller.ui.order.AppointMentTimeActivity
+import com.fuyoul.sanwenseller.ui.order.RewardRuleActivity
+import com.fuyoul.sanwenseller.ui.order.MoneyInfoActivity
 import com.fuyoul.sanwenseller.ui.user.UserInfoActivity
 import com.fuyoul.sanwenseller.utils.GlideUtils
 import com.fuyoul.sanwenseller.utils.NormalFunUtils
@@ -62,6 +65,34 @@ class MyFragment : BaseFragment<EmptyM, EmptyV, EmptyP>() {
     }
 
     override fun setListener() {
+
+
+        rewardRoleLayout.setOnClickListener {
+
+            if (LoginActivity.checkLogin(true, activity)) {
+                startActivity(Intent(context, RewardRuleActivity::class.java))
+            }
+
+        }
+
+        inMoneyLayout.setOnClickListener {
+            if (LoginActivity.checkLogin(true, activity)) {
+                startActivity(Intent(context, MoneyInfoActivity::class.java))
+            }
+        }
+
+        appointmentTimeLayout.setOnClickListener {
+            if (LoginActivity.checkLogin(true, activity)) {
+                startActivity(Intent(context, AppointMentTimeActivity::class.java))
+            }
+        }
+
+        editInfoArrorwLayout.setOnClickListener {
+            if (LoginActivity.checkLogin(true, activity)) {
+                startActivity(Intent(context, UserInfoActivity::class.java))
+            }
+        }
+
         headLayout.setOnClickListener {
             if (LoginActivity.checkLogin(true, activity)) {
                 startActivity(Intent(context, UserInfoActivity::class.java))

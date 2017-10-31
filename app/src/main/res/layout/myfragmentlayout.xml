@@ -42,9 +42,9 @@
                 android:layout_marginTop="23px"
                 android:drawablePadding="8dp"
                 android:gravity="center"
+                android:maxLength="10"
                 android:singleLine="true"
                 android:text="立即登录"
-                android:maxLength="10"
                 android:textColor="@color/color_white"
                 android:textSize="46px" />
 
@@ -64,6 +64,79 @@
             android:paddingRight="29px">
 
 
+            <!--收入-->
+            <RelativeLayout
+                android:id="@+id/inMoneyLayout"
+                android:layout_width="match_parent"
+                android:layout_height="135px"
+                android:background="@drawable/back_titlebar"
+                android:clickable="true"
+                android:paddingLeft="37px"
+                android:paddingRight="37px">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:drawableLeft="@mipmap/icon_sellcard"
+                    android:drawablePadding="10dp"
+                    android:text="收入"
+                    android:textColor="@color/color_666666"
+                    android:textSize="40px" />
+
+
+                <TextView
+                    android:id="@+id/inMoneyArrorw"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:drawablePadding="10dp"
+                    android:drawableRight="@mipmap/ic_my_set_help_jtleft"
+                    android:textColor="@color/color_aaaaaa"
+                    android:textSize="40px" />
+            </RelativeLayout>
+
+            <!--预约表-->
+            <RelativeLayout
+                android:id="@+id/appointmentTimeLayout"
+                android:layout_width="match_parent"
+                android:layout_height="135px"
+                android:background="@drawable/back_titlebar"
+                android:clickable="true"
+                android:paddingLeft="37px"
+                android:paddingRight="37px">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:drawableLeft="@mipmap/icon_sellcard"
+                    android:drawablePadding="10dp"
+                    android:text="预约表"
+                    android:textColor="@color/color_666666"
+                    android:textSize="40px" />
+
+
+                <TextView
+                    android:id="@+id/appointmentTimeArrorw"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:drawablePadding="10dp"
+                    android:drawableRight="@mipmap/ic_my_set_help_jtleft"
+                    android:textColor="@color/color_aaaaaa"
+                    android:textSize="40px" />
+            </RelativeLayout>
+
+            <!--编辑个人资料-->
             <RelativeLayout
                 android:id="@+id/editInfoArrorwLayout"
                 android:layout_width="match_parent"
@@ -101,6 +174,7 @@
             </RelativeLayout>
 
 
+            <!--扫一扫-->
             <RelativeLayout
                 android:id="@+id/scanLayout"
                 android:layout_width="match_parent"
@@ -137,46 +211,10 @@
                     android:textSize="40px" />
             </RelativeLayout>
 
+
+            <!--客服电话-->
             <RelativeLayout
-                android:id="@+id/contactServiceLayout"
-                android:layout_width="match_parent"
-                android:layout_height="135px"
-                android:background="@drawable/back_titlebar"
-                android:clickable="true"
-                android:paddingLeft="37px"
-                android:paddingRight="37px">
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@+id/contactServiceArrorw"
-                    android:layout_alignBottom="@+id/contactServiceArrorw"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:drawableLeft="@mipmap/icon_sellcard"
-                    android:drawablePadding="10dp"
-                    android:text="联系客服"
-                    android:textColor="@color/color_666666"
-                    android:textSize="40px" />
-
-
-                <TextView
-                    android:id="@+id/contactServiceArrorw"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:drawablePadding="10dp"
-                    android:drawableRight="@mipmap/ic_my_set_help_jtleft"
-                    android:textColor="@color/color_aaaaaa"
-                    android:textSize="40px" />
-            </RelativeLayout>
-
-
-            <!--分享-->
-            <RelativeLayout
-                android:id="@+id/shareLayout"
+                android:id="@+id/callLayout"
                 android:layout_width="match_parent"
                 android:layout_height="135px"
                 android:background="@drawable/back_titlebar"
@@ -189,24 +227,25 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:drawableLeft="@mipmap/ic_my_comments"
+                    android:drawableLeft="@mipmap/ic_my_kftel"
                     android:drawablePadding="10dp"
-                    android:text="分享APP"
+                    android:text="客服电话"
                     android:textColor="@color/color_666666"
                     android:textSize="40px" />
 
 
                 <TextView
+                    android:id="@+id/callNumText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:drawablePadding="10dp"
                     android:drawableRight="@mipmap/ic_my_set_help_jtleft"
+                    android:text="@string/serviceTell"
                     android:textColor="@color/color_aaaaaa"
                     android:textSize="40px" />
             </RelativeLayout>
-
             <!--意见反馈-->
             <RelativeLayout
                 android:id="@+id/reportLayout"
@@ -239,10 +278,9 @@
                     android:textColor="@color/color_aaaaaa"
                     android:textSize="40px" />
             </RelativeLayout>
-
-            <!--客服电话-->
+            <!--奖励制度-->
             <RelativeLayout
-                android:id="@+id/callLayout"
+                android:id="@+id/rewardRoleLayout"
                 android:layout_width="match_parent"
                 android:layout_height="135px"
                 android:background="@drawable/back_titlebar"
@@ -257,20 +295,18 @@
                     android:layout_centerVertical="true"
                     android:drawableLeft="@mipmap/ic_my_kftel"
                     android:drawablePadding="10dp"
-                    android:text="客服电话"
+                    android:text="奖励制度"
                     android:textColor="@color/color_666666"
                     android:textSize="40px" />
 
 
                 <TextView
-                    android:id="@+id/callNumText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:drawablePadding="10dp"
                     android:drawableRight="@mipmap/ic_my_set_help_jtleft"
-                    android:text="028-4586-458"
                     android:textColor="@color/color_aaaaaa"
                     android:textSize="40px" />
             </RelativeLayout>

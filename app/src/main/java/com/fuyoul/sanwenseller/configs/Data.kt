@@ -8,6 +8,7 @@ package com.fuyoul.sanwenseller.configs
  */
 object Data {
 
+
     /**性别**/
     val MAN = 0
     val WOMAN = 1
@@ -21,4 +22,10 @@ object Data {
     val NORMALBABY = 0//普通宝贝类型
     val QUICKTESTBABY = 1//闪测
     val PERSONALBABY = 2//自测
+
+
+    /**今天明天后台**/
+    val TODAY = 123
+    val TOMORROW = 124
+    val AFTERTOMORROW = 125
 }

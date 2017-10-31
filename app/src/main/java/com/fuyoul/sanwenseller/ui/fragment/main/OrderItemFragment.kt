@@ -73,7 +73,13 @@ class OrderItemFragment : BaseFragment<OrderM, OrderV, OrderP>() {
     override fun getPresenter(): OrderP = OrderP(initViewImpl())
 
     override fun initViewImpl(): OrderV = object : OrderV() {
-        override fun getBaseAdapter(): ThisAdapter = adapter ?: ThisAdapter()
+        override fun getBaseAdapter(): ThisAdapter {
+
+            if (adapter == null) {
+                adapter = ThisAdapter()
+            }
+            return adapter!!
+        }
     }
 
     inner class ThisAdapter : BaseAdapter(context) {

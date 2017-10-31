@@ -1,12 +1,12 @@
 package com.fuyoul.sanwenseller.structure.model
 
-import android.content.Context
 import com.alibaba.fastjson.JSON
 import com.fuyoul.sanwenseller.base.BaseM
 import com.fuyoul.sanwenseller.bean.reqhttp.ReqEditBaby
 import com.fuyoul.sanwenseller.bean.reqhttp.ReqReleaseBaby
 import com.fuyoul.sanwenseller.bean.reshttp.ResHttpResult
 import com.fuyoul.sanwenseller.configs.UrlInfo.BABYEDIT
+import com.fuyoul.sanwenseller.configs.UrlInfo.BABYRELEASE
 import com.fuyoul.sanwenseller.listener.HttpReqListener
 import com.lzy.okgo.OkGo
 
@@ -27,7 +27,7 @@ class EditBabyM : BaseM {
 
     /**发布商品**/
     fun releaseBaby(data: ReqReleaseBaby, listener: HttpReqListener) {
-        OkGo.post<ResHttpResult>(BABYEDIT)
+        OkGo.post<ResHttpResult>(BABYRELEASE)
                 .upJson(JSON.toJSONString(data))
                 .execute(listener)
 

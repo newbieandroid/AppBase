@@ -18,6 +18,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
+import android.text.TextUtils
 import android.widget.ImageView
 import android.widget.LinearLayout
 import com.fuyoul.sanwenseller.bean.others.MultDialogBean
@@ -27,6 +28,7 @@ import com.fuyoul.sanwenseller.listener.MultDialogListener
 import com.fuyoul.sanwenseller.utils.GlideUtils
 import com.fuyoul.sanwenseller.utils.PhotoSelectUtils
 import com.youquan.selector.Matisse
+import kotlinx.android.synthetic.main.includetopbar.*
 import net.lucode.hackware.magicindicator.buildins.UIUtil
 import permissions.dispatcher.PermissionRequest
 import permissions.dispatcher.OnShowRationale
@@ -44,7 +46,6 @@ class SuggestActivity : BaseActivity<EmptyM, EmptyV, EmptyP>() {
     private val selectPath = ArrayList<String>()//图片
     override fun setLayoutRes(): Int = R.layout.suggest
     override fun initData(savedInstanceState: Bundle?) {
-
         addIcon(selectPath)
     }
 
@@ -104,7 +105,15 @@ class SuggestActivity : BaseActivity<EmptyM, EmptyV, EmptyP>() {
 
         suggestInfo.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
-                suggestInfoRelease.text = "${if (p0?.isEmpty() == true) 0 else 400 - p0!!.length}/400"
+                suggestInfoRelease.text = "${if (p0?.isEmpty() == true) {
+                    toolbarChildTitle.setTextColor(resources.getColor(R.color.color_888888))
+
+                    0
+                } else {
+                    toolbarChildTitle.setTextColor(resources.getColor(R.color.color_3CC5BC))
+                    400 - p0!!.length / 400
+                }
+                }"
             }
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -128,6 +137,16 @@ class SuggestActivity : BaseActivity<EmptyM, EmptyV, EmptyP>() {
         op.navigationListener = View.OnClickListener {
             NormalFunUtils.changeKeyBord(this, false, suggestInfo)
             finish()
+        }
+        op.childTitle = "完成"
+        op.childTitleColor = R.color.color_888888
+        op.childListener = View.OnClickListener {
+            if (TextUtils.isEmpty(suggestInfo.text)) {
+                NormalFunUtils.showToast(this, "请输入返回内容")
+            } else {
+                //TODO 提交
+            }
+
         }
         return op
     }

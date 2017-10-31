@@ -90,14 +90,16 @@ abstract class HttpReqListener(context: Context, isShowDialog: Boolean, isCancle
         } else {
             val result = response?.body()
 
-            Log.e("csl","-------------:${result?.data.toString()}---")
+            Log.e("csl", "-------------:${result?.data.toString()}---")
 
             if (result?.errorCode == Code.HTTP_NODATA || TextUtils.isEmpty(result?.data.toString()) || TextUtils.equals("[]", result?.data.toString()) || TextUtils.equals("{}", result?.data.toString())) {
                 withoutData(result?.errorCode ?: HTTP_SUCCESS, "${result?.msg}")
             } else if (result?.errorCode == HTTP_ERROR) {
                 error("${result.msg}")
             } else if (result?.errorCode == HTTP_SUCCESS) {
+
                 reqOk(result)
+
             } else {
                 error("${result?.msg}")
             }

@@ -10,6 +10,8 @@ import com.fuyoul.sanwenseller.helper.MsgDialogHelper
 import com.fuyoul.sanwenseller.structure.model.EmptyM
 import com.fuyoul.sanwenseller.structure.presenter.EmptyP
 import com.fuyoul.sanwenseller.structure.view.EmptyV
+import com.fuyoul.sanwenseller.ui.LoginActivity
+import com.fuyoul.sanwenseller.utils.NormalFunUtils
 import kotlinx.android.synthetic.main.setting.*
 
 /**
@@ -37,16 +39,20 @@ class SettingActivity : BaseActivity<EmptyM, EmptyV, EmptyP>() {
         exitBtn.setOnClickListener {
 
 
-            MsgDialogHelper.showNormalDialog(this, true, "退出登录", "退出登录后，将无法收到消息提醒，确定退出吗？", object : MsgDialogHelper.DialogListener {
-                override fun onPositive() {
-                    LoginOutHelper.accountLoginOut(this@SettingActivity, false)
-                }
+            if (LoginActivity.checkLogin(false, this)) {
 
-                override fun onNagetive() {
-                }
+                MsgDialogHelper.showNormalDialog(this, true, "退出登录", "退出登录后，将无法收到消息提醒，确定退出吗？", object : MsgDialogHelper.DialogListener {
+                    override fun onPositive() {
+                        LoginOutHelper.accountLoginOut(this@SettingActivity, false)
+                    }
 
-            })
+                    override fun onNagetive() {
+                    }
 
+                })
+            } else {
+                NormalFunUtils.showToast(this, "当前暂未登录")
+            }
         }
     }
 

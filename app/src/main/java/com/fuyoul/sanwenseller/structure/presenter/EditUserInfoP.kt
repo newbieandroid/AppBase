@@ -1,6 +1,7 @@
 package com.fuyoul.sanwenseller.structure.presenter
 
 import android.content.Context
+import android.util.Log
 import com.alibaba.fastjson.JSON
 import com.fuyoul.sanwenseller.base.BaseP
 import com.fuyoul.sanwenseller.bean.reqhttp.ReqEditUserInfo
@@ -17,7 +18,6 @@ import com.fuyoul.sanwenseller.structure.model.EditUserInfoM
 import com.fuyoul.sanwenseller.structure.view.EditUserInfoV
 import com.fuyoul.sanwenseller.utils.NormalFunUtils
 import com.lzy.okgo.OkGo
-import org.litepal.crud.DataSupport
 
 /**
  *  @author: chen
@@ -30,16 +30,13 @@ class EditUserInfoP(editUserInfoV: EditUserInfoV) : BaseP<EditUserInfoM, EditUse
 
     fun upInfo(context: Context, info: ResLoginInfoBean) {
 
-
         //如果是本地图片,先上传到七牛
-        if (!info.avatar.startsWith("http")) {
+        if (info.avatar != null && !info.avatar.startsWith("http")) {
             val imgs = ArrayList<String>()
             imgs.add(info.avatar)
             QiNiuHelper.multQiNiuUpLoad(context, imgs, object : QiNiuUpLoadListener {
                 override fun complete(path: List<ResQiNiuBean>) {
-
-                    info.avatar = path[0].key
-                    doReq(context, info)
+                    doReq(context, info, path[0].key)
                 }
 
                 override fun error(error: String) {
@@ -49,23 +46,24 @@ class EditUserInfoP(editUserInfoV: EditUserInfoV) : BaseP<EditUserInfoM, EditUse
 
             })
         } else {
-            doReq(context, info)
+            doReq(context, info, null)
         }
-
-
     }
 
 
-    private fun doReq(context: Context, info: ResLoginInfoBean) {
+    private fun doReq(context: Context, info: ResLoginInfoBean, avatar: String?) {
 
         val data = ReqEditUserInfo()
-        data.avatar = info.avatar
-        data.provinces = info.provinces
-        data.gender = info.gender
+        data.avatar = avatar ?: info.avatar
         data.nickname = info.nickname
+        data.gender = info.gender
+        data.provinces = info.provinces
         data.city = info.city
-        data.self_exp = info.self_exp
-        data.self_info = info.self_info
+        data.selfExp = info.selfExp
+        data.selfInfo = info.selfInfo
+
+
+        Log.e("csl", "更新个人资料:${JSON.toJSONString(data)}")
 
         OkGo.post<ResHttpResult>(EDITUSERINFO).upJson(JSON.toJSONString(data)).execute(object : HttpReqListener(context) {
             override fun reqOk(result: ResHttpResult) {
@@ -83,7 +81,6 @@ class EditUserInfoP(editUserInfoV: EditUserInfoV) : BaseP<EditUserInfoM, EditUse
             }
 
             override fun error(errorInfo: String) {
-
                 NormalFunUtils.showToast(context, errorInfo)
             }
 

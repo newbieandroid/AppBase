@@ -8,4 +8,5 @@ package com.fuyoul.sanwenseller.configs
 object Key {
 
     val wxLoginResult = "code"
+    val appointmentTypeKey = "appointmentTypeKey"//预约时间
 }

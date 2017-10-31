@@ -83,6 +83,7 @@
 -keep class com.fuyoul.sanwenseller.reqhttp.**{*;}
 -keep class com.fuyoul.sanwenseller.reshttp.**{*;}
 -keep class com.fuyoul.sanwenseller.others.**{*;}
+-keep class com.fuyoul.sanwenseller.pickerview.**{*;}
 
 
 #微博

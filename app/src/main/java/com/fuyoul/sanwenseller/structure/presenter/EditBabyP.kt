@@ -1,14 +1,17 @@
 package com.fuyoul.sanwenseller.structure.presenter
 
 import android.app.Activity
-import android.content.Context
 import com.fuyoul.sanwenseller.base.BaseP
 import com.fuyoul.sanwenseller.bean.reqhttp.ReqEditBaby
 import com.fuyoul.sanwenseller.bean.reqhttp.ReqReleaseBaby
 import com.fuyoul.sanwenseller.bean.reshttp.ResHttpBabyItem
 import com.fuyoul.sanwenseller.bean.reshttp.ResHttpResult
+import com.fuyoul.sanwenseller.bean.reshttp.ResQiNiuBean
 import com.fuyoul.sanwenseller.configs.Code
+import com.fuyoul.sanwenseller.helper.HttpDialogHelper
+import com.fuyoul.sanwenseller.helper.QiNiuHelper
 import com.fuyoul.sanwenseller.listener.HttpReqListener
+import com.fuyoul.sanwenseller.listener.QiNiuUpLoadListener
 import com.fuyoul.sanwenseller.structure.model.EditBabyM
 import com.fuyoul.sanwenseller.structure.view.EditBabyV
 import com.fuyoul.sanwenseller.utils.NormalFunUtils
@@ -62,6 +65,24 @@ class EditBabyP(editBabyV: EditBabyV) : BaseP<EditBabyM, EditBabyV>(editBabyV) {
 
     fun releaseBaby(activity: Activity, data: ReqReleaseBaby) {
 
+        val imgs = ArrayList<String>()
+        imgs.add(data.img)
+        QiNiuHelper.multQiNiuUpLoad(activity, imgs, object : QiNiuUpLoadListener {
+            override fun complete(path: List<ResQiNiuBean>) {
+                data.img = path[0].key
+                doReleaseBaby(activity, data)
+            }
+
+            override fun error(error: String) {
+                HttpDialogHelper.dismisss()
+                NormalFunUtils.showToast(activity, error)
+            }
+
+        })
+
+    }
+
+    private fun doReleaseBaby(activity: Activity, data: ReqReleaseBaby) {
         getModelImpl().releaseBaby(data, object : HttpReqListener(activity) {
             override fun reqOk(result: ResHttpResult) {
 
@@ -82,6 +103,5 @@ class EditBabyP(editBabyV: EditBabyV) : BaseP<EditBabyM, EditBabyV>(editBabyV) {
             }
 
         })
-
     }
 }

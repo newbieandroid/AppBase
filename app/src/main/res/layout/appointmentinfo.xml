@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/includetopbar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/sendMsgBtn"
+        android:layout_below="@+id/titBarLayout"
+        android:scrollbars="none">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="36px">
+
+            <!--预测信息-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/back_circle"
+                android:padding="36px">
+
+                <TextView
+                    android:id="@+id/state"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/back_circle_ff627b"
+                    android:paddingLeft="21px"
+                    android:paddingRight="21px"
+                    android:text="待预测"
+                    android:textColor="@color/color_FF627B"
+                    android:textSize="37px" />
+
+                <ImageView
+                    android:id="@+id/avatar"
+                    android:layout_width="158px"
+                    android:layout_height="158px"
+                    android:layout_below="@+id/state"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/nim_avatar_default" />
+
+
+                <TextView
+                    android:id="@+id/nickName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/avatar"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="21px"
+                    android:text="昵称: 小豆豆"
+                    android:textColor="@color/color_333333"
+                    android:textSize="43px" />
+
+                <!--预约时间-->
+                <RelativeLayout
+                    android:id="@+id/appointTimeLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="144px"
+                    android:layout_below="@+id/nickName"
+                    android:layout_marginTop="100px"
+                    android:background="@drawable/back_mainbottom">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="预约时间"
+                        android:textColor="@color/color_666666"
+                        android:textSize="43px" />
+
+
+                    <TextView
+                        android:id="@+id/appointTimeInfo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:drawablePadding="5dp"
+                        android:drawableRight="@mipmap/ic_my_set_help_jtleft"
+                        android:text="2017/06/12 18:00-19:00"
+                        android:textColor="@color/color_FF627B"
+                        android:textSize="40px" />
+
+                </RelativeLayout>
+                <!--真实姓名-->
+                <RelativeLayout
+                    android:id="@+id/realNameLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="144px"
+                    android:layout_below="@+id/appointTimeLayout"
+                    android:background="@drawable/back_mainbottom">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="真实姓名"
+                        android:textColor="@color/color_666666"
+                        android:textSize="43px" />
+
+
+                    <TextView
+                        android:id="@+id/realNameInfo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:text="张三"
+                        android:textColor="@color/color_666666"
+                        android:textSize="40px" />
+
+                </RelativeLayout>
+                <!--性别-->
+                <RelativeLayout
+                    android:id="@+id/sexLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="144px"
+                    android:layout_below="@+id/realNameLayout"
+                    android:background="@drawable/back_mainbottom">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="性别"
+                        android:textColor="@color/color_666666"
+                        android:textSize="43px" />
+
+
+                    <TextView
+                        android:id="@+id/sexInfo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:text="男"
+                        android:textColor="@color/color_666666"
+                        android:textSize="40px" />
+
+                </RelativeLayout>
+                <!--地址-->
+                <RelativeLayout
+                    android:id="@+id/addressLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="144px"
+                    android:layout_below="@+id/sexLayout"
+                    android:background="@drawable/back_mainbottom">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="出生地址"
+                        android:textColor="@color/color_666666"
+                        android:textSize="43px" />
+
+
+                    <TextView
+                        android:id="@+id/addressInfo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:text="四川成都"
+                        android:textColor="@color/color_666666"
+                        android:textSize="40px" />
+
+                </RelativeLayout>
+
+                <!--出生日期-->
+                <RelativeLayout
+                    android:id="@+id/birthLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="144px"
+                    android:layout_below="@+id/sexLayout"
+                    android:background="@drawable/back_mainbottom">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="出生日期"
+                        android:textColor="@color/color_666666"
+                        android:textSize="43px" />
+
+
+                    <TextView
+                        android:id="@+id/birthInfo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:text="阳历：\n阴历"
+                        android:textColor="@color/color_666666"
+                        android:textSize="40px" />
+
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <!--订单信息-->
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/back_circle"
+                android:orientation="vertical"
+                android:padding="36px">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                    <ImageView
+                        android:id="@+id/babyIcon"
+                        android:layout_width="230px"
+                        android:layout_height="230px"
+                        android:layout_marginRight="28px"
+                        android:src="@mipmap/ic_launcher" />
+
+                    <TextView
+                        android:id="@+id/babyTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/babyIcon"
+                        android:text="情感婚姻"
+                        android:textColor="@color/color_333333"
+                        android:textSize="46px" />
+
+                    <TextView
+                        android:id="@+id/babyDes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/babyTitle"
+                        android:layout_toRightOf="@+id/babyIcon"
+                        android:text="情感婚姻"
+                        android:textColor="@color/color_aaaaaa"
+                        android:textSize="37px" />
+                </RelativeLayout>
+
+
+                <!--订单号-->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="144px"
+                    android:layout_marginTop="47px"
+                    android:background="@drawable/back_mainbottom">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="订单号"
+                        android:textColor="@color/color_666666"
+                        android:textSize="43px" />
+
+
+                    <TextView
+                        android:id="@+id/orderNumInfo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:text="sw201705141409460000000034"
+                        android:textColor="@color/color_666666"
+                        android:textSize="40px" />
+                </RelativeLayout>
+                <!--订单时间-->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="144px"
+                    android:background="@drawable/back_mainbottom">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="时间"
+                        android:textColor="@color/color_666666"
+                        android:textSize="43px" />
+
+
+                    <TextView
+                        android:id="@+id/orderTimeInfo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:text="1989/12/12"
+                        android:textColor="@color/color_666666"
+                        android:textSize="40px" />
+                </RelativeLayout>
+
+                <!--服务时长-->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="144px"
+                    android:background="@drawable/back_mainbottom">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="服务时长"
+                        android:textColor="@color/color_666666"
+                        android:textSize="43px" />
+
+
+                    <TextView
+                        android:id="@+id/serviceTimeInfo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:text="50分钟"
+                        android:textColor="@color/color_666666"
+                        android:textSize="40px" />
+                </RelativeLayout>
+
+                <!--价格-->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="144px"
+                    android:background="@drawable/back_mainbottom">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="小计"
+                        android:textColor="@color/color_666666"
+                        android:textSize="43px" />
+
+
+                    <TextView
+                        android:id="@+id/realPriceInfo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:text="￥523"
+                        android:textColor="@color/color_666666"
+                        android:textSize="40px" />
+                </RelativeLayout>
+
+
+                <!--优惠券-->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="144px"
+                    android:background="@drawable/back_mainbottom">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="优惠金额"
+                        android:textColor="@color/color_666666"
+                        android:textSize="43px" />
+
+
+                    <TextView
+                        android:id="@+id/salePriceInfo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:text="￥12"
+                        android:textColor="@color/color_666666"
+                        android:textSize="40px" />
+                </RelativeLayout>
+
+                <!--实付金额-->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="144px"
+                    android:background="@drawable/back_mainbottom">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="实付金额"
+                        android:textColor="@color/color_666666"
+                        android:textSize="43px" />
+
+
+                    <TextView
+                        android:id="@+id/payPriceInfo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:text="￥511"
+                        android:textColor="@color/color_666666"
+                        android:textSize="40px" />
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
+    <TextView
+        android:id="@+id/sendMsgBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:text="发送消息"
+        android:textColor="@color/color_white" />
+</RelativeLayout>

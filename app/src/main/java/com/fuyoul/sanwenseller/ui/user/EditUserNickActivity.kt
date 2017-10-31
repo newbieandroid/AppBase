@@ -62,7 +62,7 @@ class EditUserNickActivity : BaseActivity<EmptyM, EmptyV, EmptyP>() {
                     if (p0?.isNotEmpty() == true) {
                         editUserNickClear.visibility = View.VISIBLE
                         isCanSubmit = true
-                        toolbarChildTitle.setTextColor(resources.getColor(R.color.color_444444))
+                        toolbarChildTitle.setTextColor(resources.getColor(R.color.color_3CC5BC))
                     } else {
                         editUserNickClear.visibility = View.GONE
                         isCanSubmit = false
@@ -89,11 +89,19 @@ class EditUserNickActivity : BaseActivity<EmptyM, EmptyV, EmptyP>() {
 
         val op = TopBarOption()
         op.isShowBar = true
+
+
+        op.navigationListener = View.OnClickListener {
+            NormalFunUtils.changeKeyBord(this, false, editUserNick)
+            finish()
+        }
+
         op.mainTitle = "修改昵称"
         op.childTitleColor = R.color.color_888888
         op.childTitle = "完成"
         op.childListener = View.OnClickListener {
             if (isCanSubmit) {
+                NormalFunUtils.changeKeyBord(this, false, editUserNick)
                 setResult(Activity.RESULT_OK, Intent().putExtra("nick", editUserNick.text.toString()))
                 finish()
             }
@@ -101,8 +109,4 @@ class EditUserNickActivity : BaseActivity<EmptyM, EmptyV, EmptyP>() {
         return op
     }
 
-    override fun onStop() {
-        super.onStop()
-        NormalFunUtils.changeKeyBord(this, false, editUserNick)
-    }
 }

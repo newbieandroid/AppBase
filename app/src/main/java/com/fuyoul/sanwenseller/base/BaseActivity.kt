@@ -10,7 +10,10 @@ import com.fuyoul.sanwenseller.configs.TopBarOption
 import com.zhy.autolayout.AutoLayoutActivity
 import kotlinx.android.synthetic.main.includetopbar.*
 import android.os.Build
+import android.util.Log
 import android.view.WindowManager
+import com.fuyoul.sanwenseller.helper.HttpDialogHelper
+import com.fuyoul.sanwenseller.listener.KeyBordChangerListener
 import com.fuyoul.sanwenseller.utils.NormalFunUtils
 import com.netease.nim.uikit.StatusBarUtils
 
@@ -111,14 +114,17 @@ abstract class BaseActivity<out M : BaseM, V : BaseV, out P : BaseP<M, V>> : Aut
     private var globalLayoutListener: CustomGlobalLayoutListener? = null
 
 
-    inner class CustomGlobalLayoutListener(root: View, scrollToView: View) : ViewTreeObserver.OnGlobalLayoutListener {
+    inner class CustomGlobalLayoutListener(root: View, scrollToView: View, listener: KeyBordChangerListener?) : ViewTreeObserver.OnGlobalLayoutListener {
 
+
+        var listener: KeyBordChangerListener? = null
 
         var root: View? = null
         var scrollToView: View? = null
 
         init {
             this.root = root
+            this.listener = listener
             this.scrollToView = scrollToView
         }
 
@@ -127,8 +133,11 @@ abstract class BaseActivity<out M : BaseM, V : BaseV, out P : BaseP<M, V>> : Aut
             val rect = Rect()
             //获取root在窗体的可视区域
             root?.getWindowVisibleDisplayFrame(rect)
-            //获取root在窗体的不可视区域高度(被其他View遮挡的区域高度)
+            //获取root在窗体的不可视区域高度(被其他View遮挡的区域高度),键盘的高度
             val rootInvisibleHeight = (root?.rootView?.height ?: 0) - rect.bottom
+
+
+            Log.e("csl", "rootInvisibleHeight:$rootInvisibleHeight----")
 
             //若不可视区域高度大于100，则键盘显示
             if (rootInvisibleHeight > 100) {
@@ -137,20 +146,26 @@ abstract class BaseActivity<out M : BaseM, V : BaseV, out P : BaseP<M, V>> : Aut
                 scrollToView?.getLocationInWindow(location)
                 //计算root滚动高度，使scrollToView在可见区域的底部
                 val srollHeight = location[1] + (scrollToView?.height ?: 0) - rect.bottom
+//                root?.scrollTo(0, srollHeight)
 
-                root?.scrollTo(0, srollHeight)
+
+                listener?.onShow(rootInvisibleHeight, srollHeight)
             } else {
                 //键盘隐藏
-                root?.scrollTo(0, 0)
+//                root?.scrollTo(0, 0)
+                listener?.onHidden()
             }
         }
 
     }
 
-    fun registKeyBordListener(root: View, scrollToView: View) {
+    fun registKeyBordListener(root: View, scrollToView: View, listener: KeyBordChangerListener?) {
 
         if (globalLayoutListener == null) {
-            globalLayoutListener = CustomGlobalLayoutListener(root, scrollToView)
+            globalLayoutListener = CustomGlobalLayoutListener(root, scrollToView, listener)
+        } else {
+
+            unRegistKeyBordListener()
         }
 
         root.viewTreeObserver.addOnGlobalLayoutListener(globalLayoutListener)
@@ -158,7 +173,7 @@ abstract class BaseActivity<out M : BaseM, V : BaseV, out P : BaseP<M, V>> : Aut
 
 
     /**兼容软键盘控制布局的移动**/
-    private fun ounRegistKeyBordListener() {
+    private fun unRegistKeyBordListener() {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
             globalLayoutListener?.root?.viewTreeObserver?.removeGlobalOnLayoutListener(globalLayoutListener)
         } else {
@@ -171,18 +186,21 @@ abstract class BaseActivity<out M : BaseM, V : BaseV, out P : BaseP<M, V>> : Aut
     override fun onRestart() {
         super.onRestart()
         if (globalLayoutListener != null) {
-            registKeyBordListener(globalLayoutListener!!.root!!, globalLayoutListener!!.scrollToView!!)
+            registKeyBordListener(globalLayoutListener!!.root!!, globalLayoutListener!!.scrollToView!!, globalLayoutListener!!.listener!!)
         }
     }
 
     override fun onStop() {
         super.onStop()
 
+        //关闭加载对话框
+        HttpDialogHelper.dismisss()
+
+        //关闭输入法监听
         if (globalLayoutListener != null) {
             NormalFunUtils.changeKeyBord(this, false, globalLayoutListener!!.scrollToView!!)
-
         }
 
-        ounRegistKeyBordListener()
+        unRegistKeyBordListener()
     }
 }
