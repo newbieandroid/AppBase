@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_white"
+    android:keepScreenOn="true"
+    android:orientation="vertical">
+
+    <include layout="@layout/includetopbar" />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center_horizontal"
+        android:paddingBottom="69px"
+        android:paddingTop="18px"
+        android:text="优秀的个人介绍，直接影响你的接单量"
+        android:textColor="@color/color_aaaaaa"
+        android:textSize="36px" />
+
+    <ScrollView
+        android:id="@+id/submitMasterScroll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:id="@+id/submitMasterContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0.3dp"
+                android:background="#FEFEF1"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="36px"
+                    android:layout_marginRight="36px"
+                    android:layout_marginTop="36px"
+                    android:text="提供几个思路，试着从这些点描述自己;"
+                    android:textColor="@color/color_666666"
+                    android:textSize="40px" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="36px"
+                    android:layout_marginRight="36px"
+                    android:layout_marginTop="5dp"
+                    android:text="· 你预测的手法;"
+                    android:textColor="#AAAAAA"
+                    android:textSize="40px" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="36px"
+                    android:layout_marginRight="36px"
+                    android:layout_marginTop="5dp"
+                    android:text="· 预测准确率;"
+                    android:textColor="#AAAAAA"
+                    android:textSize="40px" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="36px"
+                    android:layout_marginLeft="36px"
+                    android:layout_marginRight="36px"
+                    android:layout_marginTop="5dp"
+                    android:text="· 其它你认为能展示你优势的事情"
+                    android:textColor="#AAAAAA"
+                    android:textSize="40px" />
+
+            </LinearLayout>
+
+
+            <EditText
+                android:id="@+id/masterDesInfo"
+                android:layout_width="match_parent"
+                android:layout_height="568px"
+                android:layout_below="@+id/editDesEnable"
+                android:layout_margin="43px"
+                android:background="@drawable/back_userinfoet"
+                android:gravity="top"
+                android:hint="请输入个人简介"
+                android:padding="36px"
+                android:textColor="@color/color_888888"
+                android:textColorHint="@color/color_888888"
+                android:textSize="40px" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0.3dp"
+                android:background="#FEFEF1"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="36px"
+                    android:layout_marginRight="36px"
+                    android:layout_marginTop="36px"
+                    android:text="提供几个思路，试着从这些点描述自己;"
+                    android:textColor="@color/color_666666"
+                    android:textSize="40px" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="36px"
+                    android:layout_marginRight="36px"
+                    android:layout_marginTop="5dp"
+                    android:text="· 你曾经引以为豪的个人事迹；"
+                    android:textColor="#AAAAAA"
+                    android:textSize="40px" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="36px"
+                    android:layout_marginRight="36px"
+                    android:layout_marginTop="5dp"
+                    android:text="· 你值得称道的工作细节；"
+                    android:textColor="#AAAAAA"
+                    android:textSize="40px" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="36px"
+                    android:layout_marginLeft="36px"
+                    android:layout_marginRight="36px"
+                    android:layout_marginTop="5dp"
+                    android:text="· 说说你对预测独到的行业见解"
+                    android:textColor="#AAAAAA"
+                    android:textSize="40px" />
+
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/masterExpInfo"
+                android:layout_width="match_parent"
+                android:layout_height="568px"
+                android:layout_below="@+id/editDesEnable"
+                android:layout_marginLeft="43px"
+                android:layout_marginRight="43px"
+                android:layout_marginTop="43px"
+                android:background="@drawable/back_userinfoet"
+                android:gravity="top"
+                android:hint="请输入个人经历"
+                android:padding="36px"
+                android:textColor="@color/color_888888"
+                android:textColorHint="@color/color_888888"
+                android:textSize="40px" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="#FFFFFF"
+                android:padding="36px"
+                android:text="*提交成功后，我们会在两个工作日内，以电话的形式对您进行身份审核。期待你的加入！"
+                android:textColor="@color/color_aaaaaa"
+                android:textSize="37px" />
+
+            <TextView
+                android:id="@+id/submitMasterInfoBtn"
+                android:layout_width="match_parent"
+                android:layout_height="171px"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="36px"
+                android:background="@color/color_3CC5BC"
+                android:gravity="center"
+                android:text="提交审核"
+                android:textColor="@color/color_white"
+                android:textSize="46px" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

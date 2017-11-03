@@ -93,16 +93,16 @@ abstract class BaseAdapter(context: Context) : RecyclerView.Adapter<BaseViewHold
     fun remove(position: Int) {
         this.datas.removeAt(position)
         notifyItemRemoved(position)
+        notifyItemRangeChanged(position, 1)
     }
 
     /**移除某一条数据**/
     fun remove(item: MultBaseBean) {
+        this.datas.remove(item)
 
         val index = this.datas.indexOf(item)
-        this.datas.remove(item)
-        if (index >= 0) {
-            notifyItemRemoved(index)
-        }
+        notifyItemRemoved(index)
+        notifyItemRangeChanged(index, 1)
     }
 
 
@@ -125,7 +125,7 @@ abstract class BaseAdapter(context: Context) : RecyclerView.Adapter<BaseViewHold
 
 
     /**数据的操作**/
-    abstract fun convert(holder: BaseViewHolder, position: Int, atas: List<MultBaseBean>)
+    abstract fun convert(holder: BaseViewHolder, position: Int, allDatas: List<MultBaseBean>)
 
     /**添加布局**/
     abstract fun addMultiType(multiItems: ArrayList<AdapterMultiItem>)

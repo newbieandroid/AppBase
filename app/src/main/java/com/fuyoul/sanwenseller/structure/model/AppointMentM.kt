@@ -1,11 +1,15 @@
 package com.fuyoul.sanwenseller.structure.model
 
+import com.alibaba.fastjson.JSON
 import com.fuyoul.sanwenseller.base.BaseM
 import com.fuyoul.sanwenseller.bean.others.AppointMentItemBean
 import com.fuyoul.sanwenseller.bean.others.DataTimeBean
+import com.fuyoul.sanwenseller.bean.reqhttp.ReqChangeAllDayState
+import com.fuyoul.sanwenseller.bean.reqhttp.ReqChangeDayOfItemState
 import com.fuyoul.sanwenseller.bean.reshttp.ResHttpResult
 import com.fuyoul.sanwenseller.configs.UrlInfo.APPOINTMENTLIST
 import com.fuyoul.sanwenseller.configs.UrlInfo.CHANGEAPPOINTMENT
+import com.fuyoul.sanwenseller.configs.UrlInfo.CHANGEITEMAPPOINTMENT
 import com.fuyoul.sanwenseller.listener.HttpReqListener
 import com.lzy.okgo.OkGo
 import java.util.*
@@ -35,22 +39,24 @@ class AppointMentM : BaseM {
     }
 
 
-    fun changeAllDayState(listener: HttpReqListener) {
+    /**改变全天接单状态**/
+    fun changeAllDayState(reqData: ReqChangeAllDayState, listener: HttpReqListener) {
 
         OkGo.post<ResHttpResult>(CHANGEAPPOINTMENT)
+                .upJson(JSON.toJSONString(reqData))
                 .execute(listener)
     }
 
-    fun changeItemState(listener: HttpReqListener) {
-        OkGo.post<ResHttpResult>(CHANGEAPPOINTMENT)
+    /**设置某一天的某个时间节点不接单**/
+    fun changeItemState(reqData: ReqChangeDayOfItemState, listener: HttpReqListener) {
+        OkGo.post<ResHttpResult>(CHANGEITEMAPPOINTMENT)
+                .upJson(JSON.toJSONString(reqData))
                 .execute(listener)
     }
-
 
     fun getData(listener: HttpReqListener) {
 
         OkGo.get<ResHttpResult>(APPOINTMENTLIST).execute(listener)
-
 
     }
 
@@ -68,7 +74,6 @@ class AppointMentM : BaseM {
         return result
 
     }
-
 
     fun getTomorrowBean(): DataTimeBean {
 

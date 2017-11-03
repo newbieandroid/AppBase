@@ -32,6 +32,10 @@ object MsgDialogHelper {
         fun onNagetive()
     }
 
+    interface DialogOndismissListener {
+        fun onDismiss(context: Context)
+    }
+
 
     /**显示带有确定和取消的按钮**/
     fun showNormalDialog(context: Context, cancleable: Boolean, title: String, msgInfo: String, listener: DialogListener?) {
@@ -143,7 +147,13 @@ object MsgDialogHelper {
 
 
     /**显示成功或失败的对话框**/
+
+
     fun showStateDialog(context: Context, content: String, state: Boolean) {
+        showStateDialog(context, content, state, null)
+    }
+
+    fun showStateDialog(context: Context, content: String, state: Boolean, listener: DialogOndismissListener?) {
 
         object : AbstractDialog(context, R.layout.statedialog) {
             override fun convert(holder: DialogViewHolder?) {
@@ -152,7 +162,11 @@ object MsgDialogHelper {
                 holder?.convertView?.findViewById<TextView>(R.id.stateText)?.text = content
             }
 
-        }.backgroundLight(0.7).setCancelAble(true).showDialog()
+        }
+                .setOnCancelListener {
+                    listener?.onDismiss(context)
+                }
+                .backgroundLight(0.7).setCancelAble(true).showDialog()
     }
 
 

@@ -14,12 +14,16 @@ object UrlInfo {
     /**登录相关**/
     val LOGIN = "$base/account/master/signIn"//登录
     val SMS = "$base/account/sendVerifyCode?phone="//获取验证码
+    val GETTAGLIST = "$base/account/master/labelList"//获取标签
+    val SUBMITMASTERINFO = "$base/account/master/apply"//提交预测师申请资料
+
 
     /**订单相关**/
     val ORDERLIST = "$base/order/master/orderList"//获取订单列表
     val APPOINTMENTLIST = "$base/masterSchedulingHandler/getMasterSchedulingHandler"//获取大师盘班表
-
     val CHANGEAPPOINTMENT = "$base/masterSchedulingHandler/updateMasterScheduling"//更改大师排班表
+    val CHANGEITEMAPPOINTMENT = "$base/masterSchedulingHandler/modifyAppointmentStatus"//修改某天某个时间点的接单状态
+    val APPOIINTMENTINFO = "$base/masterSchedulingHandler/getAppointInfo"//获取预约信息
 
     /**商品相关**/
     val BABYLIST = "$base/goods/master/getMasterGoodsList"//获取预测师的宝贝礼拜

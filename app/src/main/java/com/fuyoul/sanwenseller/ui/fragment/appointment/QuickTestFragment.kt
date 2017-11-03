@@ -49,6 +49,10 @@ class QuickTestFragment : BaseFragment<EmptyM, EmptyV, EmptyP>() {
 
         }
 
+        quickTestBtn.setOnClickListener {
+            //TODO 设置闪测接单数
+
+        }
 
     }
 

@@ -94,6 +94,7 @@ public class ResAppointMentT {
     public static class Item {
         private String time;
         private long userInfoId;
+        private long orderId;
         private String avatar;
         private String nickname;
 
@@ -103,6 +104,14 @@ public class ResAppointMentT {
 
         public void setUserInfoId(long userInfoId) {
             this.userInfoId = userInfoId;
+        }
+
+        public long getOrderId() {
+            return orderId;
+        }
+
+        public void setOrderId(long orderId) {
+            this.orderId = orderId;
         }
 
         public String getAvatar() {

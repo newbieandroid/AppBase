@@ -48,13 +48,25 @@ class EditBabyInfoActivity : BaseActivity<EditBabyM, EditBabyV, EditBabyP>() {
 
 
     private var goodsClassifyId = -1
-
     private val selectPath = ArrayList<String>()//图片
-
     private var photoUtils: PhotoSelectUtils = PhotoSelectUtils()
 
-    override fun setLayoutRes(): Int = R.layout.editbabyinfo
 
+    companion object {
+        fun start(activity: Activity, item: ResHttpBabyItem?) {
+
+            val intent = Intent(activity, EditBabyInfoActivity::class.java)
+            if (item != null) {
+                val bund = Bundle()
+                bund.putSerializable("item", item)
+                intent.putExtras(bund)
+            }
+            activity.startActivityForResult(intent, Code.REQ_EDITBABYINFO)
+
+        }
+    }
+
+    override fun setLayoutRes(): Int = R.layout.editbabyinfo
     override fun initData(savedInstanceState: Bundle?) {
 
         if (intent.extras != null && intent.extras.getSerializable("item") != null) {
@@ -149,27 +161,23 @@ class EditBabyInfoActivity : BaseActivity<EditBabyM, EditBabyV, EditBabyP>() {
             } else if (TextUtils.isEmpty(editBabyDes.text)) {
                 NormalFunUtils.showToast(this, "请输入宝贝描述")
             } else {
-
+                //编辑
                 if (intent.extras != null && intent.extras.getSerializable("item") != null) {
-                    //编辑
 
                     val item = intent.extras.getSerializable("item") as ResHttpBabyItem
-
                     val array = JSON.parseArray((intent.extras.getSerializable("item") as ResHttpBabyItem).imgs)
                     val before = (0 until array.size).map { array.getJSONObject(it).getString("url") }
-
 
                     item.goodsName = editBabyName.text.toString()
                     item.introduce = editBabyDes.text.toString()
                     item.goodsClassifyId = goodsClassifyId
                     item.price = editBabyPrice.text.toString().toInt()
-
                     item.serviceTime = if (TextUtils.isEmpty(editBabyServiceTime.text.toString())) SERVICETIME else editBabyServiceTime.text.toString().toInt()
                     getPresenter().editBaby(this, item, selectPath, before)
                 } else {
                     //发布
                     val data = ReqReleaseBaby()
-                    data.img = selectPath[0]
+                    data.imgs = selectPath[0]
                     data.goodsName = editBabyName.text.toString()
                     data.price = editBabyPrice.text.toString().toInt()
                     data.category = goodsClassifyId
@@ -187,6 +195,12 @@ class EditBabyInfoActivity : BaseActivity<EditBabyM, EditBabyV, EditBabyP>() {
 
         editBabyType.setOnClickListener {
             if (editBabyTypeList.visibility == View.GONE) {
+
+                NormalFunUtils.changeKeyBord(this, false, editBabyName)
+                NormalFunUtils.changeKeyBord(this, false, editBabyPrice)
+                NormalFunUtils.changeKeyBord(this, false, editBabyServiceTime)
+                NormalFunUtils.changeKeyBord(this, false, editBabyDes)
+
                 editBabyTypeList.visibility = View.VISIBLE
             }
         }

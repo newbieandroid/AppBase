@@ -13,15 +13,15 @@ public class ReqReleaseBaby {
     private int price;
     private int serviceTime = 50;
     private String introduce;
-    private String img;
+    private String imgs;
 
 
-    public String getImg() {
-        return img;
+    public String getImgs() {
+        return imgs;
     }
 
-    public void setImg(String img) {
-        this.img = img;
+    public void setImgs(String imgs) {
+        this.imgs = imgs;
     }
 
     public String getGoodsName() {

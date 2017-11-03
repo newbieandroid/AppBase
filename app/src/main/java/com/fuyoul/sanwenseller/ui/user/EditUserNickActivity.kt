@@ -39,6 +39,7 @@ class EditUserNickActivity : BaseActivity<EmptyM, EmptyV, EmptyP>() {
     override fun initData(savedInstanceState: Bundle?) {
 
         editUserNick.setText(intent.getStringExtra("nick"))
+        //设置光标所在位置
         editUserNick.setSelection(if (editUserNick.text.isNotEmpty()) editUserNick.text.length else 0)
 
     }
@@ -52,6 +53,7 @@ class EditUserNickActivity : BaseActivity<EmptyM, EmptyV, EmptyP>() {
         editUserNick.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
 
+                //判断是否包含关键字
                 if (TextUtils.equals(p0?.toString(), "填写昵称")) {
                     p0?.clear()
                     editUserNickClear.visibility = View.GONE

@@ -1,13 +1,16 @@
 package com.fuyoul.sanwenseller.ui.fragment.main
 
+import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.View
 import com.fuyoul.sanwenseller.R
 import com.fuyoul.sanwenseller.base.BaseFragment
 import com.fuyoul.sanwenseller.bean.reshttp.ResLoginInfoBean
+import com.fuyoul.sanwenseller.configs.Code
 import com.fuyoul.sanwenseller.helper.MsgDialogHelper
 import com.fuyoul.sanwenseller.structure.model.EmptyM
 import com.fuyoul.sanwenseller.structure.presenter.EmptyP
@@ -45,7 +48,11 @@ class MyFragment : BaseFragment<EmptyM, EmptyV, EmptyP>() {
 
     override fun init(view: View?, savedInstanceState: Bundle?) {
         onHiddenChanged(false)
+        setUserInfo()
+    }
 
+
+    private fun setUserInfo() {
         val loginInfo = DataSupport.findFirst(ResLoginInfoBean::class.java)
 
         if (loginInfo != null) {
@@ -89,13 +96,13 @@ class MyFragment : BaseFragment<EmptyM, EmptyV, EmptyP>() {
 
         editInfoArrorwLayout.setOnClickListener {
             if (LoginActivity.checkLogin(true, activity)) {
-                startActivity(Intent(context, UserInfoActivity::class.java))
+                UserInfoActivity.start(activity)
             }
         }
 
         headLayout.setOnClickListener {
             if (LoginActivity.checkLogin(true, activity)) {
-                startActivity(Intent(context, UserInfoActivity::class.java))
+                UserInfoActivity.start(activity)
             }
         }
         scanLayout.setOnClickListener {
@@ -132,4 +139,13 @@ class MyFragment : BaseFragment<EmptyM, EmptyV, EmptyP>() {
     override fun getPresenter(): EmptyP = EmptyP(initViewImpl())
 
     override fun initViewImpl(): EmptyV = EmptyV()
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == Code.REQ_USERINFO && resultCode == Activity.RESULT_OK) {
+            setUserInfo()
+        }
+    }
 }

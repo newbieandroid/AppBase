@@ -50,16 +50,14 @@ abstract class HttpReqListener(context: Context, isShowDialog: Boolean, isCancle
 
     override fun onSuccess(response: Response<ResHttpResult>?) {
         checkData(false, response)
-        Log.e("csl", "请求地址:${response?.rawResponse?.request()?.url()}\n接口请求信息:${JSON.toJSONString(response?.body())}\n状态：${response?.exception}")
-
+        Log.e("csl", "请求信息:${response?.rawResponse?.request()?.url()}\n接口请求信息:${JSON.toJSONString(response?.body())}\n状态：${response?.exception}")
     }
 
     override fun onCacheSuccess(response: Response<ResHttpResult>?) {
         super.onCacheSuccess(response)
         checkData(false, response)
 
-
-        Log.e("csl", "请求地址:${response?.rawResponse?.request()?.url()}\n接口缓存信息:${JSON.toJSONString(response?.body())}\n状态：${response?.exception}")
+        Log.e("csl", "缓存信息:${response?.rawResponse?.request()?.url()}\n接口缓存信息:${JSON.toJSONString(response?.body())}\n状态：${response?.exception}")
 
     }
 
@@ -90,7 +88,7 @@ abstract class HttpReqListener(context: Context, isShowDialog: Boolean, isCancle
         } else {
             val result = response?.body()
 
-            Log.e("csl", "-------------:${result?.data.toString()}---")
+            Log.e("csl", "-------接口返回数据------:${result?.data.toString()}---")
 
             if (result?.errorCode == Code.HTTP_NODATA || TextUtils.isEmpty(result?.data.toString()) || TextUtils.equals("[]", result?.data.toString()) || TextUtils.equals("{}", result?.data.toString())) {
                 withoutData(result?.errorCode ?: HTTP_SUCCESS, "${result?.msg}")

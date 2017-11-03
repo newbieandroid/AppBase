@@ -1,5 +1,7 @@
 package com.fuyoul.sanwenseller.bean.reqhttp;
 
+import com.fuyoul.sanwenseller.bean.reshttp.ResTagBean;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -11,38 +13,32 @@ import java.util.List;
 
 public class ReqRegistMasterInfo implements Serializable {
 
-    private String masterName;//姓名
-    private long masterId;//id
+    private String realName;//姓名
+    private long userInfoId;//id
     private String bankName;//开户银行名称
     private String idCard;//身份证号码
-    private String bankNum;//银行卡号
-    private String imgPathZ;//正面身份照
-    private String imgPathF;//反面身份照
+    private String bankCard;//银行卡号
+    private String idCardFront;//正面身份照
+    private String idCardBack;//反面身份照
+    private String selfExp;//个人经历
+    private String selfInfo;//个人简介
+    private List<ResTagBean> labelList;
 
-    private List<String> tags;
-
-    public List<String> getTags() {
-        return tags;
+    public long getUserInfoId() {
+        return userInfoId;
     }
 
-    public void setTags(List<String> tags) {
-        this.tags = tags;
+    public void setUserInfoId(long userInfoId) {
+        this.userInfoId = userInfoId;
     }
 
-    public String getMasterName() {
-        return masterName;
+
+    public String getRealName() {
+        return realName;
     }
 
-    public void setMasterName(String masterName) {
-        this.masterName = masterName;
-    }
-
-    public long getMasterId() {
-        return masterId;
-    }
-
-    public void setMasterId(long masterId) {
-        this.masterId = masterId;
+    public void setRealName(String realName) {
+        this.realName = realName;
     }
 
     public String getBankName() {
@@ -61,27 +57,51 @@ public class ReqRegistMasterInfo implements Serializable {
         this.idCard = idCard;
     }
 
-    public String getBankNum() {
-        return bankNum;
+    public String getBankCard() {
+        return bankCard;
     }
 
-    public void setBankNum(String bankNum) {
-        this.bankNum = bankNum;
+    public void setBankCard(String bankCard) {
+        this.bankCard = bankCard;
     }
 
-    public String getImgPathZ() {
-        return imgPathZ;
+    public String getIdCardFront() {
+        return idCardFront;
     }
 
-    public void setImgPathZ(String imgPathZ) {
-        this.imgPathZ = imgPathZ;
+    public void setIdCardFront(String idCardFront) {
+        this.idCardFront = idCardFront;
     }
 
-    public String getImgPathF() {
-        return imgPathF;
+    public String getIdCardBack() {
+        return idCardBack;
     }
 
-    public void setImgPathF(String imgPathF) {
-        this.imgPathF = imgPathF;
+    public void setIdCardBack(String idCardBack) {
+        this.idCardBack = idCardBack;
+    }
+
+    public String getSelfExp() {
+        return selfExp;
+    }
+
+    public void setSelfExp(String selfExp) {
+        this.selfExp = selfExp;
+    }
+
+    public String getSelfInfo() {
+        return selfInfo;
+    }
+
+    public void setSelfInfo(String selfInfo) {
+        this.selfInfo = selfInfo;
+    }
+
+    public List<ResTagBean> getLabelList() {
+        return labelList;
+    }
+
+    public void setLabelList(List<ResTagBean> labelList) {
+        this.labelList = labelList;
     }
 }

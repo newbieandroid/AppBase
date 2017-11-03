@@ -9,6 +9,7 @@ import com.csl.share.OpenSdkHelper
 import com.fuyoul.sanwenseller.R
 import com.fuyoul.sanwenseller.base.BaseP
 import com.fuyoul.sanwenseller.bean.reqhttp.ReqLoginBean
+import com.fuyoul.sanwenseller.bean.reqhttp.ReqRegistMasterInfo
 import com.fuyoul.sanwenseller.bean.reshttp.ResHttpResult
 import com.fuyoul.sanwenseller.bean.reshttp.ResLoginInfoBean
 import com.fuyoul.sanwenseller.configs.Code
@@ -19,12 +20,13 @@ import com.fuyoul.sanwenseller.listener.HttpReqListener
 import com.fuyoul.sanwenseller.structure.model.LoginM
 import com.fuyoul.sanwenseller.structure.view.LoginV
 import com.fuyoul.sanwenseller.ui.MainActivity
-import com.fuyoul.sanwenseller.ui.user.RegistMasterInfoActivity
+import com.fuyoul.sanwenseller.ui.user.TagSelectActivity
 import com.fuyoul.sanwenseller.utils.NormalFunUtils
+import com.lzy.okgo.OkGo
+import com.lzy.okgo.model.HttpHeaders
 import com.netease.nim.uikit.NimUIKit
 import com.netease.nimlib.sdk.RequestCallback
 import com.netease.nimlib.sdk.auth.LoginInfo
-import kotlinx.android.synthetic.main.myfragmentlayout.*
 
 /**
  *  Auther: chen
@@ -102,7 +104,9 @@ class LoginP(loginV: LoginV) : BaseP<LoginM, LoginV>(loginV) {
             Code.MASTERSTATE_DEFAULT -> {
                 HttpDialogHelper.dismisss()
 
-                RegistMasterInfoActivity.start(context, loginInfo.userInfoId)
+                val info = ReqRegistMasterInfo()
+                info.userInfoId = loginInfo.userInfoId
+                TagSelectActivity.start(context, info)
 
             }
             Code.MASTERSTATE_SUCCESS -> {
@@ -115,6 +119,15 @@ class LoginP(loginV: LoginV) : BaseP<LoginM, LoginV>(loginV) {
                     }
 
                     override fun onSuccess(p0: LoginInfo?) {
+
+
+                        val httpHeader = HttpHeaders()
+                        httpHeader.put("authorization", loginInfo.token)
+                        OkGo
+                                .getInstance()
+                                .addCommonHeaders(httpHeader)
+
+
                         viewImpl?.saveDbInfo(loginInfo)
                         HttpDialogHelper.dismisss()
                         NimUIKit.setAccount(p0?.account)
@@ -150,7 +163,7 @@ class LoginP(loginV: LoginV) : BaseP<LoginM, LoginV>(loginV) {
 
                 MsgDialogHelper.showNormalDialog(context, true,
                         "温馨提示",
-                        "预测师申请已被驳回,是否致电客服?\n${context.resources.getString(R.string.serviceTell)}",
+                        "预测师申请已被驳回,是否致电客服?\ntel:${context.resources.getString(R.string.serviceTell)}",
                         "我知道了",
                         object : MsgDialogHelper.DialogListener {
                             override fun onPositive() {

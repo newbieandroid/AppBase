@@ -36,7 +36,7 @@
                     android:paddingLeft="21px"
                     android:paddingRight="21px"
                     android:text="待预测"
-                    android:textColor="@color/color_FF627B"
+                    android:textColor="@color/white"
                     android:textSize="37px" />
 
                 <ImageView
@@ -55,7 +55,6 @@
                     android:layout_below="@+id/avatar"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="21px"
-                    android:text="昵称: 小豆豆"
                     android:textColor="@color/color_333333"
                     android:textSize="43px" />
 
@@ -85,7 +84,6 @@
                         android:layout_centerVertical="true"
                         android:drawablePadding="5dp"
                         android:drawableRight="@mipmap/ic_my_set_help_jtleft"
-                        android:text="2017/06/12 18:00-19:00"
                         android:textColor="@color/color_FF627B"
                         android:textSize="40px" />
 
@@ -113,7 +111,6 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:text="张三"
                         android:textColor="@color/color_666666"
                         android:textSize="40px" />
 
@@ -141,7 +138,6 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:text="男"
                         android:textColor="@color/color_666666"
                         android:textSize="40px" />
 
@@ -169,7 +165,6 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:text="四川成都"
                         android:textColor="@color/color_666666"
                         android:textSize="40px" />
 
@@ -180,7 +175,7 @@
                     android:id="@+id/birthLayout"
                     android:layout_width="match_parent"
                     android:layout_height="144px"
-                    android:layout_below="@+id/sexLayout"
+                    android:layout_below="@+id/addressLayout"
                     android:background="@drawable/back_mainbottom">
 
                     <TextView
@@ -198,7 +193,6 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:text="阳历：\n阴历"
                         android:textColor="@color/color_666666"
                         android:textSize="40px" />
 
@@ -211,6 +205,7 @@
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="28px"
                 android:background="@drawable/back_circle"
                 android:orientation="vertical"
                 android:padding="36px">
@@ -225,6 +220,7 @@
                         android:layout_width="230px"
                         android:layout_height="230px"
                         android:layout_marginRight="28px"
+                        android:scaleType="fitXY"
                         android:src="@mipmap/ic_launcher" />
 
                     <TextView
@@ -232,7 +228,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_toRightOf="@+id/babyIcon"
-                        android:text="情感婚姻"
                         android:textColor="@color/color_333333"
                         android:textSize="46px" />
 
@@ -242,7 +237,6 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/babyTitle"
                         android:layout_toRightOf="@+id/babyIcon"
-                        android:text="情感婚姻"
                         android:textColor="@color/color_aaaaaa"
                         android:textSize="37px" />
                 </RelativeLayout>
@@ -270,7 +264,6 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:text="sw201705141409460000000034"
                         android:textColor="@color/color_666666"
                         android:textSize="40px" />
                 </RelativeLayout>
@@ -295,7 +288,6 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:text="1989/12/12"
                         android:textColor="@color/color_666666"
                         android:textSize="40px" />
                 </RelativeLayout>
@@ -321,7 +313,6 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:text="50分钟"
                         android:textColor="@color/color_666666"
                         android:textSize="40px" />
                 </RelativeLayout>
@@ -347,7 +338,6 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:text="￥523"
                         android:textColor="@color/color_666666"
                         android:textSize="40px" />
                 </RelativeLayout>
@@ -374,7 +364,6 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:text="￥12"
                         android:textColor="@color/color_666666"
                         android:textSize="40px" />
                 </RelativeLayout>
@@ -400,7 +389,6 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:text="￥511"
                         android:textColor="@color/color_666666"
                         android:textSize="40px" />
                 </RelativeLayout>
@@ -412,8 +400,9 @@
     <TextView
         android:id="@+id/sendMsgBtn"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="172px"
         android:layout_alignParentBottom="true"
+        android:background="@color/color_3CC5BC"
         android:gravity="center"
         android:text="发送消息"
         android:textColor="@color/color_white" />

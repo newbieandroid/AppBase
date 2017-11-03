@@ -1,6 +1,8 @@
 package com.fuyoul.sanwenseller.structure.view
 
+import com.fuyoul.sanwenseller.base.BaseAdapter
 import com.fuyoul.sanwenseller.base.BaseV
+import com.fuyoul.sanwenseller.bean.reshttp.ResTagBean
 
 /**
  *  @author: chen
@@ -8,4 +10,7 @@ import com.fuyoul.sanwenseller.base.BaseV
  *  @Desc:
  */
 abstract class TagSelectV : BaseV {
+    abstract fun setTag(datas: List<ResTagBean>)
+
+    abstract fun getAdapter(): BaseAdapter
 }

@@ -39,6 +39,7 @@
             android:layout_height="130px">
 
             <TextView
+                android:id="@+id/allDayStateInfo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -47,6 +48,7 @@
                 android:textSize="46px" />
 
             <TextView
+                android:id="@+id/allDayStateRule"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"

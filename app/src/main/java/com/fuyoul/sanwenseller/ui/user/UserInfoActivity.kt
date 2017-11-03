@@ -41,10 +41,20 @@ import permissions.dispatcher.OnNeverAskAgain
  */
 @RuntimePermissions
 class UserInfoActivity : BaseActivity<EditUserInfoM, EditUserInfoV, EditUserInfoP>() {
+
+
     private var photoUtils: PhotoSelectUtils = PhotoSelectUtils()
 
     private val userInfo = DataSupport.findFirst(ResLoginInfoBean::class.java)
     private var headPath: String? = ""
+
+
+    companion object {
+        fun start(activity: Activity) {
+            activity.startActivityForResult(Intent(activity, UserInfoActivity::class.java), Code.REQ_USERINFO)
+        }
+    }
+
 
     override fun setLayoutRes(): Int = R.layout.userinfolayout
 

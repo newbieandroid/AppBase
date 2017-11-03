@@ -15,7 +15,6 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.text.TextUtils
-import android.text.method.NumberKeyListener
 import com.fuyoul.sanwenseller.bean.others.MultDialogBean
 import com.fuyoul.sanwenseller.bean.reqhttp.ReqRegistMasterInfo
 import com.fuyoul.sanwenseller.configs.Code
@@ -40,22 +39,28 @@ import permissions.dispatcher.OnNeverAskAgain
 class RegistMasterInfoActivity : BaseActivity<EmptyM, EmptyV, EmptyP>() {
 
 
-    private val reqRegistMasterInfo = ReqRegistMasterInfo()
+    private var reqRegistMasterInfo: ReqRegistMasterInfo? = null
     private var imgPathZ = ""//本地的正面图片地址
     private var imgPathF = ""//本地的反面图片地址
 
     private var photoUtils: PhotoSelectUtils = PhotoSelectUtils()
 
     companion object {
-        fun start(context: Context, masterId: Long) {
-            context.startActivity(Intent(context, RegistMasterInfoActivity::class.java).putExtra("masterId", masterId))
+        fun start(context: Context, reqRegistMasterInfo: ReqRegistMasterInfo) {
+
+            val intent = Intent(context, RegistMasterInfoActivity::class.java)
+            val bund = Bundle()
+            bund.putSerializable("data", reqRegistMasterInfo)
+            intent.putExtras(bund)
+            context.startActivity(intent)
+
         }
     }
 
     override fun setLayoutRes(): Int = R.layout.registmasterinfolayout
 
     override fun initData(savedInstanceState: Bundle?) {
-        reqRegistMasterInfo.masterId = intent.getLongExtra("masterId", 0)
+        reqRegistMasterInfo = intent.extras.getSerializable("data") as ReqRegistMasterInfo
     }
 
     override fun setListener() {
@@ -99,14 +104,14 @@ class RegistMasterInfoActivity : BaseActivity<EmptyM, EmptyV, EmptyP>() {
                     NormalFunUtils.showToast(this, "请选择身份照反面照")
                 }
                 else -> {
-                    reqRegistMasterInfo.masterName = masterName.text.toString()
-                    reqRegistMasterInfo.idCard = idCard.text.toString()
-                    reqRegistMasterInfo.bankName = bankName.text.toString()
-                    reqRegistMasterInfo.bankNum = bankNum.text.toString()
-                    reqRegistMasterInfo.imgPathZ = imgPathZ
-                    reqRegistMasterInfo.imgPathF = imgPathF
+                    reqRegistMasterInfo?.realName = masterName.text.toString()
+                    reqRegistMasterInfo?.idCard = idCard.text.toString()
+                    reqRegistMasterInfo?.bankName = bankName.text.toString()
+                    reqRegistMasterInfo?.bankCard = bankNum.text.toString()
+                    reqRegistMasterInfo?.idCardFront = imgPathZ
+                    reqRegistMasterInfo?.idCardBack = imgPathF
 
-                    TagSelectActivity.start(this, reqRegistMasterInfo)
+                    SubmitMasterInfoActivity.start(this, reqRegistMasterInfo!!)
 
                 }
             }

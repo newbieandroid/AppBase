@@ -3,6 +3,7 @@ package com.fuyoul.sanwenseller.ui.fragment.appointment
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.View
 import android.widget.RelativeLayout
 import android.widget.TextView
@@ -17,9 +18,11 @@ import com.fuyoul.sanwenseller.bean.others.AppointMentItemBean
 import com.fuyoul.sanwenseller.configs.Code
 import com.fuyoul.sanwenseller.configs.Data
 import com.fuyoul.sanwenseller.configs.Key
+import com.fuyoul.sanwenseller.helper.MsgDialogHelper
 import com.fuyoul.sanwenseller.structure.model.AppointMentM
 import com.fuyoul.sanwenseller.structure.presenter.AppointMentP
 import com.fuyoul.sanwenseller.structure.view.AppointMentV
+import com.fuyoul.sanwenseller.ui.normal.WebViewActivity
 import com.fuyoul.sanwenseller.ui.order.AppointMentInfoActivity
 import com.fuyoul.sanwenseller.utils.GlideUtils
 import kotlinx.android.synthetic.main.normaltestitem.*
@@ -32,8 +35,8 @@ import kotlinx.android.synthetic.main.normaltestitem.*
 class NormalTestItemFragment : BaseFragment<AppointMentM, AppointMentV, AppointMentP>() {
 
 
+    private var allDayState = 0//全天接单状态
     private var TYPE = Data.TODAY
-
     private var adapter: ThisAdapter? = null
     override fun setLayoutRes(): Int = R.layout.normaltestitem
 
@@ -52,14 +55,50 @@ class NormalTestItemFragment : BaseFragment<AppointMentM, AppointMentV, AppointM
         normalTestRefreshLayout.setOnRefreshListener {
             getPresenter().getData(context, TYPE)
         }
+
         stateView.setOnClickListener {
-            getPresenter().changeAllDayState(context, TYPE)
+            getPresenter().changeAllDayState(context, TYPE, if (allDayState == Data.BUSY) Data.FREE else Data.BUSY)
+        }
+
+        allDayStateRule.setOnClickListener {
+
+            WebViewActivity.startWebView(context, "时间安排协议", "http://www.baidu.com")
         }
     }
 
     override fun getPresenter(): AppointMentP = AppointMentP(initViewImpl())
 
     override fun initViewImpl(): AppointMentV = object : AppointMentV() {
+
+        override fun setItemState(position: Int) {
+            (getAdapter().datas[position] as AppointMentItemBean).canOrder = !(getAdapter().datas[position] as AppointMentItemBean).canOrder
+            getAdapter().notifyItemRangeChanged(position, 1)
+        }
+
+        override fun setAllDaySatate(state: Int, isRefreshData: Boolean) {
+            allDayState = state
+            if (allDayState == Data.BUSY) {//如果设置了全天不接单
+                stateView.setImageResource(R.mipmap.ic_my_yyb_jdshut)
+                allDayStateInfo.text = "全天不接单"
+                initViewImpl().getAdapter().datas.forEach {
+                    (it as AppointMentItemBean).isBusy = true
+                }
+
+            } else {
+                allDayStateInfo.text = "全天接单"
+                initViewImpl().getAdapter().datas.forEach {
+                    (it as AppointMentItemBean).isBusy = false
+                }
+
+                stateView.setImageResource(R.mipmap.ic_my_yyb_jdopen)
+            }
+
+            if (isRefreshData) {
+                Log.e("csl", "-----刷新数据------$isRefreshData--")
+                initViewImpl().getAdapter().notifyItemRangeChanged(0, initViewImpl().getAdapter().datas.size)
+            }
+        }
+
         override fun getAdapter(): ThisAdapter {
 
             if (adapter == null) {
@@ -89,34 +128,36 @@ class NormalTestItemFragment : BaseFragment<AppointMentM, AppointMentV, AppointM
             time.text = item.time
 
 
-            if (item.isBusy) {//如果全天不可接单
+            if (item.isSelect) {//如果被预约了,无论全天是否可接单都显示
                 infoLayout.visibility = View.VISIBLE
+                GlideUtils.loadCircleImg(context, item.avatar, holder.itemView.findViewById(R.id.avatar), R.drawable.nim_avatar_default, R.drawable.nim_avatar_default)
+                state.text = "已约"
 
-                state.text = "不可约"
-                time.setTextColor(resources.getColor(R.color.color_888888))
-                state.setTextColor(resources.getColor(R.color.color_888888))
+                infoLayout.setOnClickListener {
+                    AppointMentInfoActivity.start(context, item.orderId)
+                }
+
+                time.setTextColor(resources.getColor(R.color.color_333333))
+                state.setTextColor(resources.getColor(R.color.color_FF627B))
 
             } else {
 
-                if (item.isSelect) {//如果被预约了
-                    infoLayout.visibility = View.VISIBLE
-                    GlideUtils.loadCircleImg(context, item.avatar, holder.itemView.findViewById(R.id.avatar), R.drawable.nim_avatar_default, R.drawable.nim_avatar_default)
-                    state.text = "已约"
+                infoLayout.visibility = View.GONE
 
-                    infoLayout.setOnClickListener {
-                        AppointMentInfoActivity.start(context, item.userInfoId)
-                    }
+                if (item.isBusy || !item.canOrder) {//如果全天不可接单或者某个时间点不接单
 
-                    time.setTextColor(resources.getColor(R.color.color_333333))
-                    state.setTextColor(resources.getColor(R.color.color_FF627B))
+                    state.text = "不可约"
+                    time.setTextColor(resources.getColor(R.color.color_888888))
+                    state.setTextColor(resources.getColor(R.color.color_888888))
 
                 } else {
-                    infoLayout.visibility = View.GONE
                     state.text = "可约"
                     time.setTextColor(resources.getColor(R.color.color_333333))
                     state.setTextColor(resources.getColor(R.color.color_3CC5BC))
                 }
+
             }
+
         }
 
         override fun addMultiType(multiItems: ArrayList<AdapterMultiItem>) {
@@ -127,8 +168,9 @@ class NormalTestItemFragment : BaseFragment<AppointMentM, AppointMentV, AppointM
 
             val item = datas[position] as AppointMentItemBean
             if (!item.isBusy && !item.isSelect) {//
-                getPresenter().changeItemState(context, TYPE)
-
+                getPresenter().changeItemState(context, TYPE, position)
+            } else {
+                MsgDialogHelper.showSingleDialog(context, true, "温馨提示", "当前状态不可修改接单状态", "我知道了", null)
             }
         }
 

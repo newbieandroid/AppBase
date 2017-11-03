@@ -1,5 +1,6 @@
 package com.fuyoul.sanwenseller.ui.fragment.main
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
@@ -87,15 +88,16 @@ class BabyManagerItemFragment : BaseFragment<BabyManagerM, BabyManagerV, BabyMan
 
     override fun initViewImpl(): BabyManagerV = object : BabyManagerV() {
         override fun editBaby(item: ResHttpBabyItem) {
-
-            val bund = Bundle()
-            bund.putSerializable("item", item)
-            val intent = Intent(context, EditBabyInfoActivity::class.java)
-            intent.putExtras(bund)
-            startActivityForResult(intent, Code.REQ_EDITBABYINFO)
+            EditBabyInfoActivity.start(activity, item)
         }
 
-        override fun getBaseAdapter(): BabyManagerItemFragment.ThisAdapter = adapter ?: ThisAdapter()
+        override fun getBaseAdapter(): BabyManagerItemFragment.ThisAdapter {
+
+            if (adapter == null) {
+                adapter = ThisAdapter()
+            }
+            return adapter!!
+        }
 
 
     }
@@ -124,7 +126,6 @@ class BabyManagerItemFragment : BaseFragment<BabyManagerM, BabyManagerV, BabyMan
 
             babyItemLeftFunc.setOnClickListener {
                 initViewImpl().editBaby(item)
-
             }
             babyItemMiddleFunc.setOnClickListener {
                 if (arguments.getInt("status") == Code.SELL) {
@@ -165,6 +166,14 @@ class BabyManagerItemFragment : BaseFragment<BabyManagerM, BabyManagerV, BabyMan
 
         override fun getRecyclerView(): RecyclerView = babyManagerDataList
 
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == Code.REQ_EDITBABYINFO && resultCode == Activity.RESULT_OK) {
+            getData(true)
+        }
     }
 
 }

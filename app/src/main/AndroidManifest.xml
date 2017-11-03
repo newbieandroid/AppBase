@@ -63,6 +63,11 @@
             android:windowIsTranslucent="false"
             android:windowSoftInputMode="stateHidden|adjustResize" />
 
+        <activity
+            android:name=".ui.user.SubmitMasterInfoActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:theme="@style/Theme.Design.Light.NoActionBar"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
 
         <activity
             android:name=".ui.user.RegistMasterInfoActivity"

@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:keepScreenOn="true"
     android:orientation="vertical">
 
     <include layout="@layout/includetopbar" />
@@ -46,7 +47,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="60px"
-                    android:background="@color/color_white"
+                    android:background="@color/transparent"
                     android:hint="请输入宝贝名称"
                     android:maxLength="15"
                     android:singleLine="true"
@@ -77,7 +78,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="60px"
-                    android:background="@color/color_white"
+                    android:background="@color/transparent"
                     android:digits="0123456789"
                     android:hint="请输入宝贝价格"
                     android:inputType="number"
@@ -140,7 +141,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="60px"
-                    android:background="@color/color_white"
+                    android:background="@color/transparent"
                     android:digits="123456789"
                     android:gravity="center_vertical"
                     android:hint="默认时长为1小时"

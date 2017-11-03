@@ -21,6 +21,7 @@ object Code {
     val VIEWTYPE_MONEY = 4//收入
     val VIEWTYPE_APPOINTMENT = 5 //预约
     val VIEWTYPE_WAITSETTLEMENT = 6 //待结算
+    val VIEWTYPE_TAG = 7 //标签
 
     /**宝贝管理状态**/
     val SELL = 0// 0上架
@@ -32,6 +33,7 @@ object Code {
     val REQ_SELECTIMGS = 88//默认选择图片
     val REQ_CAMERA = 87//默认拍照
     val REQ_IMGPREVIEW = 86//图片预览
+    val REQ_USERINFO = 85//图片预览
 
     /**选择身份照正面**/
     val REQ_CAMERA_IDCARD_Z = 89

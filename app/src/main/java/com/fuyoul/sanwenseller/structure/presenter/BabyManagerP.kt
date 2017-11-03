@@ -59,6 +59,7 @@ class BabyManagerP(babyManagerV: BabyManagerV) : BaseP<BabyManagerM, BabyManager
         getModelImpl().deleteBbay(context, item.goodsId, object : HttpReqListener(context) {
             override fun reqOk(result: ResHttpResult) {
                 viewImpl?.getBaseAdapter()?.remove(position)
+                NormalFunUtils.showToast(context, "删除宝贝信息成功")
             }
 
             override fun withoutData(code: Int, msg: String) {
@@ -82,6 +83,8 @@ class BabyManagerP(babyManagerV: BabyManagerV) : BaseP<BabyManagerM, BabyManager
         getModelImpl().upToShop(context, item.goodsId, object : HttpReqListener(context) {
             override fun reqOk(result: ResHttpResult) {
                 viewImpl?.getBaseAdapter()?.remove(position)
+
+                NormalFunUtils.showToast(context, result.msg ?: "商品上架成功")
             }
 
             override fun withoutData(code: Int, msg: String) {
@@ -104,6 +107,7 @@ class BabyManagerP(babyManagerV: BabyManagerV) : BaseP<BabyManagerM, BabyManager
         getModelImpl().downToShop(context, item.goodsId, object : HttpReqListener(context) {
             override fun reqOk(result: ResHttpResult) {
                 viewImpl?.getBaseAdapter()?.remove(position)
+                NormalFunUtils.showToast(context, result.msg ?: "商品下架成功")
             }
 
             override fun withoutData(code: Int, msg: String) {

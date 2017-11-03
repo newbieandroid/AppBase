@@ -24,7 +24,7 @@ object Data {
     val PERSONALBABY = 2//自测
 
 
-    /**今天明天后台**/
+    /**今天明天后天**/
     val TODAY = 123
     val TOMORROW = 124
     val AFTERTOMORROW = 125

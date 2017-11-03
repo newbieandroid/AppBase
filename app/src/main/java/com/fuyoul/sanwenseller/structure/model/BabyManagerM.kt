@@ -36,8 +36,8 @@ class BabyManagerM : BaseM {
 
                 val req = ReqDeleteBaby()
                 req.goodsId = goodsId
-                OkGo.post<ResHttpResult>(BABYDELETE).upJson(JSON.toJSONString(req)).execute(listener)
-
+                OkGo.post<ResHttpResult>(BABYDELETE)
+                        .upJson(JSON.toJSONString(req)).execute(listener)
 
             }
 
@@ -54,7 +54,8 @@ class BabyManagerM : BaseM {
             override fun onPositive() {
                 val req = ReqDeleteBaby()
                 req.goodsId = babyId
-                OkGo.post<ResHttpResult>(BABYDOWNTOSHOP).upJson(JSON.toJSONString(req)).execute(listener)
+                OkGo.post<ResHttpResult>(BABYUPTOSHOP)
+                        .upJson(JSON.toJSONString(req)).execute(listener)
 
             }
 
@@ -70,7 +71,7 @@ class BabyManagerM : BaseM {
             override fun onPositive() {
                 val req = ReqDeleteBaby()
                 req.goodsId = babyId
-                OkGo.post<ResHttpResult>(BABYUPTOSHOP).upJson(JSON.toJSONString(req)).execute(listener)
+                OkGo.post<ResHttpResult>(BABYDOWNTOSHOP).upJson(JSON.toJSONString(req)).execute(listener)
 
             }
 

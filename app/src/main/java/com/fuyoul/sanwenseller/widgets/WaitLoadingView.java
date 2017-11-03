@@ -271,9 +271,11 @@ public class WaitLoadingView extends View {
 
     public void stopAnimator() {
         if (set != null) {
-            for (int i = 0; i < set.getChildAnimations().size(); i++) {
-                set.getChildAnimations().get(i).cancel();
+
+            for (Animator item : set.getChildAnimations()) {
+                item.cancel();
             }
+
             set.cancel();
             set.getChildAnimations().clear();
             setVisibility(GONE);
@@ -307,7 +309,6 @@ public class WaitLoadingView extends View {
         public void onAnimationRepeat(Animator animator) {
             int colorIndex = progress.getColorIndex();
             progress.setColorIndex(++colorIndex);
-            Log.i("csl", "自定义等待view: " + colorIndex);
         }
     }
 }

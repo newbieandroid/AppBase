@@ -1,9 +1,8 @@
 package com.fuyoul.sanwenseller.ui.fragment.main
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.util.Log
 import android.view.View
 import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
@@ -31,6 +30,7 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.ColorT
  */
 class BabyManagerFragment : BaseFragment<EmptyM, EmptyV, EmptyP>() {
 
+    private var addFragmentUtils: AddFragmentUtils? = null
     private val mFragmentContainerHelper = FragmentContainerHelper()
     private val fragments = arrayListOf<BabyManagerItemFragment>()
 
@@ -48,7 +48,7 @@ class BabyManagerFragment : BaseFragment<EmptyM, EmptyV, EmptyP>() {
         }
 
 
-        val addFragmentUtils = AddFragmentUtils(this, R.id.babyManagerContent)
+        addFragmentUtils = AddFragmentUtils(this, R.id.babyManagerContent)
         val commonNavigator = CommonNavigator(context)
         commonNavigator.adapter = object : CommonNavigatorAdapter() {
             override fun getTitleView(p0: Context?, p1: Int): IPagerTitleView {
@@ -65,7 +65,7 @@ class BabyManagerFragment : BaseFragment<EmptyM, EmptyV, EmptyP>() {
                         }
                 colorTransitionPagerTitleView.setOnClickListener({
                     mFragmentContainerHelper.handlePageSelected(p1, true)
-                    addFragmentUtils.showFragment(fragments[p1], fragments[p1].javaClass.name + p1)
+                    addFragmentUtils?.showFragment(fragments[p1], fragments[p1].javaClass.name + p1)
                 })
                 return colorTransitionPagerTitleView
             }
@@ -89,7 +89,7 @@ class BabyManagerFragment : BaseFragment<EmptyM, EmptyV, EmptyP>() {
         mFragmentContainerHelper.attachMagicIndicator(babyManagerIndicator)
 
         mFragmentContainerHelper.handlePageSelected(0, false)
-        addFragmentUtils.showFragment(fragments[0], fragments[0].javaClass.name + 0)
+        addFragmentUtils?.showFragment(fragments[0], fragments[0].javaClass.name + 0)
     }
 
     override fun setListener() {
@@ -98,4 +98,9 @@ class BabyManagerFragment : BaseFragment<EmptyM, EmptyV, EmptyP>() {
     override fun getPresenter(): EmptyP = EmptyP(initViewImpl())
 
     override fun initViewImpl(): EmptyV = EmptyV()
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        addFragmentUtils?.currentFragment?.onActivityResult(requestCode, resultCode, data)
+    }
 }

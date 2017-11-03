@@ -31,7 +31,7 @@
                 android:id="@+id/myHeadIcon"
                 android:layout_width="216px"
                 android:layout_height="216px"
-                android:scaleType="fitXY"
+                android:scaleType="centerInside"
                 android:src="@mipmap/ic_my_wdltx" />
 
 

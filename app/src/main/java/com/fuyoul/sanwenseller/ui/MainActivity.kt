@@ -72,7 +72,7 @@ class MainActivity : BaseActivity<EmptyM, EmptyV, EmptyP>() {
                     toolbarChildTitle.text = "发布宝贝"
                     toolbarChildTitle.setTextColor(resources.getColor(R.color.color_3CC5BC))
                     toolbarChildTitle.setOnClickListener {
-                        startActivity(Intent(this, EditBabyInfoActivity::class.java))
+                        EditBabyInfoActivity.start(this, null)
                     }
 
                     StatusBarUtils.setTranslucentForImageView(this, titBarLayout)
@@ -117,5 +117,11 @@ class MainActivity : BaseActivity<EmptyM, EmptyV, EmptyP>() {
         mainItem.isChecked = true
     }
 
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        addFragmentUtils?.currentFragment?.onActivityResult(requestCode, resultCode, data)
+    }
 
 }

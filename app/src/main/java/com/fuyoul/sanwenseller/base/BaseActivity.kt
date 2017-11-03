@@ -13,6 +13,7 @@ import android.os.Build
 import android.util.Log
 import android.view.WindowManager
 import com.fuyoul.sanwenseller.helper.HttpDialogHelper
+import com.fuyoul.sanwenseller.helper.QiNiuHelper
 import com.fuyoul.sanwenseller.listener.KeyBordChangerListener
 import com.fuyoul.sanwenseller.utils.NormalFunUtils
 import com.netease.nim.uikit.StatusBarUtils
@@ -193,6 +194,8 @@ abstract class BaseActivity<out M : BaseM, V : BaseV, out P : BaseP<M, V>> : Aut
     override fun onStop() {
         super.onStop()
 
+        QiNiuHelper.stop()
+
         //关闭加载对话框
         HttpDialogHelper.dismisss()
 
@@ -203,4 +206,6 @@ abstract class BaseActivity<out M : BaseM, V : BaseV, out P : BaseP<M, V>> : Aut
 
         unRegistKeyBordListener()
     }
+
+
 }

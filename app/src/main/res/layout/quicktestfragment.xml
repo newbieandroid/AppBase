@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <TextView
+        android:id="@+id/quickTestDesInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
         android:paddingBottom="60px"
         android:paddingLeft="36px"
         android:paddingRight="36px"
@@ -17,8 +19,10 @@
 
 
     <RelativeLayout
+        android:id="@+id/quickTestMyCountLayout"
         android:layout_width="match_parent"
         android:layout_height="158px"
+        android:layout_below="@+id/quickTestDesInfo"
         android:background="@drawable/back_titlebar"
         android:paddingLeft="36px"
         android:paddingRight="36px">
@@ -84,8 +88,10 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/quickTestReleaseCountLayout"
         android:layout_width="match_parent"
         android:layout_height="158px"
+        android:layout_below="@+id/quickTestMyCountLayout"
         android:background="@drawable/back_titlebar"
         android:paddingLeft="36px"
         android:paddingRight="36px">
@@ -108,4 +114,18 @@
             android:textColor="@color/color_FF627B"
             android:textSize="43px" />
     </RelativeLayout>
-</LinearLayout>
+
+
+    <TextView
+        android:id="@+id/quickTestBtn"
+        android:layout_width="match_parent"
+        android:layout_height="171px"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="36px"
+        android:background="@color/color_3CC5BC"
+        android:gravity="center"
+        android:text="确定"
+        android:textColor="@color/color_white"
+        android:textSize="46px" />
+
+</RelativeLayout>

@@ -2,14 +2,21 @@ package com.fuyoul.sanwenseller.helper
 
 import android.content.Context
 import android.text.TextUtils
+import android.util.Log
 import com.fuyoul.sanwenseller.bean.reshttp.ResHttpResult
 import com.fuyoul.sanwenseller.bean.reshttp.ResQiNiuBean
 import com.fuyoul.sanwenseller.configs.UrlInfo.GETIMGTOKEN
 import com.fuyoul.sanwenseller.listener.HttpReqListener
 import com.fuyoul.sanwenseller.listener.QiNiuUpLoadListener
 import com.lzy.okgo.OkGo
+import com.qiniu.android.common.AutoZone
+import com.qiniu.android.common.Zone
 import com.qiniu.android.storage.Configuration
+import com.qiniu.android.storage.UpCancellationSignal
+import com.qiniu.android.storage.UpProgressHandler
 import com.qiniu.android.storage.UploadManager
+import com.qiniu.android.storage.UploadOptions
+
 
 /**
  *  Auther: chen
@@ -17,7 +24,12 @@ import com.qiniu.android.storage.UploadManager
  *  Desc:七牛上传
  */
 object QiNiuHelper {
+
+    private var isCancle = false//控制是否终止上传图片T
+
+
     private val uploadManager = UploadManager(Configuration.Builder()
+            .zone(AutoZone.autoZone)//自动识别上传区域
             .chunkSize(512 * 1024)        // 分片上传时，每片的大小。 默认256K
             .putThreshhold(1024 * 1024)   // 启用分片上传阀值。默认512K
             .connectTimeout(10)           // 链接超时。默认10秒
@@ -37,6 +49,8 @@ object QiNiuHelper {
 
 
     fun multQiNiuUpLoad(context: Context, localPath: List<String>, listener: QiNiuUpLoadListener) {
+
+        isCancle = false
 
         if (TextUtils.isEmpty(token)) {
 
@@ -67,18 +81,20 @@ object QiNiuHelper {
     }
 
     private fun doUp(context: Context, localPath: List<String>, listener: QiNiuUpLoadListener) {
-        uploadManager.put(
-                localPath[index],
+
+        uploadManager.put(localPath[index],
                 "${System.currentTimeMillis()}_${getFileName(localPath[index])}",
                 token,
-                { key, info, jsonObject ->
+                { s, info, jsonObject ->
+
+                    Log.e("csl", "上传图片完成：$index")
 
                     if (info.isOK) {
 
                         info.error
 
                         val item = ResQiNiuBean()
-                        item.key = key
+                        item.key = s
                         item.info = info
                         item.res = jsonObject
                         result.add(item)
@@ -89,24 +105,33 @@ object QiNiuHelper {
                             val data = ArrayList<ResQiNiuBean>()
                             data.addAll(result)
                             listener.complete(data)
-
-                            clear()
+                            stop()
 
                         } else {
                             multQiNiuUpLoad(context, localPath, listener)
                         }
 
                     } else {
-                        clear()
+                        stop()
                         listener.error(info.error)
 
                     }
+                },
+                UploadOptions(null, null, false,
+                        UpProgressHandler { s, d ->
 
-                }, null)
+                            Log.e("csl", "上传进度：$d")
+
+                        },
+                        UpCancellationSignal { isCancle }))
+
     }
 
 
     private fun getFileName(filePath: String): String {
+
+
+        Log.e("csl", "上传图片地址：$filePath")
 
         val array = filePath.split("/")
 
@@ -114,9 +139,10 @@ object QiNiuHelper {
 
     }
 
-    private fun clear() {
+    fun stop() {
         index = 0
         result.clear()
+        isCancle = true
     }
 
 }
