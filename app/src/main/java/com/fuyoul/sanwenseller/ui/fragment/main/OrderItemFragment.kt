@@ -1,5 +1,6 @@
 package com.fuyoul.sanwenseller.ui.fragment.main
 
+import android.app.Activity
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Bundle
@@ -20,6 +21,7 @@ import com.fuyoul.sanwenseller.bean.AdapterMultiItem
 import com.fuyoul.sanwenseller.bean.MultBaseBean
 import com.fuyoul.sanwenseller.bean.reshttp.ResHttpOrderItem
 import com.fuyoul.sanwenseller.bean.reshttp.ResLoginInfoBean
+import com.fuyoul.sanwenseller.configs.Code
 import com.fuyoul.sanwenseller.configs.Code.VIEWTYPE_ORDER
 import com.fuyoul.sanwenseller.configs.Data
 import com.fuyoul.sanwenseller.configs.Data.QUICKTESTBABY
@@ -28,6 +30,7 @@ import com.fuyoul.sanwenseller.structure.model.OrderM
 import com.fuyoul.sanwenseller.structure.presenter.OrderP
 import com.fuyoul.sanwenseller.structure.view.OrderV
 import com.fuyoul.sanwenseller.ui.LoginActivity
+import com.fuyoul.sanwenseller.ui.order.OrderDetailActivity
 import com.fuyoul.sanwenseller.utils.GlideUtils
 import com.fuyoul.sanwenseller.widgets.CountdownView.CountdownView
 import kotlinx.android.synthetic.main.ordertypelayout.*
@@ -73,6 +76,15 @@ class OrderItemFragment : BaseFragment<OrderM, OrderV, OrderP>() {
     override fun getPresenter(): OrderP = OrderP(initViewImpl())
 
     override fun initViewImpl(): OrderV = object : OrderV() {
+        override fun deleteItem(item: ResHttpOrderItem) {
+
+            getBaseAdapter().remove(item)
+        }
+
+        override fun changeOrderState(item: ResHttpOrderItem) {
+            getBaseAdapter().changeData(item)
+        }
+
         override fun getBaseAdapter(): ThisAdapter {
 
             if (adapter == null) {
@@ -132,6 +144,7 @@ class OrderItemFragment : BaseFragment<OrderM, OrderV, OrderP>() {
                 val position = holder.adapterPosition
 
                 val release: Long = try {
+
                     SimpleDateFormat("yyyy/MM/dd HH:mm").parse((datas[position] as ResHttpOrderItem).appointmentTime).time - System.currentTimeMillis()
 
                 } catch (e: ParseException) {
@@ -282,6 +295,8 @@ class OrderItemFragment : BaseFragment<OrderM, OrderV, OrderP>() {
                     orderItemFuncRight.text = "确认订单"
                     orderItemFuncRight.setOnClickListener {
                         //TODO 确认订单
+
+                        getPresenter().confirmOrder(context, item)
                     }
 
                 }
@@ -301,6 +316,15 @@ class OrderItemFragment : BaseFragment<OrderM, OrderV, OrderP>() {
                     holder.itemView.findViewById<TextView>(R.id.orderItemState).text = OrderType.TOREPLAY.orderTitle
 
                 }
+
+                OrderType.PAYMENT.orderType -> {
+                    //交易成功
+                    holder.itemView.findViewById<LinearLayout>(R.id.orderItemFuncLayout).visibility = View.GONE
+                    holder.itemView.findViewById<LinearLayout>(R.id.orderItemReleaseTime).visibility = View.GONE
+                    holder.itemView.findViewById<TextView>(R.id.orderItemState).text = OrderType.PAYMENT.orderTitle
+
+                }
+
                 OrderType.WAITTINGSELLER.orderType -> {
                     //买家申请退款
                     holder.itemView.findViewById<LinearLayout>(R.id.orderItemFuncLayout).visibility = View.VISIBLE
@@ -323,6 +347,7 @@ class OrderItemFragment : BaseFragment<OrderM, OrderV, OrderP>() {
                     orderItemFuncMiddle.text = "同意退款"
                     orderItemFuncMiddle.setOnClickListener {
                         //TODO 同意退款
+                        getPresenter().orderRefund(context, item, true)
                     }
 
                     orderItemFuncRight.setBackgroundResource(R.drawable.back_order_press_full_other)
@@ -330,6 +355,7 @@ class OrderItemFragment : BaseFragment<OrderM, OrderV, OrderP>() {
                     orderItemFuncRight.text = "拒绝退款"
                     orderItemFuncRight.setOnClickListener {
                         //TODO 拒绝退款
+                        getPresenter().orderRefund(context, item, false)
                     }
 
 
@@ -350,6 +376,7 @@ class OrderItemFragment : BaseFragment<OrderM, OrderV, OrderP>() {
                     orderItemFuncRight.text = "删除订单"
                     orderItemFuncRight.setOnClickListener {
                         //TODO 删除订单
+                        getPresenter().deleteOrder(context, item)
                     }
                 }
                 OrderType.INREFUND.orderType -> {
@@ -363,7 +390,7 @@ class OrderItemFragment : BaseFragment<OrderM, OrderV, OrderP>() {
                     //已退款
                     holder.itemView.findViewById<LinearLayout>(R.id.orderItemFuncLayout).visibility = View.VISIBLE
                     holder.itemView.findViewById<LinearLayout>(R.id.orderItemReleaseTime).visibility = View.GONE
-                    holder.itemView.findViewById<TextView>(R.id.orderItemState).text = OrderType.INREFUND.orderTitle
+                    holder.itemView.findViewById<TextView>(R.id.orderItemState).text = OrderType.REFUND.orderTitle
                     orderItemFuncLeft.visibility = View.GONE
                     orderItemFuncMiddle.visibility = View.GONE
                     orderItemFuncRight.visibility = View.VISIBLE
@@ -374,6 +401,7 @@ class OrderItemFragment : BaseFragment<OrderM, OrderV, OrderP>() {
                     orderItemFuncRight.text = "删除订单"
                     orderItemFuncRight.setOnClickListener {
                         //TODO 删除订单
+                        getPresenter().deleteOrder(context, item)
                     }
                 }
                 OrderType.REFUNDREFUSE.orderType -> {
@@ -381,25 +409,24 @@ class OrderItemFragment : BaseFragment<OrderM, OrderV, OrderP>() {
 
                     holder.itemView.findViewById<LinearLayout>(R.id.orderItemFuncLayout).visibility = View.VISIBLE
                     holder.itemView.findViewById<LinearLayout>(R.id.orderItemReleaseTime).visibility = View.GONE
-                    holder.itemView.findViewById<TextView>(R.id.orderItemState).text = OrderType.INREFUND.orderTitle
+                    holder.itemView.findViewById<TextView>(R.id.orderItemState).text = OrderType.REFUNDREFUSE.orderTitle
                     orderItemFuncLeft.visibility = View.VISIBLE
                     orderItemFuncMiddle.visibility = View.VISIBLE
                     orderItemFuncRight.visibility = View.VISIBLE
 
 
-
-                    orderItemFuncRight.setBackgroundResource(R.drawable.back_order_normal)
-                    orderItemFuncRight.setTextColor(resources.getColor(R.color.color_888888))
-                    orderItemFuncRight.text = "客服介入"
-                    orderItemFuncRight.setOnClickListener {
-                        //TODO 删除订单
+                    orderItemFuncLeft.setBackgroundResource(R.drawable.back_order_normal)
+                    orderItemFuncLeft.setTextColor(resources.getColor(R.color.color_888888))
+                    orderItemFuncLeft.text = "客服介入"
+                    orderItemFuncLeft.setOnClickListener {
+                        //TODO 客服介入
                     }
 
 
-                    orderItemFuncRight.setBackgroundResource(R.drawable.back_order_normal)
-                    orderItemFuncRight.setTextColor(resources.getColor(R.color.color_CCCCCC))
-                    orderItemFuncRight.text = "同意退款"
-                    orderItemFuncRight.setOnClickListener {
+                    orderItemFuncMiddle.setBackgroundResource(R.drawable.back_order_normal)
+                    orderItemFuncMiddle.setTextColor(resources.getColor(R.color.color_CCCCCC))
+                    orderItemFuncMiddle.text = "同意退款"
+                    orderItemFuncMiddle.setOnClickListener {
                         //什么都不做，消耗点击事件
                     }
 
@@ -416,10 +443,14 @@ class OrderItemFragment : BaseFragment<OrderM, OrderV, OrderP>() {
                     //客服介入
                     holder.itemView.findViewById<LinearLayout>(R.id.orderItemFuncLayout).visibility = View.GONE
                     holder.itemView.findViewById<LinearLayout>(R.id.orderItemReleaseTime).visibility = View.GONE
-                    holder.itemView.findViewById<TextView>(R.id.orderItemState).text = OrderType.INREFUND.orderTitle
+                    holder.itemView.findViewById<TextView>(R.id.orderItemState).text = OrderType.SERVICEIN.orderTitle
 
                 }
 
+            }
+
+            holder.itemView.findViewById<TextView>(R.id.orderItemPrice).setOnClickListener {
+                OrderDetailActivity.start(activity, item)
             }
         }
 
@@ -444,7 +475,34 @@ class OrderItemFragment : BaseFragment<OrderM, OrderV, OrderP>() {
             } else {
                 index++
             }
-            getPresenter().getOrderData(context, isShowDialog, isRefresh, index, loginInfo.userInfoId, arguments.getInt("orderType"))
+            getPresenter().getOrderData(context, isShowDialog, isRefresh, index, arguments.getInt("orderType"))
+
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == Code.REQ_ORDERDETAIL && resultCode == Activity.RESULT_OK) {
+            //如果是订单详情返回的
+
+
+            val item = data?.extras?.getSerializable("item") as ResHttpOrderItem
+
+            var position = 0
+
+            for (index in 0 until (adapter?.datas?.size ?: 0)) {
+                if (item.orderId == (adapter?.datas?.get(index) as ResHttpOrderItem).orderId) {
+                    (adapter?.datas?.get(index) as ResHttpOrderItem).status = item.status
+
+                    position = index
+                    break
+                }
+
+            }
+
+
+            adapter?.changeData(position)
 
         }
     }

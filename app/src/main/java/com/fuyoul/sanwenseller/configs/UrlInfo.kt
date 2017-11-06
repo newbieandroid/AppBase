@@ -24,6 +24,11 @@ object UrlInfo {
     val CHANGEAPPOINTMENT = "$base/masterSchedulingHandler/updateMasterScheduling"//更改大师排班表
     val CHANGEITEMAPPOINTMENT = "$base/masterSchedulingHandler/modifyAppointmentStatus"//修改某天某个时间点的接单状态
     val APPOIINTMENTINFO = "$base/masterSchedulingHandler/getAppointInfo"//获取预约信息
+    val FINDFLASHORDERCOUNT = "$base/order/flashOrderCount"//查询大师闪测接单数
+    val UPDATEFLASHORDERCOUNT = "$base/order/flashOrderUpdate"//设置当天闪测接单数
+    val CONFIRMORDER = "$base/order/confirmOrder"//确认订单
+    val ORDERREFUND = "$base/order/master/masterDealRefund"//同意/拒绝退款
+    val ORDERDELETE = "$base/order/user/delOrder"//删除订单
 
     /**商品相关**/
     val BABYLIST = "$base/goods/master/getMasterGoodsList"//获取预测师的宝贝礼拜
@@ -39,4 +44,6 @@ object UrlInfo {
 
     /**七牛**/
     val GETIMGTOKEN = "$base/qiniu/getQiniuUploadToken"//获取七牛的token
+
+    val REWARDRULE = "$base/master/rewardRule"//奖励制度
 }

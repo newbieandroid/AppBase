@@ -18,12 +18,23 @@ import com.netease.nim.uikit.StatusBarUtils
 import com.netease.nim.uikit.recent.RecentContactsFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.includetopbar.*
+import permissions.dispatcher.RuntimePermissions
+import permissions.dispatcher.NeedsPermission
+import android.Manifest
+import android.annotation.SuppressLint
+import com.fuyoul.sanwenseller.helper.MsgDialogHelper
+import com.fuyoul.sanwenseller.utils.NormalFunUtils
+import permissions.dispatcher.PermissionRequest
+import permissions.dispatcher.OnShowRationale
+import permissions.dispatcher.OnPermissionDenied
+import permissions.dispatcher.OnNeverAskAgain
 
 /**
  *  Auther: chen
  *  Creat at: 2017\10\10 0010
  *  Desc:
  */
+@RuntimePermissions
 class MainActivity : BaseActivity<EmptyM, EmptyV, EmptyP>() {
 
 
@@ -43,11 +54,9 @@ class MainActivity : BaseActivity<EmptyM, EmptyV, EmptyP>() {
     override fun initData(savedInstanceState: Bundle?) {
         toolbarBack.visibility = View.GONE
 
+        noThingWithPermissionCheck()
+
         addFragmentUtils = AddFragmentUtils(this, R.id.mainContentLayout)
-
-//        currentTag = fragments[0].javaClass.name
-//        addFragmentUtils?.showFragment(fragments[0], currentTag)
-
     }
 
     override fun setListener() {
@@ -113,7 +122,6 @@ class MainActivity : BaseActivity<EmptyM, EmptyV, EmptyP>() {
             }
         }
 
-
         mainItem.isChecked = true
     }
 
@@ -124,4 +132,39 @@ class MainActivity : BaseActivity<EmptyM, EmptyV, EmptyP>() {
         addFragmentUtils?.currentFragment?.onActivityResult(requestCode, resultCode, data)
     }
 
+
+    @NeedsPermission(Manifest.permission.RECORD_AUDIO,Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+    fun noThing() {
+    }
+
+    @SuppressLint("NeedOnRequestPermissionsResult")
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        onRequestPermissionsResult(requestCode, grantResults)
+    }
+
+    @OnShowRationale(Manifest.permission.RECORD_AUDIO,Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+    fun noThingR(request: PermissionRequest) {
+
+        MsgDialogHelper.showSingleDialog(this@MainActivity, false, "温馨提示", "缺少必要权限,是否进行授权?", "确定", object : MsgDialogHelper.DialogListener {
+            override fun onPositive() {
+                request.proceed()
+            }
+
+            override fun onNagetive() {
+                request.cancel()
+            }
+        })
+
+    }
+
+    @OnPermissionDenied(Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+    fun noThingD() {
+        NormalFunUtils.showToast(this@MainActivity, "缺少必要权限,请前往权限管理中心开启对应权限")
+    }
+
+    @OnNeverAskAgain(Manifest.permission.RECORD_AUDIO,Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+    fun noThingN() {
+        NormalFunUtils.showToast(this@MainActivity, "缺少必要权限,请前往权限管理中心开启对应权限")
+    }
 }

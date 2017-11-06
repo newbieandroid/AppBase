@@ -34,6 +34,7 @@ object Code {
     val REQ_CAMERA = 87//默认拍照
     val REQ_IMGPREVIEW = 86//图片预览
     val REQ_USERINFO = 85//图片预览
+    val REQ_ORDERDETAIL = 84//订单详情
 
     /**选择身份照正面**/
     val REQ_CAMERA_IDCARD_Z = 89

@@ -32,6 +32,8 @@ import com.netease.nimlib.sdk.ResponseCode;
 import com.netease.nimlib.sdk.msg.MsgService;
 import com.netease.nimlib.sdk.msg.MsgServiceObserve;
 import com.netease.nimlib.sdk.msg.attachment.MsgAttachment;
+import com.netease.nimlib.sdk.msg.constant.MsgStatusEnum;
+import com.netease.nimlib.sdk.msg.constant.MsgTypeEnum;
 import com.netease.nimlib.sdk.msg.constant.SessionTypeEnum;
 import com.netease.nimlib.sdk.msg.model.IMMessage;
 import com.netease.nimlib.sdk.msg.model.RecentContact;
@@ -47,6 +49,12 @@ import java.util.Set;
 
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
 
+import static com.netease.nim.uikit.NimUIKit.ACTIVITYCONTACTID;
+import static com.netease.nim.uikit.NimUIKit.ACTIVITYNICK;
+import static com.netease.nim.uikit.NimUIKit.NOTIFYCONTACTID;
+import static com.netease.nim.uikit.NimUIKit.NOTIFYNICK;
+import static com.netease.nim.uikit.NimUIKit.SERVICECONTACTID;
+import static com.netease.nim.uikit.NimUIKit.SERVICENICK;
 import static com.netease.nim.uikit.common.ui.dialog.CustomAlertDialog.onSeparateItemClickListener;
 
 /**
@@ -134,11 +142,12 @@ public class RecentContactsFragment extends TFragment {
     }
 
     /**
-     * 初始化消息列表
+     * 初始化消息列表,手动添加三个最近联系人
      */
     private void initMessageList() {
         items = new ArrayList<>();
         cached = new HashMap<>(3);
+
 
         // adapter
         adapter = new RecentContactAdapter(recyclerView, items);
@@ -245,6 +254,17 @@ public class RecentContactsFragment extends TFragment {
     }
 
     private void showLongClickMenu(final RecentContact recent, final int position) {
+
+
+        //如果是置顶的系统联系人则不删除
+        if (recent.getContactId().equals(NimUIKit.SERVICECONTACTID)
+                || recent.getContactId().equals(NimUIKit.ACTIVITYCONTACTID)
+                || recent.getContactId().equals(NimUIKit.NOTIFYCONTACTID)) {
+
+            return;
+        }
+
+
         CustomAlertDialog alertDialog = new CustomAlertDialog(getActivity());
         alertDialog.setTitle(UserInfoHelper.getUserTitleName(recent.getContactId(), recent.getSessionType()));
         String title = getString(R.string.main_msg_list_delete_chatting);
@@ -356,6 +376,271 @@ public class RecentContactsFragment extends TFragment {
 
     private void onRecentContactsLoaded() {
         items.clear();
+
+
+        /**三问客服**/
+        RecentContact serviceContact = new RecentContact() {
+
+            @Override
+            public String getContactId() {
+                return SERVICECONTACTID;
+            }
+
+            @Override
+            public String getFromAccount() {
+                return null;
+            }
+
+            @Override
+            public String getFromNick() {
+                return SERVICENICK;
+            }
+
+            @Override
+            public SessionTypeEnum getSessionType() {
+                return SessionTypeEnum.P2P;
+            }
+
+            @Override
+            public String getRecentMessageId() {
+                return null;
+            }
+
+            @Override
+            public MsgTypeEnum getMsgType() {
+                return MsgTypeEnum.text;
+            }
+
+            @Override
+            public MsgStatusEnum getMsgStatus() {
+                return MsgStatusEnum.read;
+            }
+
+            @Override
+            public void setMsgStatus(MsgStatusEnum msgStatusEnum) {
+
+            }
+
+            @Override
+            public int getUnreadCount() {
+                return 0;
+            }
+
+            @Override
+            public String getContent() {
+                return null;
+            }
+
+            @Override
+            public long getTime() {
+                return System.currentTimeMillis();
+            }
+
+            @Override
+            public MsgAttachment getAttachment() {
+                return null;
+            }
+
+            @Override
+            public void setTag(long l) {
+
+            }
+
+            @Override
+            public long getTag() {
+                return RECENT_TAG_STICKY;
+            }
+
+            @Override
+            public Map<String, Object> getExtension() {
+                Map<String, Object> extension = new HashMap<>();
+                extension.put("user_type", 0);
+                return extension;
+            }
+
+            @Override
+            public void setExtension(Map<String, Object> map) {
+
+            }
+        };
+
+        /**系统通知**/
+        RecentContact notifyContact = new RecentContact() {
+            @Override
+            public String getContactId() {
+                return NOTIFYCONTACTID;
+            }
+
+            @Override
+            public String getFromAccount() {
+                return null;
+            }
+
+            @Override
+            public String getFromNick() {
+                return NOTIFYNICK;
+            }
+
+            @Override
+            public SessionTypeEnum getSessionType() {
+                return SessionTypeEnum.P2P;
+            }
+
+            @Override
+            public String getRecentMessageId() {
+                return null;
+            }
+
+            @Override
+            public MsgTypeEnum getMsgType() {
+                return MsgTypeEnum.text;
+            }
+
+            @Override
+            public MsgStatusEnum getMsgStatus() {
+                return MsgStatusEnum.read;
+            }
+
+            @Override
+            public void setMsgStatus(MsgStatusEnum msgStatusEnum) {
+
+            }
+
+            @Override
+            public int getUnreadCount() {
+                return 0;
+            }
+
+            @Override
+            public String getContent() {
+                return null;
+            }
+
+            @Override
+            public long getTime() {
+                return System.currentTimeMillis();
+            }
+
+            @Override
+            public MsgAttachment getAttachment() {
+                return null;
+            }
+
+            @Override
+            public void setTag(long l) {
+
+            }
+
+            @Override
+            public long getTag() {
+                return RECENT_TAG_STICKY;
+            }
+
+            @Override
+            public Map<String, Object> getExtension() {
+                Map<String, Object> extension = new HashMap<>();
+                extension.put("user_type", 0);
+                return extension;
+            }
+
+            @Override
+            public void setExtension(Map<String, Object> map) {
+
+            }
+        };
+
+        /**活动联系人**/
+        RecentContact activityContact = new RecentContact() {
+            @Override
+            public String getContactId() {
+                return ACTIVITYCONTACTID;
+            }
+
+            @Override
+            public String getFromAccount() {
+                return null;
+            }
+
+            @Override
+            public String getFromNick() {
+                return ACTIVITYNICK;
+            }
+
+            @Override
+            public SessionTypeEnum getSessionType() {
+                return SessionTypeEnum.P2P;
+            }
+
+            @Override
+            public String getRecentMessageId() {
+                return null;
+            }
+
+            @Override
+            public MsgTypeEnum getMsgType() {
+                return MsgTypeEnum.text;
+            }
+
+            @Override
+            public MsgStatusEnum getMsgStatus() {
+                return MsgStatusEnum.read;
+            }
+
+            @Override
+            public void setMsgStatus(MsgStatusEnum msgStatusEnum) {
+
+            }
+
+            @Override
+            public int getUnreadCount() {
+                return 0;
+            }
+
+            @Override
+            public String getContent() {
+                return null;
+            }
+
+            @Override
+            public long getTime() {
+                return System.currentTimeMillis();
+            }
+
+            @Override
+            public MsgAttachment getAttachment() {
+                return null;
+            }
+
+            @Override
+            public void setTag(long l) {
+
+            }
+
+            @Override
+            public long getTag() {
+                return RECENT_TAG_STICKY;
+            }
+
+            @Override
+            public Map<String, Object> getExtension() {
+
+                Map<String, Object> extension = new HashMap<>();
+                extension.put("user_type", 0);
+                return extension;
+            }
+
+            @Override
+            public void setExtension(Map<String, Object> map) {
+
+            }
+        };
+
+
+        items.add(serviceContact);
+        items.add(notifyContact);
+        items.add(activityContact);
+
+
         if (loadedRecents != null) {
             items.addAll(loadedRecents);
             loadedRecents = null;

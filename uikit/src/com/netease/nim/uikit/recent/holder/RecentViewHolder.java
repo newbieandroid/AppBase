@@ -95,6 +95,11 @@ public abstract class RecentViewHolder extends RecyclerViewHolder<BaseQuickAdapt
 
 
         NimUserInfo nimUserInfo = NimUserInfoCache.getInstance().getUserInfo(recent.getFromAccount());
+
+        if (nimUserInfo == null) {
+            masterIcon.setVisibility(View.GONE);
+            return;
+        }
         String extension = nimUserInfo.getExtension();
 
         if (!TextUtils.isEmpty(extension)) {
@@ -168,11 +173,11 @@ public abstract class RecentViewHolder extends RecyclerViewHolder<BaseQuickAdapt
     private void updateBackground(BaseViewHolder holder, RecentContact recent, int position) {
         topLine.setVisibility(getAdapter().isFirstDataItem(position) ? View.GONE : View.VISIBLE);
         bottomLine.setVisibility(getAdapter().isLastDataItem(position) ? View.VISIBLE : View.GONE);
-        if ((recent.getTag() & RecentContactsFragment.RECENT_TAG_STICKY) == 0) {
-            holder.getConvertView().setBackgroundResource(R.drawable.touch_bg);
-        } else {
-            holder.getConvertView().setBackgroundResource(R.drawable.nim_recent_contact_sticky_selecter);
-        }
+//        if ((recent.getTag() & RecentContactsFragment.RECENT_TAG_STICKY) == 0) {
+        holder.getConvertView().setBackgroundResource(R.drawable.touch_bg);
+//        } else {
+//            holder.getConvertView().setBackgroundResource(R.drawable.nim_recent_contact_sticky_selecter);
+//        }
     }
 
     protected void loadPortrait(RecentContact recent) {

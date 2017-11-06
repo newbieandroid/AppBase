@@ -117,6 +117,15 @@
             android:theme="@style/Theme.Design.Light.NoActionBar"
             android:windowIsTranslucent="false"
             android:windowSoftInputMode="stateHidden|adjustResize" />
+
+
+        <activity
+            android:name=".ui.order.OrderDetailActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:theme="@style/Theme.Design.Light.NoActionBar"
+            android:windowIsTranslucent="false"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+
         <activity
             android:name=".ui.normal.ImgPreviewActivity"
             android:launchMode="singleTask"

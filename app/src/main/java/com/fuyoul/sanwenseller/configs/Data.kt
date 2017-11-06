@@ -28,4 +28,9 @@ object Data {
     val TODAY = 123
     val TOMORROW = 124
     val AFTERTOMORROW = 125
+
+    /**退款结果**/
+    val REFUNDTOUSER = 2//客服判给买家
+    val REFUNDTOSELLER = 3//判给卖家
+    val REFUND = 4//商家同意退款
 }

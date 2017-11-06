@@ -7,6 +7,7 @@ import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
 import android.view.View
+import android.widget.Toast
 import com.fuyoul.sanwenseller.R
 import com.fuyoul.sanwenseller.base.BaseActivity
 import com.fuyoul.sanwenseller.configs.Code
@@ -15,6 +16,7 @@ import com.fuyoul.sanwenseller.structure.model.EmptyM
 import com.fuyoul.sanwenseller.structure.presenter.EmptyP
 import com.fuyoul.sanwenseller.structure.view.EmptyV
 import com.fuyoul.sanwenseller.utils.NormalFunUtils
+import com.netease.nim.uikit.NimUIKit
 import kotlinx.android.synthetic.main.editusernick.*
 import kotlinx.android.synthetic.main.includetopbar.*
 
@@ -103,9 +105,20 @@ class EditUserNickActivity : BaseActivity<EmptyM, EmptyV, EmptyP>() {
         op.childTitle = "完成"
         op.childListener = View.OnClickListener {
             if (isCanSubmit) {
-                NormalFunUtils.changeKeyBord(this, false, editUserNick)
-                setResult(Activity.RESULT_OK, Intent().putExtra("nick", editUserNick.text.toString()))
-                finish()
+
+                if (editUserNick.text.toString().contains(NimUIKit.SERVICENICK)
+                        || editUserNick.text.toString().contains(NimUIKit.NOTIFYNICK)
+                        || editUserNick.text.toString().contains(NimUIKit.ACTIVITYNICK)) {
+
+                    Toast.makeText(this, "包含敏感字符", Toast.LENGTH_SHORT).show()
+                    editUserNick.text.clear()
+
+                } else {
+
+                    NormalFunUtils.changeKeyBord(this, false, editUserNick)
+                    setResult(Activity.RESULT_OK, Intent().putExtra("nick", editUserNick.text.toString()))
+                    finish()
+                }
             }
         }
         return op

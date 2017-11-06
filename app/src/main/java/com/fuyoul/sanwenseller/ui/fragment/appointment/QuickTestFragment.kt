@@ -4,9 +4,10 @@ import android.os.Bundle
 import android.view.View
 import com.fuyoul.sanwenseller.R
 import com.fuyoul.sanwenseller.base.BaseFragment
-import com.fuyoul.sanwenseller.structure.model.EmptyM
-import com.fuyoul.sanwenseller.structure.presenter.EmptyP
-import com.fuyoul.sanwenseller.structure.view.EmptyV
+import com.fuyoul.sanwenseller.bean.reshttp.ResQuickTestCount
+import com.fuyoul.sanwenseller.structure.model.QuickTestM
+import com.fuyoul.sanwenseller.structure.presenter.QuickTestP
+import com.fuyoul.sanwenseller.structure.view.QuickTestV
 import com.fuyoul.sanwenseller.utils.NormalFunUtils
 import kotlinx.android.synthetic.main.quicktestfragment.*
 
@@ -15,22 +16,25 @@ import kotlinx.android.synthetic.main.quicktestfragment.*
  *  @CreatDate: 2017\10\30 0030
  *  @Desc:
  */
-class QuickTestFragment : BaseFragment<EmptyM, EmptyV, EmptyP>() {
+class QuickTestFragment : BaseFragment<QuickTestM, QuickTestV, QuickTestP>() {
+
+
+    var count = 0
+
     override fun setLayoutRes(): Int = R.layout.quicktestfragment
 
     override fun init(view: View?, savedInstanceState: Bundle?) {
         resutInfo.text = "0"
+        getPresenter().getCountInfo(context)
     }
 
     override fun setListener() {
 
         reduceBtn.setOnClickListener {
 
-            var result = resutInfo.text.toString().toInt()
-
-            if (result > 0) {
-                result--
-                resutInfo.text = "$result"
+            if (count > 0) {
+                count--
+                resutInfo.text = "$count"
             } else {
                 NormalFunUtils.showToast(context, "超过最少接单数")
             }
@@ -38,25 +42,30 @@ class QuickTestFragment : BaseFragment<EmptyM, EmptyV, EmptyP>() {
 
         addBtn.setOnClickListener {
 
-            var result = resutInfo.text.toString().toInt()
-
-            if (result < 99) {
-                result++
-                resutInfo.text = "$result"
+            if (count < 30) {
+                count++
+                resutInfo.text = "$count"
             } else {
                 NormalFunUtils.showToast(context, "超过最大接单数")
             }
+        }
+        quickTestBtn.setOnClickListener {
+
+            getPresenter().upDateCountInfo(context, count)
 
         }
+    }
 
-        quickTestBtn.setOnClickListener {
-            //TODO 设置闪测接单数
+    override fun getPresenter(): QuickTestP = QuickTestP(initViewImpl())
 
+    override fun initViewImpl(): QuickTestV = object : QuickTestV() {
+        override fun setViewInfo(data: ResQuickTestCount) {
+
+            count = data.maxOrdersCount
+
+            resutInfo.text = "${data.maxOrdersCount}"
+            releaseCount.text = "${data.restOrdersCount}"
         }
 
     }
-
-    override fun getPresenter(): EmptyP = EmptyP(initViewImpl())
-
-    override fun initViewImpl(): EmptyV = EmptyV()
 }

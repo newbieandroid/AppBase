@@ -3,13 +3,15 @@ package com.fuyoul.sanwenseller.bean.reshttp;
 import com.fuyoul.sanwenseller.bean.MultBaseBean;
 import com.fuyoul.sanwenseller.configs.Code;
 
+import java.io.Serializable;
+
 /**
  * @author: chen
  * @CreatDate: 2017\10\26 0026
  * @Desc:
  */
 
-public class ResHttpOrderItem implements MultBaseBean {
+public class ResHttpOrderItem implements MultBaseBean, Serializable {
     /**
      * nickname : 哈哈哈
      * introduce : 简介
@@ -34,6 +36,7 @@ public class ResHttpOrderItem implements MultBaseBean {
      * orderCode : SW1508403077407000001
      */
 
+    private int refundStatus;//退款结果
     private String nickname;
     private String introduce;
     private String avatar;
@@ -43,7 +46,7 @@ public class ResHttpOrderItem implements MultBaseBean {
     private int fillInformation;
     private String appointmentTime;
     private double realPrice;
-    private int orderDate;
+    private long orderDate;
     private int orderPrice;
     private String imToken;
     private String goodsImgs;
@@ -61,6 +64,14 @@ public class ResHttpOrderItem implements MultBaseBean {
         return Code.INSTANCE.getVIEWTYPE_ORDER();
     }
 
+
+    public int getRefundStatus() {
+        return refundStatus;
+    }
+
+    public void setRefundStatus(int refundStatus) {
+        this.refundStatus = refundStatus;
+    }
 
     public String getNickname() {
         return nickname;
@@ -134,11 +145,11 @@ public class ResHttpOrderItem implements MultBaseBean {
         this.realPrice = realPrice;
     }
 
-    public int getOrderDate() {
+    public long getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(int orderDate) {
+    public void setOrderDate(long orderDate) {
         this.orderDate = orderDate;
     }
 

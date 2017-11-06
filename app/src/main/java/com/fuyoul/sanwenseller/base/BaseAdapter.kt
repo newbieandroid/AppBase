@@ -83,9 +83,11 @@ abstract class BaseAdapter(context: Context) : RecyclerView.Adapter<BaseViewHold
     }
 
     /**更改某一条数据**/
-    fun changeData(item: MultBaseBean, position: Int) {
+    fun changeData(item: MultBaseBean) {
+        notifyItemChanged(datas.indexOf(item))
+    }
 
-        datas[position] = item
+    fun changeData(position: Int) {
         notifyItemChanged(position)
     }
 

@@ -71,7 +71,7 @@ class NormalTestFragment : BaseFragment<EmptyM, EmptyV, EmptyP>() {
                         when (p1) {
                             0 -> "今天"
                             1 -> "明天"
-                            2 -> "后台"
+                            2 -> "后天"
                             else -> "今天"
                         }
                 colorTransitionPagerTitleView.setOnClickListener({

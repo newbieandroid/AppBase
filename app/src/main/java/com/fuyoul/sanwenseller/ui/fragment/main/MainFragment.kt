@@ -1,6 +1,7 @@
 package com.fuyoul.sanwenseller.ui.fragment.main
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.animation.AccelerateInterpolator
@@ -29,6 +30,9 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.ColorT
  *  @Desc:
  */
 class MainFragment : BaseFragment<EmptyM, EmptyV, EmptyP>() {
+
+
+    private var addFragmentUtils: AddFragmentUtils? = null
 
     private val mFragmentContainerHelper = FragmentContainerHelper()
     private var fragments = ArrayList<OrderItemFragment>()
@@ -70,7 +74,7 @@ class MainFragment : BaseFragment<EmptyM, EmptyV, EmptyP>() {
             tags.add("argOf$index")
         }
 
-        val addFragmentUtils = AddFragmentUtils(this, R.id.orderContent)
+        addFragmentUtils = AddFragmentUtils(this, R.id.orderContent)
         val commonNavigator = CommonNavigator(context)
 
         commonNavigator.adapter = object : CommonNavigatorAdapter() {
@@ -90,7 +94,7 @@ class MainFragment : BaseFragment<EmptyM, EmptyV, EmptyP>() {
                         }
                 colorTransitionPagerTitleView.setOnClickListener({
                     mFragmentContainerHelper.handlePageSelected(p1, true)
-                    addFragmentUtils.showFragment(fragments[p1], tags[p1])
+                    addFragmentUtils?.showFragment(fragments[p1], tags[p1])
                 })
                 return colorTransitionPagerTitleView
             }
@@ -114,7 +118,14 @@ class MainFragment : BaseFragment<EmptyM, EmptyV, EmptyP>() {
         mFragmentContainerHelper.attachMagicIndicator(orderAllIndicator)
 
         mFragmentContainerHelper.handlePageSelected(0, false)
-        addFragmentUtils.showFragment(fragments[0], tags[0])
+        addFragmentUtils?.showFragment(fragments[0], tags[0])
+    }
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        addFragmentUtils?.currentFragment?.onActivityResult(requestCode, resultCode, data)
     }
 
     override fun setListener() {

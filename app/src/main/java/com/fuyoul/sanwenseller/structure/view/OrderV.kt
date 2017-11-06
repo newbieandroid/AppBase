@@ -1,6 +1,7 @@
 package com.fuyoul.sanwenseller.structure.view
 
 import com.fuyoul.sanwenseller.base.BaseV
+import com.fuyoul.sanwenseller.bean.reshttp.ResHttpOrderItem
 import com.fuyoul.sanwenseller.ui.fragment.main.OrderItemFragment
 
 /**
@@ -11,4 +12,8 @@ import com.fuyoul.sanwenseller.ui.fragment.main.OrderItemFragment
 abstract class OrderV : BaseV {
 
     abstract fun getBaseAdapter(): OrderItemFragment.ThisAdapter
+
+    abstract fun changeOrderState(item: ResHttpOrderItem)
+
+    abstract fun deleteItem(item: ResHttpOrderItem)
 }
