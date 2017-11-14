@@ -20,21 +20,18 @@ public class ResMoneyItem {
      * notSccountsPrice : 209
      */
 
-    /**
-     *
-     */
-    private int countOrders;
-    private int countPrice;
 
     private int totalPrice;
     private int totalCount;
 
-    /**
-     * 未结算
-     */
-    private int notSccountsCount;
-    private int notSccountsPrice;
+    private int countOrders;
+    private int countPrice;
     private List<IncomeListBean> incomeList;
+
+
+    public void setCountPrice(int countPrice) {
+        this.countPrice = countPrice;
+    }
 
     public int getCountOrders() {
         return countOrders;
@@ -48,9 +45,6 @@ public class ResMoneyItem {
         return countPrice;
     }
 
-    public void setCountPrice(int countPrice) {
-        this.countPrice = countPrice;
-    }
 
     public int getTotalPrice() {
         return totalPrice;
@@ -60,13 +54,6 @@ public class ResMoneyItem {
         this.totalPrice = totalPrice;
     }
 
-    public int getNotSccountsCount() {
-        return notSccountsCount;
-    }
-
-    public void setNotSccountsCount(int notSccountsCount) {
-        this.notSccountsCount = notSccountsCount;
-    }
 
     public int getTotalCount() {
         return totalCount;
@@ -76,13 +63,6 @@ public class ResMoneyItem {
         this.totalCount = totalCount;
     }
 
-    public int getNotSccountsPrice() {
-        return notSccountsPrice;
-    }
-
-    public void setNotSccountsPrice(int notSccountsPrice) {
-        this.notSccountsPrice = notSccountsPrice;
-    }
 
     public List<IncomeListBean> getIncomeList() {
         return incomeList;

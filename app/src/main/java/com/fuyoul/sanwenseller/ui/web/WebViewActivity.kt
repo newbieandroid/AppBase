@@ -148,13 +148,15 @@ class WebViewActivity : BaseActivity<EmptyM, EmptyV, EmptyP>() {
     }
 
     override fun onDestroy() {
-        super.onDestroy()
+
         normalWeb.clearCache(true)
         normalWeb.clearFormData()
         normalWeb.clearHistory()
         normalWeb.clearMatches()
         normalWeb.clearSslPreferences()
         normalWeb.destroy()
+
+        super.onDestroy()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

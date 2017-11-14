@@ -23,7 +23,7 @@ class MoneyInComeP(v: MoneyInComeV) : BaseP<MoneyInComeM, MoneyInComeV>(v) {
     fun getData(context: Context, req: ReqInCome, isRefresh: Boolean) {
 
 
-        getModelImpl().getData(req, object : HttpReqListener(context) {
+        getModelImpl().getData(req, object : HttpReqListener(context, false, true) {
             override fun reqOk(result: ResHttpResult) {
 
                 val data = JSON.parseObject(result.data.toString(), ResMoneyItem::class.java)

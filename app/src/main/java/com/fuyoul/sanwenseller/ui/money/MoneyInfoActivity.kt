@@ -98,8 +98,8 @@ class MoneyInfoActivity : BaseActivity<MoneyInComeM, MoneyInComeV, MoneyInComeP>
             inComePriceCount.text = "${data.totalPrice}"
             inComeOrderCount.text = "${data.totalCount}"
 
-            waitForTotalPrice.text = "${data.notSccountsPrice}"
-            waitForTotalCount.text = "${data.notSccountsCount}"
+            waitForTotalPrice.text = "${data.countPrice}"
+            waitForTotalCount.text = "${data.countOrders}"
         }
 
         override fun getAdapter(): ThisAdapter {

@@ -136,15 +136,8 @@ class SettlementTypeActivity : BaseActivity<MoneyInComeM, MoneyInComeV, MoneyInC
         }
 
         override fun setViewInfo(data: ResMoneyItem) {
-
-//            if (intent.getBooleanExtra("isHistoryType", false)) {
-//                priceCount.text = "${data.totalPrice}"
-//                orderCount.text = "${data.totalCount}"
-//            } else {
-            priceCount.text = "${data.notSccountsPrice}"
-            orderCount.text = "${data.notSccountsCount}"
-//            }
-
+            priceCount.text = "${data.countPrice}"
+            orderCount.text = "${data.countOrders}"
         }
 
     }
