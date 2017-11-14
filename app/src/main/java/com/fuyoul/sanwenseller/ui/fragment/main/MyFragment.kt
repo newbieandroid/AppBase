@@ -5,7 +5,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Log
 import android.view.View
 import com.fuyoul.sanwenseller.R
 import com.fuyoul.sanwenseller.base.BaseFragment
@@ -19,8 +18,8 @@ import com.fuyoul.sanwenseller.ui.LoginActivity
 import com.fuyoul.sanwenseller.ui.normal.SettingActivity
 import com.fuyoul.sanwenseller.ui.normal.SuggestActivity
 import com.fuyoul.sanwenseller.ui.order.AppointMentTimeActivity
-import com.fuyoul.sanwenseller.ui.order.RewardRuleActivity
 import com.fuyoul.sanwenseller.ui.order.MoneyInfoActivity
+import com.fuyoul.sanwenseller.ui.order.RewardRuleActivity
 import com.fuyoul.sanwenseller.ui.user.UserInfoActivity
 import com.fuyoul.sanwenseller.utils.GlideUtils
 import com.fuyoul.sanwenseller.utils.NormalFunUtils
@@ -40,7 +39,6 @@ class MyFragment : BaseFragment<EmptyM, EmptyV, EmptyP>() {
 
         if (!hidden) {
             StatusBarUtils.setTransparentForImageViewInFragment(activity, contentLayout)
-
         }
     }
 
@@ -104,9 +102,6 @@ class MyFragment : BaseFragment<EmptyM, EmptyV, EmptyP>() {
             if (LoginActivity.checkLogin(true, activity)) {
                 UserInfoActivity.start(activity)
             }
-        }
-        scanLayout.setOnClickListener {
-            //TODO 扫一扫
         }
 
 

@@ -13,6 +13,7 @@ import com.fuyoul.sanwenseller.configs.TopBarOption
 import com.fuyoul.sanwenseller.structure.model.EmptyM
 import com.fuyoul.sanwenseller.structure.presenter.EmptyP
 import com.fuyoul.sanwenseller.structure.view.EmptyV
+import com.fuyoul.sanwenseller.utils.NormalFunUtils
 import com.tencent.smtt.export.external.interfaces.IX5WebChromeClient
 import com.tencent.smtt.sdk.WebChromeClient
 import com.tencent.smtt.sdk.WebSettings
@@ -36,6 +37,12 @@ class WebViewActivity : BaseActivity<EmptyM, EmptyV, EmptyP>() {
 
         fun startWebView(context: Context, title: String, urlPath: String) {
 
+            if (TextUtils.isEmpty(urlPath)) {
+                return
+            } else if (!urlPath.contains("http")) {
+                NormalFunUtils.showToast(context, "地址有误")
+                return
+            }
             context.startActivity(Intent(context, WebViewActivity::class.java).putExtra("title", title).putExtra("urlPath", urlPath))
         }
 

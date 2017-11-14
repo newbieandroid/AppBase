@@ -106,9 +106,14 @@ class EditUserNickActivity : BaseActivity<EmptyM, EmptyV, EmptyP>() {
         op.childListener = View.OnClickListener {
             if (isCanSubmit) {
 
-                if (editUserNick.text.toString().contains(NimUIKit.SERVICENICK)
-                        || editUserNick.text.toString().contains(NimUIKit.NOTIFYNICK)
-                        || editUserNick.text.toString().contains(NimUIKit.ACTIVITYNICK)) {
+                if (editUserNick.text.toString().contains("三问")
+                        || editUserNick.text.toString().contains("客服")
+
+                        || editUserNick.text.toString().contains("消息")
+                        || editUserNick.text.toString().contains("系统")
+
+                        || editUserNick.text.toString().contains("活动")
+                        || editUserNick.text.toString().contains("通知")) {
 
                     Toast.makeText(this, "包含敏感字符", Toast.LENGTH_SHORT).show()
                     editUserNick.text.clear()

@@ -18,16 +18,21 @@ import com.netease.nim.uikit.StatusBarUtils
 import com.netease.nim.uikit.recent.RecentContactsFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.includetopbar.*
-import permissions.dispatcher.RuntimePermissions
-import permissions.dispatcher.NeedsPermission
 import android.Manifest
 import android.annotation.SuppressLint
 import com.fuyoul.sanwenseller.helper.MsgDialogHelper
+import com.fuyoul.sanwenseller.im.session.extension.StickerAttachment
+import com.fuyoul.sanwenseller.ui.order.ActivityMsgListActivity
+import com.fuyoul.sanwenseller.ui.order.SystemMsgListActivity
 import com.fuyoul.sanwenseller.utils.NormalFunUtils
-import permissions.dispatcher.PermissionRequest
-import permissions.dispatcher.OnShowRationale
-import permissions.dispatcher.OnPermissionDenied
-import permissions.dispatcher.OnNeverAskAgain
+import com.netease.nim.uikit.NimUIKit
+import com.netease.nim.uikit.recent.RecentContactsCallback
+import com.netease.nimlib.sdk.NIMClient
+import com.netease.nimlib.sdk.msg.MsgService
+import com.netease.nimlib.sdk.msg.attachment.MsgAttachment
+import com.netease.nimlib.sdk.msg.model.RecentContact
+import permissions.dispatcher.*
+import java.util.ArrayList
 
 /**
  *  Auther: chen
@@ -123,6 +128,75 @@ class MainActivity : BaseActivity<EmptyM, EmptyV, EmptyP>() {
         }
 
         mainItem.isChecked = true
+
+
+        (fragments[2] as RecentContactsFragment).setCallback(object : RecentContactsCallback {
+            override fun onRecentContactsLoaded() {
+            }
+
+            override fun onUnreadCountChange(unreadCount: Int) {
+
+
+            }
+
+            override fun onItemClick(recent: RecentContact?) {
+
+                //如果是系统通知或者活动公告
+                if (recent?.contactId.equals(NimUIKit.ACTIVITYCONTACTID)) {
+
+                    startActivity(Intent(this@MainActivity, ActivityMsgListActivity::class.java))
+
+                } else if (recent?.contactId.equals(NimUIKit.NOTIFYCONTACTID)) {
+
+                    startActivity(Intent(this@MainActivity, SystemMsgListActivity::class.java))
+
+                } else {
+
+                    if (PermissionUtils.hasSelfPermissions(this@MainActivity, Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE)) {
+                        NimUIKit.startP2PSession(this@MainActivity, recent?.contactId)
+                    } else {
+
+                        MsgDialogHelper.showNormalDialog(this@MainActivity, true, "缺少必要权限,是否前往开启?", "", "前往", object : MsgDialogHelper.DialogListener {
+                            override fun onPositive() {
+                                NormalFunUtils.goToAppDetailSettingIntent(this@MainActivity)
+                            }
+
+                            override fun onNagetive() {
+                            }
+
+                        })
+
+                    }
+                }
+            }
+
+            override fun getDigestOfAttachment(recent: RecentContact?, attachment: MsgAttachment?): String? {
+
+                if (attachment is StickerAttachment) {
+                    return "[贴图]"
+                }
+
+                return null
+            }
+
+            override fun getDigestOfTipMsg(recent: RecentContact?): String? {
+
+                val msgId = recent!!.recentMessageId
+                val uuids = ArrayList<String>(1)
+                uuids.add(msgId)
+                val msgs = NIMClient.getService(MsgService::class.java).queryMessageListByUuidBlock(uuids)
+                if (msgs != null && !msgs.isEmpty()) {
+                    val msg = msgs[0]
+                    val content = msg.remoteExtension
+                    if (content != null && !content.isEmpty()) {
+                        return content["content"] as String
+                    }
+                }
+
+                return null
+            }
+
+        })
     }
 
 
@@ -133,8 +207,10 @@ class MainActivity : BaseActivity<EmptyM, EmptyV, EmptyP>() {
     }
 
 
-    @NeedsPermission(Manifest.permission.RECORD_AUDIO,Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+    @NeedsPermission(Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE)
     fun noThing() {
+
+
     }
 
     @SuppressLint("NeedOnRequestPermissionsResult")
@@ -143,7 +219,7 @@ class MainActivity : BaseActivity<EmptyM, EmptyV, EmptyP>() {
         onRequestPermissionsResult(requestCode, grantResults)
     }
 
-    @OnShowRationale(Manifest.permission.RECORD_AUDIO,Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+    @OnShowRationale(Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE)
     fun noThingR(request: PermissionRequest) {
 
         MsgDialogHelper.showSingleDialog(this@MainActivity, false, "温馨提示", "缺少必要权限,是否进行授权?", "确定", object : MsgDialogHelper.DialogListener {
@@ -158,12 +234,12 @@ class MainActivity : BaseActivity<EmptyM, EmptyV, EmptyP>() {
 
     }
 
-    @OnPermissionDenied(Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+    @OnPermissionDenied(Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE)
     fun noThingD() {
         NormalFunUtils.showToast(this@MainActivity, "缺少必要权限,请前往权限管理中心开启对应权限")
     }
 
-    @OnNeverAskAgain(Manifest.permission.RECORD_AUDIO,Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+    @OnNeverAskAgain(Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE)
     fun noThingN() {
         NormalFunUtils.showToast(this@MainActivity, "缺少必要权限,请前往权限管理中心开启对应权限")
     }

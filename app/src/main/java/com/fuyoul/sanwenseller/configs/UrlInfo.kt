@@ -29,6 +29,7 @@ object UrlInfo {
     val CONFIRMORDER = "$base/order/confirmOrder"//确认订单
     val ORDERREFUND = "$base/order/master/masterDealRefund"//同意/拒绝退款
     val ORDERDELETE = "$base/order/user/delOrder"//删除订单
+    val INCOME = "$base/master/masterIncome"//收入相关
 
     /**商品相关**/
     val BABYLIST = "$base/goods/master/getMasterGoodsList"//获取预测师的宝贝礼拜
@@ -45,5 +46,7 @@ object UrlInfo {
     /**七牛**/
     val GETIMGTOKEN = "$base/qiniu/getQiniuUploadToken"//获取七牛的token
 
+    /**其他信息**/
     val REWARDRULE = "$base/master/rewardRule"//奖励制度
+    val GETCONFIG = "$base/account/user/getSysConfig" //获取一些配置信息
 }

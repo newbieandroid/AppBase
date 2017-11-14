@@ -7,6 +7,8 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.graphics.Color
 import android.text.TextUtils
+import android.util.Log
+import com.alibaba.fastjson.JSON
 import com.fuyoul.sanwenseller.R
 import com.fuyoul.sanwenseller.bean.reshttp.ResLoginInfoBean
 import com.fuyoul.sanwenseller.configs.Path
@@ -215,6 +217,8 @@ object ImInit {
 
         val resHttpLoginBean = DataSupport.findFirst(ResLoginInfoBean::class.java)
 
+
+        Log.e("csl", "网易自动登录:${JSON.toJSONString(resHttpLoginBean)}")
 
         if (resHttpLoginBean != null) {
             val loginInfo = LoginInfo("user_${resHttpLoginBean.userInfoId}", resHttpLoginBean.imToken)

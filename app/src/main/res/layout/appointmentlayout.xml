@@ -5,6 +5,7 @@
     android:orientation="vertical">
 
     <RelativeLayout
+        android:id="@+id/topFuncLayout"
         android:layout_width="match_parent"
         android:layout_height="127px"
         android:layout_alignParentTop="true"

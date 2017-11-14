@@ -5,6 +5,7 @@ import android.view.View
 import com.fuyoul.sanwenseller.R
 import com.fuyoul.sanwenseller.base.BaseFragment
 import com.fuyoul.sanwenseller.bean.reshttp.ResQuickTestCount
+import com.fuyoul.sanwenseller.configs.Code
 import com.fuyoul.sanwenseller.structure.model.QuickTestM
 import com.fuyoul.sanwenseller.structure.presenter.QuickTestP
 import com.fuyoul.sanwenseller.structure.view.QuickTestV
@@ -19,7 +20,8 @@ import kotlinx.android.synthetic.main.quicktestfragment.*
 class QuickTestFragment : BaseFragment<QuickTestM, QuickTestV, QuickTestP>() {
 
 
-    var count = 0
+    private var isChanged = false
+    private var count = 0
 
     override fun setLayoutRes(): Int = R.layout.quicktestfragment
 
@@ -51,7 +53,7 @@ class QuickTestFragment : BaseFragment<QuickTestM, QuickTestV, QuickTestP>() {
         }
         quickTestBtn.setOnClickListener {
 
-            getPresenter().upDateCountInfo(context, count)
+            getPresenter().upDateCountInfo(context, count, isChanged)
 
         }
     }
@@ -59,13 +61,17 @@ class QuickTestFragment : BaseFragment<QuickTestM, QuickTestV, QuickTestP>() {
     override fun getPresenter(): QuickTestP = QuickTestP(initViewImpl())
 
     override fun initViewImpl(): QuickTestV = object : QuickTestV() {
+        override fun setIsChangeState(isChanged: Boolean) {
+            this@QuickTestFragment.isChanged = isChanged
+        }
+
         override fun setViewInfo(data: ResQuickTestCount) {
 
             count = data.maxOrdersCount
-
             resutInfo.text = "${data.maxOrdersCount}"
             releaseCount.text = "${data.restOrdersCount}"
-        }
 
+            setIsChangeState(data.isChanged == Code.ISCHANGED)
+        }
     }
 }

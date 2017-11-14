@@ -33,4 +33,5 @@ object Data {
     val REFUNDTOUSER = 2//客服判给买家
     val REFUNDTOSELLER = 3//判给卖家
     val REFUND = 4//商家同意退款
+
 }

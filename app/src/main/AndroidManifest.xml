@@ -46,7 +46,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Design.Light.NoActionBar">
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".ui.SplashActivity"
             android:launchMode="singleTop"
             android:theme="@style/Theme.Design.Light.NoActionBar">
             <intent-filter>
@@ -56,6 +56,16 @@
             </intent-filter>
 
         </activity>
+
+
+        <activity
+            android:name=".ui.MainActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:theme="@style/Theme.Design.Light.NoActionBar"
+            android:windowIsTranslucent="false"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+
+
         <activity
             android:name=".ui.order.AppointMentInfoActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
@@ -78,6 +88,7 @@
         <activity
             android:name=".ui.order.MoneyInfoActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label=""
             android:theme="@style/Theme.Design.Light.NoActionBar"
             android:windowIsTranslucent="false"
             android:windowSoftInputMode="stateHidden|adjustResize" />
@@ -95,6 +106,7 @@
         <activity
             android:name=".ui.order.WaitForSettlementActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label=""
             android:theme="@style/Theme.Design.Light.NoActionBar"
             android:windowIsTranslucent="false"
             android:windowSoftInputMode="stateHidden|adjustResize" />
@@ -127,6 +139,13 @@
             android:windowSoftInputMode="stateHidden|adjustResize" />
 
         <activity
+            android:name=".ui.order.ActivityMsgListActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:theme="@style/Theme.Design.Light.NoActionBar"
+            android:windowIsTranslucent="false"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+
+        <activity
             android:name=".ui.normal.ImgPreviewActivity"
             android:launchMode="singleTask"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
@@ -139,9 +158,6 @@
             android:windowSoftInputMode="stateHidden|adjustResize" />
 
 
-        <activity
-            android:name=".ui.SplashActivity"
-            android:theme="@style/Theme.Design.Light.NoActionBar" />
         <activity
             android:name=".ui.baby.EditBabyInfoActivity"
             android:theme="@style/Theme.Design.Light.NoActionBar"
@@ -157,6 +173,11 @@
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
             android:name=".ui.order.AppointMentTimeActivity"
+            android:theme="@style/Theme.Design.Light.NoActionBar"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+
+        <activity
+            android:name=".ui.order.SystemMsgListActivity"
             android:theme="@style/Theme.Design.Light.NoActionBar"
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity

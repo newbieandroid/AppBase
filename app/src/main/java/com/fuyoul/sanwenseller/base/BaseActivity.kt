@@ -11,6 +11,7 @@ import com.zhy.autolayout.AutoLayoutActivity
 import kotlinx.android.synthetic.main.includetopbar.*
 import android.os.Build
 import android.util.Log
+import android.view.Window
 import android.view.WindowManager
 import com.fuyoul.sanwenseller.helper.HttpDialogHelper
 import com.fuyoul.sanwenseller.helper.QiNiuHelper
@@ -29,6 +30,7 @@ abstract class BaseActivity<out M : BaseM, V : BaseV, out P : BaseP<M, V>> : Aut
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.requestWindowFeature(android.view.Window.FEATURE_NO_TITLE)//去掉标题栏
+
 
         if (isFullScreen()) {
             this.requestWindowFeature(android.view.Window.FEATURE_NO_TITLE)

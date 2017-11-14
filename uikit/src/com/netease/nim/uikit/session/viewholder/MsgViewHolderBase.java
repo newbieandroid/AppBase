@@ -267,6 +267,12 @@ public abstract class MsgViewHolderBase extends RecyclerViewHolder<BaseMultiItem
 
         Log.e("csl", "--------MsgViewHolderBase---相关信息---------" + JSON.toJSONString(nimUserInfo));
 
+
+        if (nimUserInfo == null) {
+            imageView.setVisibility(View.GONE);
+            return;
+        }
+
         String extension = nimUserInfo.getExtension();
         if (!TextUtils.isEmpty(extension)) {
 

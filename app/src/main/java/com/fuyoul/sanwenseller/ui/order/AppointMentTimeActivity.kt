@@ -14,6 +14,7 @@ import com.fuyoul.sanwenseller.structure.view.EmptyV
 import com.fuyoul.sanwenseller.ui.fragment.appointment.NormalTestFragment
 import com.fuyoul.sanwenseller.ui.fragment.appointment.QuickTestFragment
 import com.fuyoul.sanwenseller.utils.AddFragmentUtils
+import com.netease.nim.uikit.StatusBarUtils
 import kotlinx.android.synthetic.main.appointmentlayout.*
 import net.lucode.hackware.magicindicator.FragmentContainerHelper
 import net.lucode.hackware.magicindicator.buildins.UIUtil
@@ -34,6 +35,10 @@ class AppointMentTimeActivity : BaseActivity<EmptyM, EmptyV, EmptyP>() {
     override fun setLayoutRes(): Int = R.layout.appointmentlayout
 
     override fun initData(savedInstanceState: Bundle?) {
+
+
+        StatusBarUtils.setTranslucentForImageView(this, topFuncLayout)
+        StatusBarUtils.StatusBarLightMode(this, R.color.color_white)
 
         val fragments = ArrayList<Fragment>()
         fragments.add(NormalTestFragment())

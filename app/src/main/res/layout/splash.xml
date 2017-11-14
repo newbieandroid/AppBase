@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-</LinearLayout>
+
+    <com.bigkoo.convenientbanner.ConvenientBanner xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/splashBanner"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:canLoop="true" />
+
+
+    <TextView
+        android:id="@+id/splashJumpBtn"
+        android:layout_width="match_parent"
+        android:layout_height="130px"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="50px"
+        android:background="@drawable/back_order_press_full"
+        android:gravity="center"
+        android:text="立即进入"
+        android:textColor="@color/color_white"
+        android:visibility="gone" />
+
+</RelativeLayout>

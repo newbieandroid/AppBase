@@ -5,6 +5,7 @@
 
 
     <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBarLayoutOfWaitSettlement"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -115,7 +116,7 @@
                 android:layout_marginTop="25dp"
                 android:background="@android:color/transparent"
                 app:layout_collapseMode="pin"
-                app:navigationIcon="?attr/homeAsUpIndicator" />
+                app:navigationIcon="@mipmap/ic_yb_top_back" />
         </android.support.design.widget.CollapsingToolbarLayout>
 
     </android.support.design.widget.AppBarLayout>

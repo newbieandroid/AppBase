@@ -108,5 +108,7 @@ dependencies {
     //指示器
     compile 'com.github.hackware1993:MagicIndicator:1.5.0'
     implementation project(':photoselector')
+
+    compile 'com.bigkoo:convenientbanner:2.0.5'
 }
 

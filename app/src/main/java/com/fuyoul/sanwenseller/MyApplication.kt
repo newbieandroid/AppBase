@@ -12,6 +12,7 @@ import com.squareup.leakcanary.LeakCanary
 import com.squareup.leakcanary.RefWatcher
 import com.tencent.smtt.sdk.QbSdk
 import com.fuyoul.sanwenseller.im.ImInit
+import com.fuyoul.sanwenseller.utils.SpUtils
 import com.fuyoul.sanwenseller.widgets.pickerview.InitCityDataHelper
 import com.lzy.okgo.model.HttpHeaders
 import com.zhy.autolayout.config.AutoLayoutConifg
@@ -40,6 +41,10 @@ class MyApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+
+
+        SpUtils.init(this)
+
         /**注册页面管理器**/
         registerActivityLifecycleCallbacks(ActivityStateListener())
 
@@ -69,8 +74,7 @@ class MyApplication : Application() {
         val httpHeader = HttpHeaders()
         httpHeader.put("authorization", DataSupport.findFirst(ResLoginInfoBean::class.java)?.token ?: "")
 
-        OkGo
-                .getInstance()
+        OkGo.getInstance()
                 .init(this)
                 .setCacheMode(CacheMode.REQUEST_FAILED_READ_CACHE)
                 .setOkHttpClient(builder.build())

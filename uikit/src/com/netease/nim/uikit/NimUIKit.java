@@ -41,15 +41,21 @@ import java.util.Set;
 public final class NimUIKit {
 
 
-    /**三问客服**/
-    public static final String SERVICENICK = "三问客服";
-    public static final String SERVICECONTACTID = "123";
-    /**系统消息**/
-    public static final String NOTIFYNICK = "系统消息";
-    public static final String NOTIFYCONTACTID = "456";
-    /**活动公告**/
-    public static final String ACTIVITYNICK = "活动公告";
-    public static final String ACTIVITYCONTACTID = "789";
+    /**
+     * 三问客服
+     **/
+    public static String SERVICECONTACTID = "三问客服";
+    public static final int KFCONTACTTYPE = 1;
+    /**
+     * 系统消息
+     **/
+    public static String NOTIFYCONTACTID = "系统消息";
+    public static final int SYSCONTACTTYPE = 0;
+    /**
+     * 活动公告
+     **/
+    public static String ACTIVITYCONTACTID = "活动公告";
+    public static final int ACTIVITYCONTACTTYPE = 2;
 
 
     public static final String USERTYP_EXKEY = "user_type";

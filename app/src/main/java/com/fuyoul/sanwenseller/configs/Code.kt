@@ -20,8 +20,12 @@ object Code {
     val VIEWTYPE_MULTDIALOG = 3//仿苹果底部对话框
     val VIEWTYPE_MONEY = 4//收入
     val VIEWTYPE_APPOINTMENT = 5 //预约
-    val VIEWTYPE_WAITSETTLEMENT = 6 //待结算
+//    val VIEWTYPE_WAITSETTLEMENT = 6 //待结算
     val VIEWTYPE_TAG = 7 //标签
+    val VIEWTYPE_ACTIVITYLISTINFO = 8 //活动公告
+    val VIEWTYPE_SYSMSG = 9 //系统通知
+    val VIEWTYPE_SPLASH = 10 //首页
+
 
     /**宝贝管理状态**/
     val SELL = 0// 0上架
@@ -57,5 +61,9 @@ object Code {
     val MASTERSTATE_WAIT = 0//审核中
     val MASTERSTATE_SUCCESS = 1//已通过
     val MASTERSTATE_REFUSE = 2//未通过
+
+
+    /**闪测加单数是否改变**/
+    val ISCHANGED = 1//更改过了
 
 }

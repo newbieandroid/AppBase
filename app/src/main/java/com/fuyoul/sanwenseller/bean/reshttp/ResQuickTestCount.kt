@@ -15,6 +15,8 @@ class ResQuickTestCount {
 //        "allowableOrdersCount":0
 //    }
 
+
+    var isChanged: Int = 0
     var date: String = ""
     var maxOrdersCount = 0
     var masterId: Long = 0

@@ -11,4 +11,6 @@ import com.fuyoul.sanwenseller.bean.reshttp.ResQuickTestCount
 abstract class QuickTestV : BaseV {
 
     abstract fun setViewInfo(data: ResQuickTestCount)
+
+    abstract fun setIsChangeState(isChanged: Boolean)
 }

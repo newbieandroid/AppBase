@@ -49,23 +49,22 @@ abstract class HttpReqListener(context: Context, isShowDialog: Boolean, isCancle
     }
 
     override fun onSuccess(response: Response<ResHttpResult>?) {
-        checkData(false, response)
         Log.e("csl", "请求信息:${response?.rawResponse?.request()?.url()}\n接口请求信息:${JSON.toJSONString(response?.body())}\n状态：${response?.exception}")
+
+        checkData(false, response)
     }
 
     override fun onCacheSuccess(response: Response<ResHttpResult>?) {
         super.onCacheSuccess(response)
-        checkData(false, response)
 
         Log.e("csl", "缓存信息:${response?.rawResponse?.request()?.url()}\n接口缓存信息:${JSON.toJSONString(response?.body())}\n状态：${response?.exception}")
-
+        checkData(false, response)
     }
 
     override fun onError(response: Response<ResHttpResult>?) {
         super.onError(response)
-        checkData(true, response)
         Log.e("csl", "请求地址:${response?.rawResponse?.request()?.url()}\n异常:${JSON.toJSONString(response?.body())}\n状态：${response?.exception}")
-
+        checkData(true, response)
     }
 
     override fun convertResponse(response: okhttp3.Response?): ResHttpResult = JSON.parseObject(response?.body()?.string(), ResHttpResult::class.java)
@@ -81,7 +80,6 @@ abstract class HttpReqListener(context: Context, isShowDialog: Boolean, isCancle
 
     /**检查数据**/
     private fun checkData(isError: Boolean, response: Response<ResHttpResult>?) {
-
 
         if (isError) {
             error("和服务器通信失败")

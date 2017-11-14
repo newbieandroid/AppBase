@@ -9,4 +9,7 @@ object Key {
 
     val wxLoginResult = "code"
     val appointmentTypeKey = "appointmentTypeKey"//预约时间
+
+
+    val isFirst = "inapp"//是否第一次进入app
 }
