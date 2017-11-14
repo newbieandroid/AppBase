@@ -235,6 +235,7 @@
                 android:background="@color/color_f3f3f3" />
 
             <TextView
+                android:id="@+id/historySettleMentBtn"
                 android:layout_width="match_parent"
                 android:layout_height="100px"
                 android:background="@drawable/back_titlebar"

@@ -1,4 +1,4 @@
-package com.fuyoul.sanwenseller.ui.fragment.main
+package com.fuyoul.sanwenseller.ui.main.main
 
 import android.app.Activity
 import android.content.Intent
@@ -22,7 +22,7 @@ import com.fuyoul.sanwenseller.structure.model.BabyManagerM
 import com.fuyoul.sanwenseller.structure.presenter.BabyManagerP
 import com.fuyoul.sanwenseller.structure.view.BabyManagerV
 import com.fuyoul.sanwenseller.ui.baby.EditBabyInfoActivity
-import com.fuyoul.sanwenseller.ui.LoginActivity
+import com.fuyoul.sanwenseller.ui.user.LoginActivity
 import com.fuyoul.sanwenseller.utils.GlideUtils
 import kotlinx.android.synthetic.main.babymanageritem.*
 import org.litepal.crud.DataSupport

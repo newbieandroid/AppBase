@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/settlementOfYear"
+        android:layout_width="match_parent"
+        android:layout_height="80px"
+        android:layout_marginTop="33px"
+        android:background="@color/color_f3f3f3"
+        android:gravity="center_vertical"
+        android:paddingLeft="33px"
+        android:textColor="@color/color_888888"
+        android:textSize="40px" />
+
+    <TextView
+        android:id="@+id/settlementOfMonth"
+        android:layout_width="match_parent"
+        android:layout_height="145px"
+        android:background="@drawable/back_titlebar"
+        android:drawableRight="@mipmap/icon_settlement_arrow"
+        android:gravity="center_vertical"
+        android:paddingLeft="33px"
+        android:paddingRight="33px"
+        android:textColor="@color/colorFF7F73"
+        android:textSize="57px" />
+
+
+</LinearLayout>

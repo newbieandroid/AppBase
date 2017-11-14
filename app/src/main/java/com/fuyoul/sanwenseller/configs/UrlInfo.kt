@@ -30,6 +30,7 @@ object UrlInfo {
     val ORDERREFUND = "$base/order/master/masterDealRefund"//同意/拒绝退款
     val ORDERDELETE = "$base/order/user/delOrder"//删除订单
     val INCOME = "$base/master/masterIncome"//收入相关
+    val SETTLEMENTDATE = "$base/master/getOrdersYearMonth"//收入时间节点
 
     /**商品相关**/
     val BABYLIST = "$base/goods/master/getMasterGoodsList"//获取预测师的宝贝礼拜

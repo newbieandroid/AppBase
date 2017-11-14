@@ -1,4 +1,4 @@
-package com.fuyoul.sanwenseller.ui.fragment.main
+package com.fuyoul.sanwenseller.ui.main.main
 
 import android.content.Context
 import android.content.Intent

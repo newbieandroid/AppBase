@@ -27,12 +27,11 @@ class MoneyInComeP(v: MoneyInComeV) : BaseP<MoneyInComeM, MoneyInComeV>(v) {
             override fun reqOk(result: ResHttpResult) {
 
                 val data = JSON.parseObject(result.data.toString(), ResMoneyItem::class.java)
-
+                viewImpl?.setViewInfo(data)
 
                 if (data.incomeList.isEmpty()) {
                     withoutData(200, "暂无数据")
                 } else {
-                    viewImpl?.setViewInfo(data)
                     viewImpl?.getAdapter()?.setData(isRefresh, data.incomeList)
                     viewImpl?.getAdapter()?.setReqLayoutInfo(isRefresh, true)
                 }

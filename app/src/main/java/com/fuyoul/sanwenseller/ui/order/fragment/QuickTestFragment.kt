@@ -1,4 +1,4 @@
-package com.fuyoul.sanwenseller.ui.fragment.appointment
+package com.fuyoul.sanwenseller.ui.order.fragment
 
 import android.os.Bundle
 import android.view.View

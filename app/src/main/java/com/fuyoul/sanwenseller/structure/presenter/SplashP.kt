@@ -2,6 +2,7 @@ package com.fuyoul.sanwenseller.structure.presenter
 
 import android.app.Activity
 import android.content.Context
+import android.util.Log
 import com.alibaba.fastjson.JSON
 import com.fuyoul.sanwenseller.base.BaseP
 import com.fuyoul.sanwenseller.bean.reshttp.ResHttpResult
@@ -27,6 +28,9 @@ class SplashP(v: SplashV) : BaseP<SplashM, SplashV>(v) {
             override fun reqOk(result: ResHttpResult) {
 
                 val data = JSON.parseObject(result.data.toString(), ResSplash::class.java)
+
+
+                Log.e("csl", "是否是第一次进入${SpUtils.getBoolean(Key.isFirst)}")
 
                 if (SpUtils.getBoolean(Key.isFirst)) {
                     viewImpl?.setImgs(data.firstImgs)

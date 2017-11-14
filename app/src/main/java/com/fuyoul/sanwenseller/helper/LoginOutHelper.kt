@@ -3,7 +3,7 @@ package com.fuyoul.sanwenseller.helper
 import android.content.Context
 import android.content.Intent
 import com.fuyoul.sanwenseller.bean.reshttp.ResLoginInfoBean
-import com.fuyoul.sanwenseller.ui.LoginActivity
+import com.fuyoul.sanwenseller.ui.user.LoginActivity
 import com.lzy.okgo.OkGo
 import com.netease.nimlib.sdk.NIMClient
 import com.netease.nimlib.sdk.auth.AuthService

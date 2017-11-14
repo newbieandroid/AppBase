@@ -2,7 +2,7 @@ package com.fuyoul.sanwenseller.structure.view
 
 import com.fuyoul.sanwenseller.base.BaseV
 import com.fuyoul.sanwenseller.bean.reshttp.ResHttpOrderItem
-import com.fuyoul.sanwenseller.ui.fragment.main.OrderItemFragment
+import com.fuyoul.sanwenseller.ui.main.main.OrderItemFragment
 
 /**
  *  @author: chen

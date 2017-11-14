@@ -1,4 +1,4 @@
-package com.fuyoul.sanwenseller.ui.normal
+package com.fuyoul.sanwenseller.ui.web
 
 import android.content.Context
 import android.content.Intent

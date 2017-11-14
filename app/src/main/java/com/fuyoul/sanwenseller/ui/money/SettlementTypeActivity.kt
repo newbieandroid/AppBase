@@ -1,6 +1,7 @@
-package com.fuyoul.sanwenseller.ui.order
+package com.fuyoul.sanwenseller.ui.money
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.support.design.widget.AppBarLayout
@@ -34,13 +35,28 @@ import com.netease.nim.uikit.NimUIKit
 import com.netease.nim.uikit.StatusBarUtils
 import kotlinx.android.synthetic.main.moneyinfolayout.*
 import kotlinx.android.synthetic.main.waitforsettlementlayout.*
+import java.util.*
 
 /**
  *  @author: chen
  *  @CreatDate: 2017\10\31 0031
  *  @Desc:待结算
  */
-class WaitForSettlementActivity : BaseActivity<MoneyInComeM, MoneyInComeV, MoneyInComeP>() {
+class SettlementTypeActivity : BaseActivity<MoneyInComeM, MoneyInComeV, MoneyInComeP>() {
+
+
+    companion object {
+
+        fun start(context: Context, isHistoryType: Boolean, year: String?, month: String?) {
+            val intent = Intent(context, SettlementTypeActivity::class.java)
+            intent.putExtra("isHistoryType", isHistoryType)
+            if (isHistoryType) {
+                intent.putExtra("year", year)
+                intent.putExtra("month", month)
+            }
+            context.startActivity(intent)
+        }
+    }
 
     private val req = ReqInCome()
     private var index = 0
@@ -55,6 +71,12 @@ class WaitForSettlementActivity : BaseActivity<MoneyInComeM, MoneyInComeV, Money
         StatusBarUtils.setTranslucentForCoordinatorLayout(this, 30)
         setSupportActionBar(toolbar)
 
+
+        //如果是结算历史
+        if (intent.getBooleanExtra("isHistoryType", false)) {
+            req.ordersDate = "${intent.getStringExtra("year")}${intent.getStringExtra("month")}"
+        }
+
         getPresenter().viewImpl?.initAdapter(this)
         getPresenter().getData(this, req, true)
     }
@@ -65,13 +87,13 @@ class WaitForSettlementActivity : BaseActivity<MoneyInComeM, MoneyInComeV, Money
             override fun onRefresh(refreshlayout: RefreshLayout?) {
                 index = 0
                 req.index = "$index"
-                getPresenter().getData(this@WaitForSettlementActivity, req, true)
+                getPresenter().getData(this@SettlementTypeActivity, req, true)
             }
 
             override fun onLoadmore(refreshlayout: RefreshLayout?) {
                 index++
                 req.index = "$index"
-                getPresenter().getData(this@WaitForSettlementActivity, req, false)
+                getPresenter().getData(this@SettlementTypeActivity, req, false)
             }
 
         })
@@ -107,7 +129,7 @@ class WaitForSettlementActivity : BaseActivity<MoneyInComeM, MoneyInComeV, Money
 
         override fun initAdapter(context: Context) {
 
-            val manager = LinearLayoutManager(this@WaitForSettlementActivity)
+            val manager = LinearLayoutManager(this@SettlementTypeActivity)
             manager.orientation = LinearLayoutManager.VERTICAL
             waitForSettlementDataList.layoutManager = manager
             waitForSettlementDataList.adapter = getAdapter()
@@ -115,8 +137,14 @@ class WaitForSettlementActivity : BaseActivity<MoneyInComeM, MoneyInComeV, Money
 
         override fun setViewInfo(data: ResMoneyItem) {
 
+//            if (intent.getBooleanExtra("isHistoryType", false)) {
+//                priceCount.text = "${data.totalPrice}"
+//                orderCount.text = "${data.totalCount}"
+//            } else {
             priceCount.text = "${data.notSccountsPrice}"
             orderCount.text = "${data.notSccountsCount}"
+//            }
+
         }
 
     }
@@ -130,8 +158,8 @@ class WaitForSettlementActivity : BaseActivity<MoneyInComeM, MoneyInComeV, Money
             val item = datas[position] as ResMoneyItem.IncomeListBean
 
 
-            GlideUtils.loadNormalImg(this@WaitForSettlementActivity, JSON.parseArray(item.imgs).getJSONObject(0).getString("url"), holder.itemView.findViewById(R.id.orderItemIcon))
-            GlideUtils.loadNormalImg(this@WaitForSettlementActivity, item.avatar, holder.itemView.findViewById(R.id.orderItemHead))
+            GlideUtils.loadNormalImg(this@SettlementTypeActivity, JSON.parseArray(item.imgs).getJSONObject(0).getString("url"), holder.itemView.findViewById(R.id.orderItemIcon))
+            GlideUtils.loadNormalImg(this@SettlementTypeActivity, item.avatar, holder.itemView.findViewById(R.id.orderItemHead))
 
             holder.itemView.findViewById<TextView>(R.id.orderItemPrice).text = "￥${item.totalPrice}"
             holder.itemView.findViewById<TextView>(R.id.orderItemTitle).text = "${item.name}"
@@ -163,7 +191,7 @@ class WaitForSettlementActivity : BaseActivity<MoneyInComeM, MoneyInComeV, Money
             val orderItemFuncRight = holder.itemView.findViewById<TextView>(R.id.orderItem_Func_Right)
             orderItemFuncRight.text = "联系买家"
             orderItemFuncRight.setOnClickListener {
-                NimUIKit.startP2PSession(this@WaitForSettlementActivity, "user_${item.user_info_id}")
+                NimUIKit.startP2PSession(this@SettlementTypeActivity, "user_${item.user_info_id}")
             }
 
 
@@ -193,14 +221,14 @@ class WaitForSettlementActivity : BaseActivity<MoneyInComeM, MoneyInComeV, Money
             when (state) {
                 State.EXPANDED -> {
                     //展开状态
-                    StatusBarUtils.StatusBarDarkMode(this@WaitForSettlementActivity)
-                    StatusBarUtils.setTranslucentForCoordinatorLayout(this@WaitForSettlementActivity, 30)
+                    StatusBarUtils.StatusBarDarkMode(this@SettlementTypeActivity)
+                    StatusBarUtils.setTranslucentForCoordinatorLayout(this@SettlementTypeActivity, 30)
                     toolbar.setBackgroundColor(resources.getColor(R.color.transparent))
                 }
                 State.COLLAPSED -> {
                     //折叠状态
                     toolbarOfMoneyInfo.setNavigationIcon(R.mipmap.ic_yb_top_back)
-                    StatusBarUtils.StatusBarLightMode(this@WaitForSettlementActivity, R.color.color_white)
+                    StatusBarUtils.StatusBarLightMode(this@SettlementTypeActivity, R.color.color_white)
                     toolbar.setBackgroundResource(R.drawable.back_titlebar)
 
                 }
@@ -209,8 +237,8 @@ class WaitForSettlementActivity : BaseActivity<MoneyInComeM, MoneyInComeV, Money
 
                     //如果之前是折叠状态,则表示在向下滑动
                     if (defaultState == State.COLLAPSED) {
-                        StatusBarUtils.StatusBarDarkMode(this@WaitForSettlementActivity)
-                        StatusBarUtils.setTranslucentForCoordinatorLayout(this@WaitForSettlementActivity, 30)
+                        StatusBarUtils.StatusBarDarkMode(this@SettlementTypeActivity)
+                        StatusBarUtils.setTranslucentForCoordinatorLayout(this@SettlementTypeActivity, 30)
                         toolbar.setBackgroundColor(resources.getColor(R.color.transparent))
                     }
 

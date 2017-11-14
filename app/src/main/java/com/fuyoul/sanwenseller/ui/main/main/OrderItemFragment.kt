@@ -1,4 +1,4 @@
-package com.fuyoul.sanwenseller.ui.fragment.main
+package com.fuyoul.sanwenseller.ui.main.main
 
 import android.app.Activity
 import android.content.Intent
@@ -29,8 +29,8 @@ import com.fuyoul.sanwenseller.enuminfo.OrderType
 import com.fuyoul.sanwenseller.structure.model.OrderM
 import com.fuyoul.sanwenseller.structure.presenter.OrderP
 import com.fuyoul.sanwenseller.structure.view.OrderV
-import com.fuyoul.sanwenseller.ui.LoginActivity
-import com.fuyoul.sanwenseller.ui.order.OrderDetailActivity
+import com.fuyoul.sanwenseller.ui.user.LoginActivity
+import com.fuyoul.sanwenseller.ui.others.OrderDetailActivity
 import com.fuyoul.sanwenseller.utils.GlideUtils
 import com.fuyoul.sanwenseller.widgets.CountdownView.CountdownView
 import kotlinx.android.synthetic.main.ordertypelayout.*

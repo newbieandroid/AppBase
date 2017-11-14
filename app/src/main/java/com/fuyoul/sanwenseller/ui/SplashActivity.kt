@@ -17,7 +17,8 @@ import com.fuyoul.sanwenseller.configs.TopBarOption
 import com.fuyoul.sanwenseller.structure.model.SplashM
 import com.fuyoul.sanwenseller.structure.presenter.SplashP
 import com.fuyoul.sanwenseller.structure.view.SplashV
-import com.fuyoul.sanwenseller.ui.normal.WebViewActivity
+import com.fuyoul.sanwenseller.ui.main.MainActivity
+import com.fuyoul.sanwenseller.ui.web.WebViewActivity
 import com.fuyoul.sanwenseller.utils.GlideUtils
 import com.fuyoul.sanwenseller.utils.SpUtils
 import com.netease.nim.uikit.NimUIKit
@@ -48,9 +49,8 @@ class SplashActivity : BaseActivity<SplashM, SplashV, SplashP>() {
     override fun setListener() {
 
         splashJumpBtn.setOnClickListener {
-            initViewImpl().gotoMain()
+            getPresenter().viewImpl?.gotoMain()
         }
-
     }
 
     override fun getPresenter(): SplashP = SplashP(initViewImpl())

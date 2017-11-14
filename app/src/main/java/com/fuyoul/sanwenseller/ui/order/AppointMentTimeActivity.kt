@@ -11,8 +11,8 @@ import com.fuyoul.sanwenseller.configs.TopBarOption
 import com.fuyoul.sanwenseller.structure.model.EmptyM
 import com.fuyoul.sanwenseller.structure.presenter.EmptyP
 import com.fuyoul.sanwenseller.structure.view.EmptyV
-import com.fuyoul.sanwenseller.ui.fragment.appointment.NormalTestFragment
-import com.fuyoul.sanwenseller.ui.fragment.appointment.QuickTestFragment
+import com.fuyoul.sanwenseller.ui.order.fragment.NormalTestFragment
+import com.fuyoul.sanwenseller.ui.order.fragment.QuickTestFragment
 import com.fuyoul.sanwenseller.utils.AddFragmentUtils
 import com.netease.nim.uikit.StatusBarUtils
 import kotlinx.android.synthetic.main.appointmentlayout.*

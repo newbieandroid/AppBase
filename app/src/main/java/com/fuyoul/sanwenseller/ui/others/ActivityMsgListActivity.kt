@@ -1,4 +1,4 @@
-package com.fuyoul.sanwenseller.ui.order
+package com.fuyoul.sanwenseller.ui.others
 
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
@@ -20,7 +20,7 @@ import com.fuyoul.sanwenseller.configs.TopBarOption
 import com.fuyoul.sanwenseller.structure.model.EmptyM
 import com.fuyoul.sanwenseller.structure.presenter.EmptyP
 import com.fuyoul.sanwenseller.structure.view.EmptyV
-import com.fuyoul.sanwenseller.ui.normal.WebViewActivity
+import com.fuyoul.sanwenseller.ui.web.WebViewActivity
 import com.fuyoul.sanwenseller.utils.GlideUtils
 import com.fuyoul.sanwenseller.utils.TimeDateUtils
 import kotlinx.android.synthetic.main.activitylistinfo.*

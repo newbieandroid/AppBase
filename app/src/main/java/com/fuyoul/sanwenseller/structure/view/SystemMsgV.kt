@@ -1,7 +1,7 @@
 package com.fuyoul.sanwenseller.structure.view
 
 import com.fuyoul.sanwenseller.base.BaseV
-import com.fuyoul.sanwenseller.ui.order.SystemMsgListActivity
+import com.fuyoul.sanwenseller.ui.others.SystemMsgListActivity
 
 /**
  *  @author: chen

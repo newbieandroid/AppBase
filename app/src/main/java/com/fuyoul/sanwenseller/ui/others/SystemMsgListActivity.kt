@@ -1,4 +1,4 @@
-package com.fuyoul.sanwenseller.ui.order
+package com.fuyoul.sanwenseller.ui.others
 
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager

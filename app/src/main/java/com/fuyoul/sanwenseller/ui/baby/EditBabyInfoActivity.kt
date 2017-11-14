@@ -41,7 +41,7 @@ import permissions.dispatcher.OnNeverAskAgain
 /**
  *  @author: chen
  *  @CreatDate: 2017\10\27 0027
- *  @Desc:
+ *  @Desc:发布宝贝和编辑宝贝
  */
 @RuntimePermissions
 class EditBabyInfoActivity : BaseActivity<EditBabyM, EditBabyV, EditBabyP>() {

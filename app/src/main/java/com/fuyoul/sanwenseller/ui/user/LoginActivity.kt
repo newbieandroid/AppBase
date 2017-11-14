@@ -1,4 +1,4 @@
-package com.fuyoul.sanwenseller.ui
+package com.fuyoul.sanwenseller.ui.user
 
 import android.app.Activity
 import android.content.BroadcastReceiver
@@ -23,7 +23,7 @@ import com.fuyoul.sanwenseller.configs.TopBarOption
 import com.fuyoul.sanwenseller.structure.model.LoginM
 import com.fuyoul.sanwenseller.structure.presenter.LoginP
 import com.fuyoul.sanwenseller.structure.view.LoginV
-import com.fuyoul.sanwenseller.ui.normal.AgreeMentActivity
+import com.fuyoul.sanwenseller.ui.others.AgreeMentActivity
 import com.fuyoul.sanwenseller.utils.NormalFunUtils
 import kotlinx.android.synthetic.main.loginactivity.*
 import org.litepal.crud.DataSupport

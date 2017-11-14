@@ -1,4 +1,4 @@
-package com.fuyoul.sanwenseller.ui.order
+package com.fuyoul.sanwenseller.ui.money
 
 import android.content.Context
 import android.content.Intent
@@ -76,7 +76,13 @@ class MoneyInfoActivity : BaseActivity<MoneyInComeM, MoneyInComeV, MoneyInComeP>
         appBarLayoutOfMoneyInfo.addOnOffsetChangedListener(listener)
 
         waitForSettleMentBtn.setOnClickListener {
-            startActivity(Intent(this@MoneyInfoActivity, WaitForSettlementActivity::class.java))
+
+            SettlementTypeActivity.start(this@MoneyInfoActivity, false, null, null)
+
+        }
+
+        historySettleMentBtn.setOnClickListener {
+            startActivity(Intent(this@MoneyInfoActivity, HistorySettlementTimeActivity::class.java))
         }
 
         toolbarOfMoneyInfo.setNavigationOnClickListener({

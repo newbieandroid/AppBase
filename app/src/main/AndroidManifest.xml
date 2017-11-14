@@ -59,7 +59,7 @@
 
 
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".ui.main.MainActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:theme="@style/Theme.Design.Light.NoActionBar"
             android:windowIsTranslucent="false"
@@ -86,14 +86,14 @@
             android:windowSoftInputMode="stateHidden|adjustResize" />
 
         <activity
-            android:name=".ui.order.MoneyInfoActivity"
+            android:name=".ui.money.MoneyInfoActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:label=""
             android:theme="@style/Theme.Design.Light.NoActionBar"
             android:windowIsTranslucent="false"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
-            android:name=".ui.order.RewardRuleActivity"
+            android:name=".ui.others.RewardRuleActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:theme="@style/Theme.Design.Light.NoActionBar"
             android:windowIsTranslucent="false"
@@ -104,54 +104,54 @@
             android:name=".ui.user.TagSelectActivity"
             android:theme="@style/Theme.Design.Light.NoActionBar" />
         <activity
-            android:name=".ui.order.WaitForSettlementActivity"
+            android:name=".ui.money.SettlementTypeActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:label=""
             android:theme="@style/Theme.Design.Light.NoActionBar"
             android:windowIsTranslucent="false"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
-            android:name=".ui.normal.SettingActivity"
+            android:name=".ui.others.SettingActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:theme="@style/Theme.Design.Light.NoActionBar"
             android:windowIsTranslucent="false"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
-            android:name=".ui.normal.AboutUsActivity"
-            android:configChanges="orientation|screenSize|keyboardHidden"
-            android:theme="@style/Theme.Design.Light.NoActionBar"
-            android:windowIsTranslucent="false"
-            android:windowSoftInputMode="stateHidden|adjustResize" />
-
-        <activity
-            android:name=".ui.normal.SuggestActivity"
-            android:configChanges="orientation|screenSize|keyboardHidden"
-            android:theme="@style/Theme.Design.Light.NoActionBar"
-            android:windowIsTranslucent="false"
-            android:windowSoftInputMode="stateHidden|adjustResize" />
-
-
-        <activity
-            android:name=".ui.order.OrderDetailActivity"
+            android:name=".ui.others.AboutUsActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:theme="@style/Theme.Design.Light.NoActionBar"
             android:windowIsTranslucent="false"
             android:windowSoftInputMode="stateHidden|adjustResize" />
 
         <activity
-            android:name=".ui.order.ActivityMsgListActivity"
+            android:name=".ui.others.SuggestActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:theme="@style/Theme.Design.Light.NoActionBar"
+            android:windowIsTranslucent="false"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+
+
+        <activity
+            android:name=".ui.others.OrderDetailActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:theme="@style/Theme.Design.Light.NoActionBar"
             android:windowIsTranslucent="false"
             android:windowSoftInputMode="stateHidden|adjustResize" />
 
         <activity
-            android:name=".ui.normal.ImgPreviewActivity"
+            android:name=".ui.others.ActivityMsgListActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:theme="@style/Theme.Design.Light.NoActionBar"
+            android:windowIsTranslucent="false"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+
+        <activity
+            android:name=".ui.others.ImgPreviewActivity"
             android:launchMode="singleTask"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
-            android:name=".ui.normal.WebViewActivity"
+            android:name=".ui.web.WebViewActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:theme="@style/Theme.Design.Light.NoActionBar"
             android:windowIsTranslucent="false"
@@ -163,12 +163,17 @@
             android:theme="@style/Theme.Design.Light.NoActionBar"
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
-            android:name=".ui.normal.AgreeMentActivity"
+            android:name=".ui.others.AgreeMentActivity"
             android:theme="@style/Theme.Design.Light.NoActionBar"
             android:windowSoftInputMode="adjustResize|stateHidden" />
 
         <activity
             android:name=".ui.user.EditUserNickActivity"
+            android:theme="@style/Theme.Design.Light.NoActionBar"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+
+        <activity
+            android:name=".ui.money.HistorySettlementTimeActivity"
             android:theme="@style/Theme.Design.Light.NoActionBar"
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
@@ -177,7 +182,7 @@
             android:windowSoftInputMode="adjustResize|stateHidden" />
 
         <activity
-            android:name=".ui.order.SystemMsgListActivity"
+            android:name=".ui.others.SystemMsgListActivity"
             android:theme="@style/Theme.Design.Light.NoActionBar"
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
@@ -185,7 +190,7 @@
             android:theme="@style/Theme.Design.Light.NoActionBar"
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
-            android:name=".ui.LoginActivity"
+            android:name=".ui.user.LoginActivity"
             android:theme="@style/Theme.Design.Light.NoActionBar" />
 
         <!--腾讯x5-->

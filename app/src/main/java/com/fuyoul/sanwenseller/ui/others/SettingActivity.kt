@@ -1,4 +1,4 @@
-package com.fuyoul.sanwenseller.ui.normal
+package com.fuyoul.sanwenseller.ui.others
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,7 +10,8 @@ import com.fuyoul.sanwenseller.helper.MsgDialogHelper
 import com.fuyoul.sanwenseller.structure.model.EmptyM
 import com.fuyoul.sanwenseller.structure.presenter.EmptyP
 import com.fuyoul.sanwenseller.structure.view.EmptyV
-import com.fuyoul.sanwenseller.ui.LoginActivity
+import com.fuyoul.sanwenseller.ui.user.LoginActivity
+import com.fuyoul.sanwenseller.ui.web.WebViewActivity
 import com.fuyoul.sanwenseller.utils.NormalFunUtils
 import kotlinx.android.synthetic.main.setting.*
 

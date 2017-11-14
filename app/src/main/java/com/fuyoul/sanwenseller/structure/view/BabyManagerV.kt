@@ -2,7 +2,7 @@ package com.fuyoul.sanwenseller.structure.view
 
 import com.fuyoul.sanwenseller.base.BaseV
 import com.fuyoul.sanwenseller.bean.reshttp.ResHttpBabyItem
-import com.fuyoul.sanwenseller.ui.fragment.main.BabyManagerItemFragment
+import com.fuyoul.sanwenseller.ui.main.main.BabyManagerItemFragment
 
 /**
  *  @author: chen

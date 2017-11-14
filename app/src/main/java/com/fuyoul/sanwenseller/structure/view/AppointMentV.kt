@@ -1,7 +1,7 @@
 package com.fuyoul.sanwenseller.structure.view
 
 import com.fuyoul.sanwenseller.base.BaseV
-import com.fuyoul.sanwenseller.ui.fragment.appointment.NormalTestItemFragment
+import com.fuyoul.sanwenseller.ui.order.fragment.NormalTestItemFragment
 
 /**
  *  @author: chen

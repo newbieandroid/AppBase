@@ -20,12 +20,12 @@ object Code {
     val VIEWTYPE_MULTDIALOG = 3//仿苹果底部对话框
     val VIEWTYPE_MONEY = 4//收入
     val VIEWTYPE_APPOINTMENT = 5 //预约
-//    val VIEWTYPE_WAITSETTLEMENT = 6 //待结算
+    //    val VIEWTYPE_WAITSETTLEMENT = 6 //待结算
     val VIEWTYPE_TAG = 7 //标签
     val VIEWTYPE_ACTIVITYLISTINFO = 8 //活动公告
     val VIEWTYPE_SYSMSG = 9 //系统通知
     val VIEWTYPE_SPLASH = 10 //首页
-
+    val VIEWTYPE_SETTLEMENT = 11 //结算历史的日期
 
     /**宝贝管理状态**/
     val SELL = 0// 0上架
@@ -65,5 +65,11 @@ object Code {
 
     /**闪测加单数是否改变**/
     val ISCHANGED = 1//更改过了
+
+
+    /**三个状态**/
+    val BOTHSHOW = 0//都显示
+    val SINGLETOP = 1
+    val SINGLEBOTTOM = -1
 
 }

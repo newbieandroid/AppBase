@@ -19,7 +19,7 @@ import com.fuyoul.sanwenseller.helper.MsgDialogHelper
 import com.fuyoul.sanwenseller.listener.HttpReqListener
 import com.fuyoul.sanwenseller.structure.model.LoginM
 import com.fuyoul.sanwenseller.structure.view.LoginV
-import com.fuyoul.sanwenseller.ui.MainActivity
+import com.fuyoul.sanwenseller.ui.main.MainActivity
 import com.fuyoul.sanwenseller.ui.user.TagSelectActivity
 import com.fuyoul.sanwenseller.utils.NormalFunUtils
 import com.lzy.okgo.OkGo

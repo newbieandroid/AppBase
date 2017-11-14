@@ -1,4 +1,4 @@
-package com.fuyoul.sanwenseller.ui.fragment.main
+package com.fuyoul.sanwenseller.ui.main.main
 
 import android.app.Activity
 import android.content.Intent
@@ -14,12 +14,12 @@ import com.fuyoul.sanwenseller.helper.MsgDialogHelper
 import com.fuyoul.sanwenseller.structure.model.EmptyM
 import com.fuyoul.sanwenseller.structure.presenter.EmptyP
 import com.fuyoul.sanwenseller.structure.view.EmptyV
-import com.fuyoul.sanwenseller.ui.LoginActivity
-import com.fuyoul.sanwenseller.ui.normal.SettingActivity
-import com.fuyoul.sanwenseller.ui.normal.SuggestActivity
+import com.fuyoul.sanwenseller.ui.user.LoginActivity
+import com.fuyoul.sanwenseller.ui.others.SettingActivity
+import com.fuyoul.sanwenseller.ui.others.SuggestActivity
 import com.fuyoul.sanwenseller.ui.order.AppointMentTimeActivity
-import com.fuyoul.sanwenseller.ui.order.MoneyInfoActivity
-import com.fuyoul.sanwenseller.ui.order.RewardRuleActivity
+import com.fuyoul.sanwenseller.ui.money.MoneyInfoActivity
+import com.fuyoul.sanwenseller.ui.others.RewardRuleActivity
 import com.fuyoul.sanwenseller.ui.user.UserInfoActivity
 import com.fuyoul.sanwenseller.utils.GlideUtils
 import com.fuyoul.sanwenseller.utils.NormalFunUtils

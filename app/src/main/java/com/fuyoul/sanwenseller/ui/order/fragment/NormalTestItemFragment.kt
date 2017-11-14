@@ -1,4 +1,4 @@
-package com.fuyoul.sanwenseller.ui.fragment.appointment
+package com.fuyoul.sanwenseller.ui.order.fragment
 
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
@@ -22,7 +22,7 @@ import com.fuyoul.sanwenseller.helper.MsgDialogHelper
 import com.fuyoul.sanwenseller.structure.model.AppointMentM
 import com.fuyoul.sanwenseller.structure.presenter.AppointMentP
 import com.fuyoul.sanwenseller.structure.view.AppointMentV
-import com.fuyoul.sanwenseller.ui.normal.WebViewActivity
+import com.fuyoul.sanwenseller.ui.web.WebViewActivity
 import com.fuyoul.sanwenseller.ui.order.AppointMentInfoActivity
 import com.fuyoul.sanwenseller.utils.GlideUtils
 import kotlinx.android.synthetic.main.normaltestitem.*

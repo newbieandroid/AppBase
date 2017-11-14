@@ -1,4 +1,4 @@
-package com.fuyoul.sanwenseller.ui
+package com.fuyoul.sanwenseller.ui.main
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,9 +10,9 @@ import com.fuyoul.sanwenseller.structure.model.EmptyM
 import com.fuyoul.sanwenseller.structure.presenter.EmptyP
 import com.fuyoul.sanwenseller.structure.view.EmptyV
 import com.fuyoul.sanwenseller.ui.baby.EditBabyInfoActivity
-import com.fuyoul.sanwenseller.ui.fragment.main.BabyManagerFragment
-import com.fuyoul.sanwenseller.ui.fragment.main.MainFragment
-import com.fuyoul.sanwenseller.ui.fragment.main.MyFragment
+import com.fuyoul.sanwenseller.ui.main.main.BabyManagerFragment
+import com.fuyoul.sanwenseller.ui.main.main.MainFragment
+import com.fuyoul.sanwenseller.ui.main.main.MyFragment
 import com.fuyoul.sanwenseller.utils.AddFragmentUtils
 import com.netease.nim.uikit.StatusBarUtils
 import com.netease.nim.uikit.recent.RecentContactsFragment
@@ -22,8 +22,8 @@ import android.Manifest
 import android.annotation.SuppressLint
 import com.fuyoul.sanwenseller.helper.MsgDialogHelper
 import com.fuyoul.sanwenseller.im.session.extension.StickerAttachment
-import com.fuyoul.sanwenseller.ui.order.ActivityMsgListActivity
-import com.fuyoul.sanwenseller.ui.order.SystemMsgListActivity
+import com.fuyoul.sanwenseller.ui.others.ActivityMsgListActivity
+import com.fuyoul.sanwenseller.ui.others.SystemMsgListActivity
 import com.fuyoul.sanwenseller.utils.NormalFunUtils
 import com.netease.nim.uikit.NimUIKit
 import com.netease.nim.uikit.recent.RecentContactsCallback

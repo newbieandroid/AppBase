@@ -1,4 +1,4 @@
-package com.fuyoul.sanwenseller.ui.order
+package com.fuyoul.sanwenseller.ui.others
 
 import android.app.Activity
 import android.content.Context
