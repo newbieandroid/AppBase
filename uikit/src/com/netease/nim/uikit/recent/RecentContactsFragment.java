@@ -4,12 +4,14 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
 import com.netease.nim.uikit.NimUIKit;
 import com.netease.nim.uikit.OnlineStateChangeListener;
 import com.netease.nim.uikit.R;
@@ -69,7 +71,6 @@ public class RecentContactsFragment extends TFragment {
         }
     }
 
-    // 置顶功能可直接使用，也可作为思路，供开发者充分利用RecentContact的tag字段
     public static final long RECENT_TAG_STICKY = 1; // 联系人置顶tag
 
     // view
@@ -356,6 +357,8 @@ public class RecentContactsFragment extends TFragment {
                     public void onResult(int code, List<RecentContact> recents, Throwable exception) {
 
 
+                        Log.e("csl", "获取到的最近联系人列表:\n" + JSON.toJSONString(recents));
+
                         loadedRecents = recents;
                         // 此处如果是界面刚初始化，为了防止界面卡顿，可先在后台把需要显示的用户资料和群组资料在后台加载好，然后再刷新界面
                         msgLoaded = true;
@@ -372,39 +375,53 @@ public class RecentContactsFragment extends TFragment {
         items.clear();
 
 
-        if (!items.contains(serviceContact)) {
-            items.add(0, serviceContact);
-        }
-        if (!items.contains(notifyContact)) {
-            items.add(1, notifyContact);
-        }
-        if (!items.contains(activityContact)) {
-            items.add(2, activityContact);
-        }
-
-
         if (loadedRecents != null) {
 
+            boolean hasSERVICECONTACTID = false;
+            boolean hasNOTIFYCONTACTID = false;
+            boolean hasACTIVITYCONTACTID = false;
 
             for (RecentContact recentContact : loadedRecents) {
 
-
-                if (recentContact.getContactId().equals(serviceContact.getContactId())) {
-                    serviceContact = recentContact;
-                    loadedRecents.remove(recentContact);
-                } else if (recentContact.getContactId().equals(notifyContact.getContactId())) {
-                    notifyContact = recentContact;
-                    loadedRecents.remove(recentContact);
-                } else if (recentContact.getContactId().equals(activityContact.getContactId())) {
-                    activityContact = recentContact;
-                    loadedRecents.remove(recentContact);
+                if (recentContact.getContactId().equals(NimUIKit.SERVICECONTACTID)) {
+                    hasSERVICECONTACTID = true;
+                    addTag(recentContact, RECENT_TAG_STICKY);
+                } else if (recentContact.getContactId().equals(NimUIKit.NOTIFYCONTACTID)) {
+                    hasNOTIFYCONTACTID = true;
+                    addTag(recentContact, RECENT_TAG_STICKY);
+                } else if (recentContact.getContactId().equals(NimUIKit.ACTIVITYCONTACTID)) {
+                    hasACTIVITYCONTACTID = true;
+                    addTag(recentContact, RECENT_TAG_STICKY);
                 }
 
             }
 
+            if (!hasSERVICECONTACTID) {
+                items.add(serviceContact);
+            }
+
+            if (!hasNOTIFYCONTACTID) {
+                items.add(notifyContact);
+            }
+
+            if (!hasACTIVITYCONTACTID) {
+                items.add(activityContact);
+            }
+
             items.addAll(loadedRecents);
             loadedRecents = null;
+        } else {
+            if (!items.contains(serviceContact)) {
+                items.add(0, serviceContact);
+            }
+            if (!items.contains(notifyContact)) {
+                items.add(1, notifyContact);
+            }
+            if (!items.contains(activityContact)) {
+                items.add(2, activityContact);
+            }
         }
+
         refreshMessages(true);
 
         if (callback != null) {

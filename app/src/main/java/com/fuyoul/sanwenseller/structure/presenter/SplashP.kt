@@ -30,8 +30,6 @@ class SplashP(v: SplashV) : BaseP<SplashM, SplashV>(v) {
                 val data = JSON.parseObject(result.data.toString(), ResSplash::class.java)
 
 
-                Log.e("csl", "是否是第一次进入${SpUtils.getBoolean(Key.isFirst)}")
-
                 if (SpUtils.getBoolean(Key.isFirst)) {
                     viewImpl?.setImgs(data.firstImgs)
                 } else {

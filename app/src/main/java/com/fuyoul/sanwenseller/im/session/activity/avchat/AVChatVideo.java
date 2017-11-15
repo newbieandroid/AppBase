@@ -85,13 +85,13 @@ public class AVChatVideo implements View.OnClickListener, ToggleListener {
         netUnstableTV = (TextView) topRoot.findViewById(R.id.avchat_video_netunstable);
 
         middleRoot = root.findViewById(R.id.avchat_video_middle_control);
-        headImg = (HeadImageView) middleRoot.findViewById(R.id.avchat_video_head);
-        nickNameTV = (TextView) middleRoot.findViewById(R.id.avchat_video_nickname);
-        notifyTV = (TextView) middleRoot.findViewById(R.id.avchat_video_notify);
 
-        refuse_receive = middleRoot.findViewById(R.id.avchat_video_refuse_receive);
-        refuseTV = (TextView) refuse_receive.findViewById(R.id.refuse);
-        receiveTV = (TextView) refuse_receive.findViewById(R.id.receive);
+        headImg = (HeadImageView) middleRoot.findViewById(R.id.avchat_video_head_middle);
+        nickNameTV = (TextView) middleRoot.findViewById(R.id.avchat_video_nickname_middle);
+        notifyTV = (TextView) middleRoot.findViewById(R.id.avchat_video_notify_middle);
+        refuse_receive = middleRoot.findViewById(R.id.avchat_video_refuse_receive_middle);
+        refuseTV = (TextView) refuse_receive.findViewById(R.id.refuse_middle);
+        receiveTV = (TextView) refuse_receive.findViewById(R.id.receive_middle);
         refuseTV.setOnClickListener(this);
         receiveTV.setOnClickListener(this);
 
@@ -121,8 +121,9 @@ public class AVChatVideo implements View.OnClickListener, ToggleListener {
      * @param state
      */
     public void onCallStateChange(CallStateEnum state) {
-        if (CallStateEnum.isVideoMode(state))
+        if (CallStateEnum.isVideoMode(state)) {
             findViews();
+        }
         switch (state) {
             case OUTGOING_VIDEO_CALLING:
                 showProfile();//对方的详细信息
@@ -269,10 +270,10 @@ public class AVChatVideo implements View.OnClickListener, ToggleListener {
             case R.id.avchat_video_logout:
                 listener.onHangUp();
                 break;
-            case R.id.refuse:
+            case R.id.refuse_middle:
                 listener.onRefuse();
                 break;
-            case R.id.receive:
+            case R.id.receive_middle:
                 listener.onReceive();
                 break;
             case R.id.avchat_video_mute:

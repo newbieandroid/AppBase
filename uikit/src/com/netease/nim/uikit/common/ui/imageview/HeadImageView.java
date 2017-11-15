@@ -88,9 +88,9 @@ public class HeadImageView extends CircleImageView {
          * 若使用网易云信云存储，这里可以设置下载图片的压缩尺寸，生成下载URL
          * 如果图片来源是非网易云信云存储，请不要使用NosThumbImageUtil
          */
-        final String thumbUrl = makeAvatarThumbNosUrl(url, thumbSize);
+//        final String thumbUrl = makeAvatarThumbNosUrl(url, thumbSize);
         Glide.with(getContext().getApplicationContext())
-                .load(thumbUrl).asBitmap().centerCrop()
+                .load(url).asBitmap().centerCrop()
                 .placeholder(defaultResId)
                 .error(defaultResId)
                 .override(thumbSize, thumbSize)

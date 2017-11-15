@@ -4,8 +4,11 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.view.ViewPager
+import android.text.TextUtils
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
+import com.alibaba.fastjson.JSON
 import com.bigkoo.convenientbanner.ConvenientBanner
 import com.bigkoo.convenientbanner.holder.Holder
 import com.fuyoul.sanwenseller.R
@@ -14,6 +17,10 @@ import com.fuyoul.sanwenseller.bean.reqhttp.ResDefaultImInfo
 import com.fuyoul.sanwenseller.bean.reshttp.ResSplash
 import com.fuyoul.sanwenseller.configs.Key
 import com.fuyoul.sanwenseller.configs.TopBarOption
+import com.fuyoul.sanwenseller.im.helper.SessionHelper
+import com.fuyoul.sanwenseller.im.session.activity.avchat.AVChatActivity
+import com.fuyoul.sanwenseller.im.session.activity.avchat.AVChatProfile
+import com.fuyoul.sanwenseller.im.session.activity.avchat.Extras
 import com.fuyoul.sanwenseller.structure.model.SplashM
 import com.fuyoul.sanwenseller.structure.presenter.SplashP
 import com.fuyoul.sanwenseller.structure.view.SplashV
@@ -21,9 +28,14 @@ import com.fuyoul.sanwenseller.ui.main.MainActivity
 import com.fuyoul.sanwenseller.ui.web.WebViewActivity
 import com.fuyoul.sanwenseller.utils.GlideUtils
 import com.fuyoul.sanwenseller.utils.SpUtils
+import com.fuyoul.sanwenseller.utils.SysInfoUtil
 import com.netease.nim.uikit.NimUIKit
 import com.netease.nim.uikit.StatusBarUtils
+import com.netease.nimlib.sdk.NimIntent
+import com.netease.nimlib.sdk.msg.constant.SessionTypeEnum
+import com.netease.nimlib.sdk.msg.model.IMMessage
 import kotlinx.android.synthetic.main.splash.*
+import java.util.*
 
 /**
  *  @author: chen
@@ -42,8 +54,84 @@ class SplashActivity : BaseActivity<SplashM, SplashV, SplashP>() {
         StatusBarUtils.setTransparentForImageView(this, null)
         StatusBarUtils.StatusBarLightMode(this, R.color.color_white)
 
-        getPresenter().getData(this)
 
+        if (savedInstanceState != null) {
+            intent = Intent()// 从堆栈恢复，不再重复解析之前的intent
+        }
+
+        val intent = intent
+
+
+        Log.e("csl", "启动页收到的消息:\n${JSON.toJSONString(intent)}")
+
+
+        if (intent.hasExtra(NimIntent.EXTRA_NOTIFY_CONTENT)) {
+            parseNotifyIntent(intent)
+            finish()
+        } else if (intent.hasExtra(Extras.EXTRA_JUMP_P2P) || intent.hasExtra(AVChatActivity.INTENT_ACTION_AVCHAT)) {
+            onParseIntent(intent)
+            finish()
+        } else {
+            if (!SysInfoUtil.stackResumed(this)) {
+                getPresenter().getData(this)
+            }
+        }
+
+
+    }
+
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        setIntent(intent)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+        outState?.clear()
+    }
+
+    //处理通知栏的请求
+    private fun parseNotifyIntent(intent: Intent) {
+        val messages = intent.getSerializableExtra(NimIntent.EXTRA_NOTIFY_CONTENT) as ArrayList<IMMessage>
+        if (messages == null || messages.size > 1) {
+            onParseIntent(null)
+        } else {
+            val intent = Intent().putExtra(NimIntent.EXTRA_NOTIFY_CONTENT, messages[0])
+            onParseIntent(intent)
+        }
+
+    }
+
+
+    //处理请求
+    private fun onParseIntent(intent: Intent?) {
+
+        if (intent == null) {
+            return
+        }
+
+
+        Log.e("csl", "收到的通知：" + JSON.toJSONString(intent.extras))
+
+        if (intent.hasExtra(NimIntent.EXTRA_NOTIFY_CONTENT)) {
+            val message = getIntent().getSerializableExtra(NimIntent.EXTRA_NOTIFY_CONTENT) as ArrayList<IMMessage>
+            when (message[0].sessionType) {
+                SessionTypeEnum.P2P -> SessionHelper.startP2PSession(this, message[0].sessionId)
+            }
+        } else if (intent.hasExtra(AVChatActivity.INTENT_ACTION_AVCHAT)) {
+            if (AVChatProfile.getInstance().isAVChatting) {
+                val localIntent = Intent()
+                localIntent.setClass(this, AVChatActivity::class.java)
+                startActivity(localIntent)
+            }
+        } else if (intent.hasExtra(Extras.EXTRA_JUMP_P2P)) {
+            val data = intent.getParcelableExtra<Intent>(Extras.EXTRA_DATA)
+            val account = data.getStringExtra(Extras.EXTRA_ACCOUNT)
+            if (!TextUtils.isEmpty(account)) {
+                SessionHelper.startP2PSession(this, account)
+            }
+        }
     }
 
     override fun setListener() {
@@ -59,7 +147,6 @@ class SplashActivity : BaseActivity<SplashM, SplashV, SplashP>() {
         override fun gotoMain() {
 
             SpUtils.putBoolean(Key.isFirst, false)
-
             startActivity(Intent(this@SplashActivity, MainActivity::class.java))
         }
 

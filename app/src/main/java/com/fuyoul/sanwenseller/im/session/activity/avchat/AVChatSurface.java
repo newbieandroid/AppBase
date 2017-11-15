@@ -244,7 +244,7 @@ public class AVChatSurface {
          * 设置画布，加入到自己的布局中，用于呈现视频图像
          * account 要显示视频的用户帐号
          */
-        if (("USER_" + DataSupport.findFirst(ResLoginInfoBean.class).getUserInfoId()).equals(account)) {
+        if (("USER_" + DataSupport.findFirst(ResLoginInfoBean.class).getUserInfoId()).toLowerCase().equals(account)) {
             AVChatManager.getInstance().setupLocalVideoRender(smallRender, false, AVChatVideoScalingType.SCALE_ASPECT_BALANCED);
         } else {
             AVChatManager.getInstance().setupRemoteVideoRender(account, smallRender, false, AVChatVideoScalingType.SCALE_ASPECT_BALANCED);

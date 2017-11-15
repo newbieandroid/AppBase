@@ -164,14 +164,14 @@ public class AVChatAudio implements View.OnClickListener, ToggleListener {
         recordToggle.setEnabled(false);
 
         refuse_receive = rootView.findViewById(R.id.avchat_audio_refuse_receive);
-        refuseTV = (TextView) refuse_receive.findViewById(R.id.refuse);
-        receiveTV = (TextView) refuse_receive.findViewById(R.id.receive);
+        refuseTV = (TextView) refuse_receive.findViewById(R.id.refuse_audio);
+        receiveTV = (TextView) refuse_receive.findViewById(R.id.receive_audio);
         refuseTV.setOnClickListener(this);
         receiveTV.setOnClickListener(this);
 
-        recordView = rootView.findViewById(R.id.avchat_record_layout);
-        recordTip = rootView.findViewById(R.id.avchat_record_tip);
-        recordWarning = rootView.findViewById(R.id.avchat_record_warning);
+        recordView = rootView.findViewById(R.id.avchat_record_layout_audio);
+        recordTip = rootView.findViewById(R.id.avchat_record_tip_audio);
+        recordWarning = rootView.findViewById(R.id.avchat_record_warning_audio);
 
         init = true;
     }
@@ -324,10 +324,10 @@ public class AVChatAudio implements View.OnClickListener, ToggleListener {
             case R.id.avchat_audio_hangup:
                 listener.onHangUp();
                 break;
-            case R.id.refuse:
+            case R.id.refuse_audio:
                 listener.onRefuse();
                 break;
-            case R.id.receive:
+            case R.id.receive_audio:
                 listener.onReceive();
                 break;
             case R.id.avchat_audio_mute:

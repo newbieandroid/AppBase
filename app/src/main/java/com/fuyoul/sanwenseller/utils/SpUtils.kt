@@ -21,7 +21,7 @@ class SpUtils {
 
 
         fun putBoolean(key: String, result: Boolean) {
-            sp?.edit()?.putBoolean(key, result)?.apply()
+            sp?.edit()?.putBoolean(key, result)?.commit()
         }
 
         fun getBoolean(key: String): Boolean = sp?.getBoolean(key, true) ?: true

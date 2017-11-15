@@ -123,9 +123,7 @@ class LoginP(loginV: LoginV) : BaseP<LoginM, LoginV>(loginV) {
 
                         val httpHeader = HttpHeaders()
                         httpHeader.put("authorization", loginInfo.token)
-                        OkGo
-                                .getInstance()
-                                .addCommonHeaders(httpHeader)
+                        OkGo.getInstance().addCommonHeaders(httpHeader)
 
 
                         viewImpl?.saveDbInfo(loginInfo)
